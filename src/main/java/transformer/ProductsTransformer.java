@@ -4,7 +4,7 @@ import dto.ProductDTO;
 import entity.ProductsEntity;
 
 public class ProductsTransformer {
-    private ProductDTO convertToDto(ProductsEntity productsEntity){
+    public ProductDTO convertToDto(ProductsEntity productsEntity){
         if(productsEntity==null){
             return null;
         }
@@ -17,7 +17,7 @@ public class ProductsTransformer {
         return productDTO;
     }
 
-    private ProductsEntity convertToEntity(ProductDTO productsDto){
+    public ProductsEntity convertToEntity(ProductDTO productsDto){
         if(productsDto==null){
             return null;
         }

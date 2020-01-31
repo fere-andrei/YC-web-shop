@@ -1,4 +1,4 @@
-<%@ page import="entity.UserEntity" %><%--@elvariable id="loginedUser" type="entity.UserEntity"--%>
+<%--@elvariable id="loginedUser" type="entity.UserDTO"--%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" session="true"%>
 <link href="css/background.css" rel="stylesheet" type="text/css">
@@ -15,25 +15,13 @@
 
     <img src="img/app-icon.png" style="width: 55px; height: 55px; padding-bottom: inherit">
 
-
-    <%
-        UserEntity username = (UserEntity) session.getAttribute("loginedUser");
-        if (username.getUserName() == null) {
-    %>
-            <a href="${pageContext.request.contextPath}/register">Register</a>
-            <a href="${pageContext.request.contextPath}/login">Login</a>
-    <%
-    } else {
-    %>
-    <div style="float: right; padding: 10px; text-align: right;">
+    <div id="js-user-logined" style="float: right; padding: 10px; text-align: right;">
 
         Hello <b>${loginedUser.userName}</b>
         <br/>
         <a href="logout">Logout</a>
 
     </div>
-    <%}%>
-
 
     <div style="float: right" class="shopping-item">
         <a href="${pageContext.request.contextPath}/cart">My Cart <i class="shopping-cart-view"></i>

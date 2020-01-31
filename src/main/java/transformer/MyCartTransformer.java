@@ -4,7 +4,7 @@ import dto.MyCartDTO;
 import entity.MyCartEntity;
 
 public class MyCartTransformer {
-    private MyCartDTO convertToDto(MyCartEntity myCartEntity){
+    public MyCartDTO convertToDto(MyCartEntity myCartEntity){
         if(myCartEntity==null){
             return null;
         }
@@ -17,7 +17,7 @@ public class MyCartTransformer {
         return myCartDTO;
     }
 
-    private MyCartEntity convertToDto(MyCartDTO myCartDTO){
+    public MyCartEntity convertToDto(MyCartDTO myCartDTO){
         if(myCartDTO==null){
             return null;
         }

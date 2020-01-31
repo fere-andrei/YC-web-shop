@@ -2,6 +2,7 @@ package service.imp;
 
 import dao.UserDAO;
 import daoImpl.UserDAOImpl;
+import dto.UserDTO;
 import entity.UserEntity;
 import service.LoginService;
 import util.SessionUtil;
@@ -22,7 +23,7 @@ public class LoginServiceImpl implements LoginService {
         HttpSession session = request.getSession();
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        UserEntity user = loginDao.checkLogin(username, password);
+        UserDTO user = loginDao.checkLogin(username, password);
         String destPage = "login.jsp";
         if (null!=user) {
             SessionUtil.storeLoginedUser(session,user);

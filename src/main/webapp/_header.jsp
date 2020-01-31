@@ -1,4 +1,4 @@
-<%--@elvariable id="loginedUser" type="entity.UserEntity"--%>
+<%--@elvariable id="loginedUser" type="entity.UserDTO"--%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" session="true"%>
 <link href="css/background.css" rel="stylesheet" type="text/css">

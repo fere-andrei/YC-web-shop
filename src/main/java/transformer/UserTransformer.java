@@ -4,7 +4,7 @@ import dto.UserDTO;
 import entity.UserEntity;
 
 public class UserTransformer {
-    private UserDTO convertToDto(UserEntity userEntity) {
+    public static UserDTO convertToDto(UserEntity userEntity) {
         if (userEntity == null) {
             return null;
         }
