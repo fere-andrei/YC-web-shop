@@ -1,15 +1,25 @@
 package dto;
 
 
+import entity.ProductsEntity;
+import entity.UserEntity;
+
+import javax.persistence.*;
+
 public class MyCartDTO {
+
 
     private int id;
 
     private int productCount;
 
-    private int userId;
+    private UserEntity user;
 
     private Double totalPrice;
+
+    private ProductsEntity product;
+
+    private int statusCart;
 
     public int getId() {
         return id;
@@ -27,12 +37,12 @@ public class MyCartDTO {
         this.productCount = productCount;
     }
 
-    public int getUserId() {
-        return userId;
+    public UserEntity getUser() {
+        return user;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
 
     public Double getTotalPrice() {
@@ -41,5 +51,21 @@ public class MyCartDTO {
 
     public void setTotalPrice(Double totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public ProductsEntity getProduct() {
+        return product;
+    }
+
+    public void setProduct(ProductsEntity product) {
+        this.product = product;
+    }
+
+    public int getStatusCart() {
+        return statusCart;
+    }
+
+    public void setStatusCart(int statusCart) {
+        this.statusCart = statusCart;
     }
 }

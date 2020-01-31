@@ -27,6 +27,9 @@ public class ProductsEntity {
     @Column(name = "price")
     private Double price;
 
+    public ProductsEntity() {
+    }
+
     public int getId() {
         return id;
     }
