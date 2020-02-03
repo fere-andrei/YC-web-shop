@@ -31,6 +31,9 @@ public class UserEntity implements Serializable {
     @Column(name = "address")
     private String address;
 
+    @OneToOne(mappedBy =  "user" ,cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+    private MyCartEntity myCartEntity;
+
     public UserEntity() {
     }
 

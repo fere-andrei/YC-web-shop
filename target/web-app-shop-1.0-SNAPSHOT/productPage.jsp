@@ -38,7 +38,10 @@
                    <td><c:out value="${item.category}" /></td>
                    <td><c:out value="${item.stockNumber}" /></td>
                    <td><input id = "stockValue" type = "number" name = "quantity" value="1" min="1" max="${item.stockNumber}"></td>
-                   <td><button id="js-shopping-cart" > Add to cart</button> </td>
+
+                   <form action="<%=request.getContextPath()%>/post" method="post">
+                       <td><button id="js-shopping-cart" value = "${item.id}" >Add to cart</button> </td>
+                   </form>
 
                </tr>
            </c:forEach>

@@ -1,8 +1,11 @@
 package service.imp;
 
+import dao.MyCartDAO;
 import dao.UserDAO;
+import daoImpl.MyCartDAOImpl;
 import daoImpl.UserDAOImpl;
 import dto.UserDTO;
+import entity.MyCartEntity;
 import entity.UserEntity;
 import service.LoginService;
 import util.SessionUtil;
@@ -16,6 +19,7 @@ import java.io.IOException;
 
 public class LoginServiceImpl implements LoginService {
     private UserDAO loginDao = new UserDAOImpl();
+    private MyCartDAO myCart = new MyCartDAOImpl();
 
 
     @Override
@@ -24,9 +28,11 @@ public class LoginServiceImpl implements LoginService {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         UserDTO user = loginDao.checkLogin(username, password);
+        int numberOfItemsInCart = myCart.findNumberOfItems(user.getId());
         String destPage = "login.jsp";
         if (null!=user) {
             SessionUtil.storeLoginedUser(session,user);
+            SessionUtil.storeNumberOfItemsInCart(session,numberOfItemsInCart);
             destPage = "userHomePage.jsp";
         }else {
             String message = "Invalid email/password";

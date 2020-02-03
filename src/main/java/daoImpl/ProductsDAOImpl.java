@@ -3,7 +3,6 @@ package daoImpl;
 import dao.ProductsDAO;
 import entity.ProductsEntity;
 import org.hibernate.Session;
-import org.hibernate.query.Query;
 import util.HibernateUtil;
 
 import java.util.List;
@@ -29,6 +28,15 @@ public class ProductsDAOImpl implements ProductsDAO {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return (List<String>) session.createQuery("select DISTINCT ProductsEntity.category from ProductsEntity").list();
         }
+    }
+
+    @Override
+    public ProductsEntity findProductById(int productId) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.createQuery("FROM ProductsEntity P where p.id =: productId", ProductsEntity.class).setParameter("" +
+                    "productId", productId).getSingleResult();
+        }
+
     }
 
 }

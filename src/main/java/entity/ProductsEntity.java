@@ -1,9 +1,5 @@
 package entity;
 
-import lombok.Getter;
-import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 
 @Entity
@@ -26,6 +22,9 @@ public class ProductsEntity {
 
     @Column(name = "price")
     private Double price;
+
+    @OneToOne(mappedBy =  "product" ,cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+    private MyCartEntity myCartEntity;
 
     public ProductsEntity() {
     }
@@ -68,5 +67,13 @@ public class ProductsEntity {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public MyCartEntity getMyCartEntity() {
+        return myCartEntity;
+    }
+
+    public void setMyCartEntity(MyCartEntity myCartEntity) {
+        this.myCartEntity = myCartEntity;
     }
 }

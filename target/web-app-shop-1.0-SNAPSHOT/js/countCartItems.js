@@ -15,8 +15,9 @@ var MyCartComponent = (function(){
 
     var addToCart = function () {
         $(Config.ADD_TO_CART_BUTTON).click(function(){
-          var inputStock = $(Config.NO_OF_ITEMES).val();
-          $(Config.MY_CART_VIEW).text('('+inputStock+$(Config.MY_CART_VIEW).textContent+')');
+          var inputStock =parseInt($(Config.NO_OF_ITEMES).val());
+          inputStock=parseInt($(Config.MY_CART_VIEW).text())+inputStock;
+          $(Config.MY_CART_VIEW).text(inputStock);
 
         });
 

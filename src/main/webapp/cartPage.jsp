@@ -1,4 +1,4 @@
-<%@ taglib prefix="h" uri="http://java.sun.com/jsf/html" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: anfe0908
@@ -24,19 +24,23 @@
             <th>Number of units</th>
             <th>Remove</th>
         </tr>
-        <c:forEach items="${myCartProducts}" var="cartItem">
+        <c:forEach items="${myCartItems}" var="cartItem">
             <tr>
-                <td><c:out value="${cartItem.productName}" /></td>
-                <td><c:out value="${cartItem.price}" /></td>
-                <td><c:out value="${cartItem.category}" /></td>
-                <td><c:out value="${cartItem.stockNumber}" /></td>
-                <td><button id="js-remove-from-cart" > Remove from cart</button> </td>
+
+                <c:set var = "myProduct"  value = "${cartItem.product}"/>
+                <td><c:out value="${myProduct.productName}" /></td>
+                <td><c:out value="${cartItem.totalPrice}" /></td>
+                <td><c:out value="${cartItem.product.category}" /></td>
+                <td><c:out value="${cartItem.productCount}" /></td>
+                <td>
+                    <button id="js-remove-from-cart" > Remove from cart</button>
+                </td>
             </tr>
         </c:forEach>
-        <button id="js-place-order">Place Order</button>
+
     </table>
 </div>
-
+<button id="js-place-order">Place Order</button>
 
 <jsp:include page="_footer.jsp"></jsp:include>
 </body>

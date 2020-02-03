@@ -19,15 +19,14 @@ public class MyCartEntity {
     @Column(name = "product_count")
     private int productCount;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id",referencedColumnName = "id")
     private UserEntity user;
 
     @Column(name = "total_price")
     private Double totalPrice;
 
-
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="product_id",referencedColumnName = "id")
     private ProductsEntity product;
 
