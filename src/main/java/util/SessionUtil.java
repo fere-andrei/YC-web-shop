@@ -9,7 +9,7 @@ public class SessionUtil {
         session.setAttribute("loginedUser", loginedUser);
     }
 
-    public static void storeNumberOfItemsInCart(HttpSession session, int numberOfItems) {
+    public static void storeNumberOfItemsInCart(HttpSession session, Long numberOfItems) {
         session.setAttribute("numberOfItems", numberOfItems);
     }
 }

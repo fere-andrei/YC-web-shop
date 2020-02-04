@@ -28,7 +28,7 @@ public class LoginServiceImpl implements LoginService {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         UserDTO user = loginDao.checkLogin(username, password);
-        int numberOfItemsInCart = myCart.findNumberOfItems(user.getId());
+        Long numberOfItemsInCart = myCart.findNumberOfItems(user.getId());
         String destPage = "login.jsp";
         if (null!=user) {
             SessionUtil.storeLoginedUser(session,user);

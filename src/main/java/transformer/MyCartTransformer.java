@@ -13,11 +13,13 @@ public class MyCartTransformer {
         myCartDTO.setProductCount(myCartEntity.getProductCount());
         myCartDTO.setTotalPrice(myCartEntity.getTotalPrice());
         myCartDTO.setUser(myCartEntity.getUser());
+        //myCartDTO.setUserId(myCartEntity.getUserId());
+        myCartDTO.setProductId(myCartEntity.getProductId());
 
         return myCartDTO;
     }
 
-    public MyCartEntity convertToDto(MyCartDTO myCartDTO){
+    public MyCartEntity convertToEntity(MyCartDTO myCartDTO){
         if(myCartDTO==null){
             return null;
         }
@@ -26,6 +28,8 @@ public class MyCartTransformer {
         myCartEntity.setProductCount(myCartEntity.getProductCount());
         myCartEntity.setTotalPrice(myCartEntity.getTotalPrice());
         myCartEntity.setUser(myCartEntity.getUser());
+       // myCartEntity.setUserId(myCartDTO.getUserId());
+        myCartEntity.setProductId(myCartDTO.getProductId());
         return myCartEntity;
     }
 }

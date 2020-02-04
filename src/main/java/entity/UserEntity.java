@@ -12,9 +12,9 @@ import java.io.Serializable;
 public class UserEntity implements Serializable {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name="id")
-    private int id;
+    private Long id;
 
     @Column(name = "user_name")
     private String userName;
@@ -31,17 +31,17 @@ public class UserEntity implements Serializable {
     @Column(name = "address")
     private String address;
 
-    @OneToOne(mappedBy =  "user" ,cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
-    private MyCartEntity myCartEntity;
+ /*   @OneToOne(mappedBy =  "user" ,cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+    private MyCartEntity myCartEntity;*/
 
     public UserEntity() {
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

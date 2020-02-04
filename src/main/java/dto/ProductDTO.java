@@ -3,7 +3,7 @@ package dto;
 import javax.persistence.Column;
 
 public class ProductDTO {
-    private int id;
+    private Long id;
 
     private String productName;
 
@@ -13,11 +13,11 @@ public class ProductDTO {
 
     private Double price;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

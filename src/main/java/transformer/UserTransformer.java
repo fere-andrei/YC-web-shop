@@ -18,4 +18,18 @@ public class UserTransformer {
         return userDTO;
     }
 
+
+    public static UserEntity convertToEntity(UserDTO userDTO) {
+        if (userDTO == null) {
+            return null;
+        }
+        UserEntity userEntity = new UserEntity();
+        userEntity.setAddress(userDTO.getAddress());
+        userEntity.setAdminStatus(userDTO.getAdminStatus());
+        userEntity.setFullName(userDTO.getFullName());
+        userEntity.setId(userDTO.getId());
+        userEntity.setPassword(userDTO.getPassword());
+        userEntity.setUserName(userDTO.getUserName());
+        return userEntity;
+    }
 }

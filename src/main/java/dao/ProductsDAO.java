@@ -8,5 +8,5 @@ public interface ProductsDAO {
     public List<ProductsEntity> findProducts();
     public List<ProductsEntity> findProductsByCategory(String category);
     public List<String> findAllCategory();
-    public ProductsEntity findProductById(int productId);
+    public ProductsEntity findProductById(Long productId);
 }

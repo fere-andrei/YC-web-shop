@@ -12,7 +12,9 @@ import entity.UserEntity;
 
 import service.CartService;
 import service.imp.CartServiceImpl;
+import transformer.UserTransformer;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -51,16 +53,26 @@ public class CartController extends HttpServlet  {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         addItemInCart(request,response);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("productPage.jsp");
+        dispatcher.forward(request, response);
     }
 
     private void addItemInCart(HttpServletRequest request,HttpServletResponse response){
         HttpSession session = request.getSession();
-        int productId = Integer.parseInt(request.getParameter("productId"));
+        Long productId =  Long.parseLong(request.getParameter("productId"));
         ProductsEntity product = productsDao.findProductById(productId);
-        UserEntity user = (UserEntity) session.getAttribute("loginedUser");
-        MyCartEntity myCart = new MyCartEntity();
 
-        myCart.setUser(user);
-        myCart.setProduct(product);
+        UserDTO user = (UserDTO) session.getAttribute("loginedUser");
+        MyCartEntity myCart = new MyCartEntity();
+        UserEntity userEntity = UserTransformer.convertToEntity(user);
+
+        myCart.setUser(userEntity);
+        myCart.getProducts().add(product);
+        myCart.setProductId(product.getId());
+
+        //sa inmultesti cu numarul de unitati pentru total price si sa setez si product count
+        myCart.setTotalPrice(product.getPrice());
+
+        myCartDAO.saveItemInMyCart(myCart);
     }
 }

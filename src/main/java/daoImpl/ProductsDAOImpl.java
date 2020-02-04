@@ -31,12 +31,15 @@ public class ProductsDAOImpl implements ProductsDAO {
     }
 
     @Override
-    public ProductsEntity findProductById(int productId) {
+    public ProductsEntity findProductById(Long productId) {
+        ProductsEntity productsEntity = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.createQuery("FROM ProductsEntity P where p.id =: productId", ProductsEntity.class).setParameter("" +
-                    "productId", productId).getSingleResult();
+            productsEntity = session.createQuery("select P FROM ProductsEntity P where P.id=:productId", ProductsEntity.class).
+                    setParameter("productId", productId).getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
+        return productsEntity;
     }
 
 }
