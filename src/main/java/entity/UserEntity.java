@@ -31,8 +31,6 @@ public class UserEntity implements Serializable {
     @Column(name = "address")
     private String address;
 
- /*   @OneToOne(mappedBy =  "user" ,cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
-    private MyCartEntity myCartEntity;*/
 
     public UserEntity() {
     }
@@ -61,6 +59,14 @@ public class UserEntity implements Serializable {
         this.password = password;
     }
 
+    public int getAdminStatus() {
+        return adminStatus;
+    }
+
+    public void setAdminStatus(int adminStatus) {
+        this.adminStatus = adminStatus;
+    }
+
     public String getFullName() {
         return fullName;
     }
@@ -76,13 +82,4 @@ public class UserEntity implements Serializable {
     public void setAddress(String address) {
         this.address = address;
     }
-
-    public int getAdminStatus() {
-        return adminStatus;
-    }
-
-    public void setAdminStatus(int adminStatus) {
-        this.adminStatus = adminStatus;
-    }
-
 }

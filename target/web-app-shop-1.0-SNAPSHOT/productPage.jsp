@@ -37,13 +37,9 @@
                    <td><c:out value="${item.price}"/>$</td>
                    <td><c:out value="${item.category}" /></td>
                    <td><c:out value="${item.stockNumber}" /></td>
-                   <td><input id = "stockValue" type = "number" name = "quantity" value="1" min="1" max="${item.stockNumber}"></td>
-
+                   <td><input id = "quantity" type = "number" name = "quantity" value="1" min="1" max="${item.stockNumber}"></td>
                    <td>
-                       <form action="<%=request.getContextPath()%>/cart" method="post">
-                           <button id="productId" type="submit" name="productId" value = "${item.id}" class="add-btn">Add to cart</button>
-                          <%-- <button id="productId" name="productId" value = "${item.id}" >Add to cart</button>--%>
-                       </form>
+                       <button id="add-to-cart-button" type="submit" name="productId" value = "${item.id}" class="add-btn">Add to cart</button>
                    </td>
 
                </tr>

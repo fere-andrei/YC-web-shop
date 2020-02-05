@@ -13,6 +13,7 @@ import entity.UserEntity;
 import service.CartService;
 import service.imp.CartServiceImpl;
 import transformer.UserTransformer;
+import util.SessionUtil;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -58,21 +59,38 @@ public class CartController extends HttpServlet  {
     }
 
     private void addItemInCart(HttpServletRequest request,HttpServletResponse response){
-        HttpSession session = request.getSession();
-        Long productId =  Long.parseLong(request.getParameter("productId"));
-        ProductsEntity product = productsDao.findProductById(productId);
+        try {
+            HttpSession session = request.getSession();
+            Long productId = Long.parseLong(request.getParameter("productId"));
+            Long quantity = Long.parseLong(request.getParameter("quantity"));
+            UserDTO user = (UserDTO) session.getAttribute("loginedUser");
+            ProductsEntity product = productsDao.findProductById(productId);
+            if(checkIfItemExistInCart(user.getId(),product.getProductName())) {
+                //incrase just the existing quantity
+            }else{
 
-        UserDTO user = (UserDTO) session.getAttribute("loginedUser");
-        MyCartEntity myCart = new MyCartEntity();
-        UserEntity userEntity = UserTransformer.convertToEntity(user);
 
-        myCart.setUser(userEntity);
-        myCart.getProducts().add(product);
-        myCart.setProductId(product.getId());
+                MyCartEntity myCart = new MyCartEntity();
+                UserEntity userEntity = UserTransformer.convertToEntity(user);
 
-        //sa inmultesti cu numarul de unitati pentru total price si sa setez si product count
-        myCart.setTotalPrice(product.getPrice());
 
-        myCartDAO.saveItemInMyCart(myCart);
+                myCart.setUser(userEntity);
+                myCart.setProductName(product.getProductName());
+                myCart.setPrice(product.getPrice() * quantity);
+                myCart.setQuantity(quantity);
+
+                myCartDAO.saveItemInMyCart(myCart);
+            }
+        }catch (Exception e){ e.printStackTrace();}
+    }
+
+    private boolean checkIfItemExistInCart(Long userId,String productNametoCheck){
+        List<MyCartEntity> productsFromCart = myCartDAO.findSpecificCartByUser(userId);
+        for(MyCartEntity myCart:productsFromCart) {
+            if (myCart.getProductName().equalsIgnoreCase(productNametoCheck)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

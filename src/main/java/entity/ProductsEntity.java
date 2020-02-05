@@ -10,6 +10,7 @@ public class ProductsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id")
+    @SequenceGenerator(name = "generator", sequenceName = "cart_sequence")
     private Long id;
 
     @Column(name = "product_name")
@@ -24,19 +25,6 @@ public class ProductsEntity {
     @Column(name = "price")
     private Double price;
 
-//    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private List<MyCartEntity> myCartEntity;
-
-/*    public List<MyCartEntity> getMyCartEntity() {
-        return myCartEntity;
-    }
-
-    public void setMyCartEntity(List<MyCartEntity> myCartEntity) {
-        this.myCartEntity = myCartEntity;
-    }
-
-    public ProductsEntity() {
-    }*/
 
     public Long getId() {
         return id;
@@ -77,5 +65,4 @@ public class ProductsEntity {
     public void setPrice(Double price) {
         this.price = price;
     }
-
 }

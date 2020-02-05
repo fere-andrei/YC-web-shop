@@ -4,8 +4,8 @@ $(document).ready(function () {
 
 var MyCartComponent = (function(){
     var Config = {
-        ADD_TO_CART_BUTTON: "#js-shopping-cart",
-        NO_OF_ITEMES:"#stockValue",
+        ADD_TO_CART_BUTTON: "#add-to-cart-button",
+        NO_OF_ITEMES:"#quantity",
         MY_CART_VIEW:"#JS-cart-item-count"
     };
 
@@ -15,12 +15,23 @@ var MyCartComponent = (function(){
 
     var addToCart = function () {
         $(Config.ADD_TO_CART_BUTTON).click(function(){
-          var inputStock =parseInt($(Config.NO_OF_ITEMES).val());
-          inputStock=parseInt($(Config.MY_CART_VIEW).text())+inputStock;
-          $(Config.MY_CART_VIEW).text(inputStock);
-
+            var productId = $(Config.ADD_TO_CART_BUTTON).val();
+            var quantity = $(Config.NO_OF_ITEMES).val();
+            $.ajax({
+                type:"POST",
+                data: {
+                    quantity : quantity,
+                    productId : productId
+                },
+                url : "cart",
+                success : function(resp){
+                    alert(resp);
+                },
+                error : function(resp){
+                    alert("FAIL");
+                }
+            });
         });
-
     }
 
     return {

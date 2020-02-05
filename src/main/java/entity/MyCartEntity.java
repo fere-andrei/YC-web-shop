@@ -1,8 +1,5 @@
 package entity;
 
-import lombok.Getter;
-import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -19,42 +16,18 @@ public class MyCartEntity {
     @SequenceGenerator(name = "generator", sequenceName = "cart_sequence")
     private Long id;
 
-    @Column(name = "product_count")
-    private int productCount;
+    @Column(name = "quantity")
+    private Long quantity;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id",referencedColumnName = "ID")
     private UserEntity user;
 
-    @Column(name = "total_price")
-    private Double totalPrice;
+    @Column(name = "price")
+    private Double price;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "PRODUCT_ID",referencedColumnName = "ID")
-    private List<ProductsEntity> products = new ArrayList<>();
-
-    @Column(name = "PRODUCT_ID")
-    private Long productId;
-
-
-    @Column(name = "status_cart")
-    private int statusCart;
-
-    public Long getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Long productId) {
-        this.productId = productId;
-    }
-
-    public List<ProductsEntity> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<ProductsEntity> products) {
-        this.products = products;
-    }
+    @Column(name = "product_name")
+    private String productName;
 
     public Long getId() {
         return id;
@@ -64,12 +37,12 @@ public class MyCartEntity {
         this.id = id;
     }
 
-    public int getProductCount() {
-        return productCount;
+    public Long getQuantity() {
+        return quantity;
     }
 
-    public void setProductCount(int productCount) {
-        this.productCount = productCount;
+    public void setQuantity(Long quantity) {
+        this.quantity = quantity;
     }
 
     public UserEntity getUser() {
@@ -80,19 +53,19 @@ public class MyCartEntity {
         this.user = user;
     }
 
-    public Double getTotalPrice() {
-        return totalPrice;
+    public Double getPrice() {
+        return price;
     }
 
-    public void setTotalPrice(Double totalPrice) {
-        this.totalPrice = totalPrice;
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
-    public int getStatusCart() {
-        return statusCart;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setStatusCart(int statusCart) {
-        this.statusCart = statusCart;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 }

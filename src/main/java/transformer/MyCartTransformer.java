@@ -10,11 +10,7 @@ public class MyCartTransformer {
         }
         MyCartDTO myCartDTO = new MyCartDTO();
         myCartDTO.setId(myCartEntity.getId());
-        myCartDTO.setProductCount(myCartEntity.getProductCount());
-        myCartDTO.setTotalPrice(myCartEntity.getTotalPrice());
-        myCartDTO.setUser(myCartEntity.getUser());
-        //myCartDTO.setUserId(myCartEntity.getUserId());
-        myCartDTO.setProductId(myCartEntity.getProductId());
+
 
         return myCartDTO;
     }
@@ -24,12 +20,9 @@ public class MyCartTransformer {
             return null;
         }
         MyCartEntity myCartEntity = new MyCartEntity();
-        myCartEntity.setId(myCartEntity.getId());
-        myCartEntity.setProductCount(myCartEntity.getProductCount());
-        myCartEntity.setTotalPrice(myCartEntity.getTotalPrice());
-        myCartEntity.setUser(myCartEntity.getUser());
-       // myCartEntity.setUserId(myCartDTO.getUserId());
-        myCartEntity.setProductId(myCartDTO.getProductId());
+        myCartEntity.setId(myCartDTO.getId());
+
+
         return myCartEntity;
     }
 }
