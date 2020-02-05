@@ -19,7 +19,7 @@ public class MyCartEntity {
     @Column(name = "quantity")
     private Long quantity;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id",referencedColumnName = "ID")
     private UserEntity user;
 

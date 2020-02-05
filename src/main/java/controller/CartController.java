@@ -65,14 +65,12 @@ public class CartController extends HttpServlet  {
             Long quantity = Long.parseLong(request.getParameter("quantity"));
             UserDTO user = (UserDTO) session.getAttribute("loginedUser");
             ProductsEntity product = productsDao.findProductById(productId);
-            if(checkIfItemExistInCart(user.getId(),product.getProductName())) {
-                //incrase just the existing quantity
-            }else{
+            List<MyCartEntity> productsFromCart = myCartDAO.findSpecificCartByUser(user.getId());
+            MyCartEntity itemFromCart = getProductFromCartIfExists(productsFromCart,product.getProductName());
 
-
+            if(itemFromCart==null) {
                 MyCartEntity myCart = new MyCartEntity();
                 UserEntity userEntity = UserTransformer.convertToEntity(user);
-
 
                 myCart.setUser(userEntity);
                 myCart.setProductName(product.getProductName());
@@ -80,17 +78,20 @@ public class CartController extends HttpServlet  {
                 myCart.setQuantity(quantity);
 
                 myCartDAO.saveItemInMyCart(myCart);
+            }else{
+                itemFromCart.setQuantity(quantity+itemFromCart.getQuantity());
+                myCartDAO.updateItemFromCart(itemFromCart);
+
             }
         }catch (Exception e){ e.printStackTrace();}
     }
 
-    private boolean checkIfItemExistInCart(Long userId,String productNametoCheck){
-        List<MyCartEntity> productsFromCart = myCartDAO.findSpecificCartByUser(userId);
+    private MyCartEntity getProductFromCartIfExists(List<MyCartEntity> productsFromCart,String productNametoCheck){
         for(MyCartEntity myCart:productsFromCart) {
             if (myCart.getProductName().equalsIgnoreCase(productNametoCheck)) {
-                return true;
+               return myCart;
             }
         }
-        return false;
+        return null;
     }
 }

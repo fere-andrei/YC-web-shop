@@ -20,17 +20,15 @@
         <tr>
             <th>Product Name</th>
             <th>Price$</th>
-            <th>Category</th>
             <th>Number of units</th>
             <th>Remove</th>
         </tr>
         <c:set var ="index" value="0"></c:set>
         <c:forEach items="${myCartItems}" var="cartItem">
             <tr>
-                <td><c:out value="${cartItem.product[0].productName}" /></td>
-                <td><c:out value="${cartItem.totalPrice}" /></td>
-                <td><c:out value="${cartItem.product[0].category}" /></td>
-                <td><c:out value="${cartItem.productCount}" /></td>
+                <td><c:out value="${cartItem.productName}" /></td>
+                <td><c:out value="${cartItem.price}" /></td>
+                <td><c:out value="${cartItem.quantity}" /></td>
                 <td>
                     <button id="js-remove-from-cart" > Remove from cart</button>
                 </td>

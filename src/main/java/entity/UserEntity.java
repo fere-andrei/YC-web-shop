@@ -8,7 +8,7 @@ import java.io.Serializable;
 /*@Getter
 @Setter*/
 @Entity
-@Table(name = "t_users")
+@Table(name = "t_user")
 public class UserEntity implements Serializable {
 
     @Id
@@ -30,7 +30,6 @@ public class UserEntity implements Serializable {
 
     @Column(name = "address")
     private String address;
-
 
     public UserEntity() {
     }

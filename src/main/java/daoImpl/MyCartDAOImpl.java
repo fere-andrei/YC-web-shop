@@ -48,4 +48,19 @@ public class MyCartDAOImpl implements MyCartDAO {
         }
         return myCartEntity;
     }
+
+    @Override
+    public void updateItemFromCart(MyCartEntity itemFromCart) {
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            session.update(itemFromCart);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+    }
 }

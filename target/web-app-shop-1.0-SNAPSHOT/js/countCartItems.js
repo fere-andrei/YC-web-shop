@@ -26,6 +26,8 @@ var MyCartComponent = (function(){
                 url : "cart",
                 success : function(resp){
                     alert(resp);
+                    var inputStock=parseInt($(Config.MY_CART_VIEW).text())+quantity;
+                    $(Config.MY_CART_VIEW).text(inputStock);
                 },
                 error : function(resp){
                     alert("FAIL");
