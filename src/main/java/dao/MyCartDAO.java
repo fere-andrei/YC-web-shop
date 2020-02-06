@@ -9,4 +9,8 @@ public interface MyCartDAO {
     public Long findNumberOfItems(Long userId);
     public List<MyCartEntity> findSpecificCartByUser(Long userId);
     public void updateItemFromCart(MyCartEntity itemFromCart);
+    public Double totalCostOfMyCart(Long userId);
+    public MyCartEntity findProductFromCart(Long userId,String productName);
+
+    void deleteFromCart(MyCartEntity productFromCart);
 }

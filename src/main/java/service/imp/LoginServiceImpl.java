@@ -5,8 +5,6 @@ import dao.UserDAO;
 import daoImpl.MyCartDAOImpl;
 import daoImpl.UserDAOImpl;
 import dto.UserDTO;
-import entity.MyCartEntity;
-import entity.UserEntity;
 import service.LoginService;
 import util.SessionUtil;
 

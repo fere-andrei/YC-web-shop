@@ -36,6 +36,6 @@
 
     <div style="float: right" class="shopping-item">
         <a href="${pageContext.request.contextPath}/cart">My Cart <i class="shopping-cart-view"></i>
-            <p id="JS-cart-item-count" class="product-count"><b>${numberOfItems}</b></p></a>
+            <p id="JS-cart-item-count" class="product-count" data-no-of-items="${numberOfItems}"><b>${numberOfItems}</b></p></a>
     </div>
 </div>

@@ -32,16 +32,15 @@
             <th>Add to cart</th>
         </tr>
            <c:forEach items="${products}" var="item">
-               <tr>
+               <tr class = "js-product-details">
                    <td><c:out value="${item.productName}" /></td>
                    <td><c:out value="${item.price}"/>$</td>
                    <td><c:out value="${item.category}" /></td>
                    <td><c:out value="${item.stockNumber}" /></td>
-                   <td><input id = "quantity" type = "number" name = "quantity" value="1" min="1" max="${item.stockNumber}"></td>
+                   <td><input class = "js-quantity-class" id = "js-quantity-id" type = "number" name = "quantity" value="1" min="1" max="${item.stockNumber}"></td>
                    <td>
-                       <button id="add-to-cart-button" type="submit" name="productId" value = "${item.id}" class="add-btn">Add to cart</button>
+                       <button id="js-button-id" type="submit" name="productId" value = "${item.id}" class="js-add-to-cart-button">Add to cart</button>
                    </td>
-
                </tr>
            </c:forEach>
     </table>
