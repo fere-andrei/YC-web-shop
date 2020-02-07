@@ -10,7 +10,7 @@ public interface MyCartDAO {
     public List<MyCartEntity> findSpecificCartByUser(Long userId);
     public void updateItemFromCart(MyCartEntity itemFromCart);
     public Double totalCostOfMyCart(Long userId);
-    public MyCartEntity findProductFromCart(Long userId,String productName);
+    public MyCartEntity findProductFromCart(Long userId,Long productId);
 
     void deleteFromCart(MyCartEntity productFromCart);
 }

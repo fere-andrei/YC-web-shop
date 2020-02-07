@@ -29,7 +29,7 @@ public class MyCartDAOImpl implements MyCartDAO {
     //TODO if the cart is empty init with 0 numberOfItems
     @Override
     public Long findNumberOfItems(Long userId) {
-        Long numberOfItems = 0l;
+        Long numberOfItems = 0L;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             numberOfItems = (Long) session.createQuery("SELECT sum(C.quantity) FROM MyCartEntity C JOIN C.user U WHERE U.id=:userId")
                     .setParameter("userId", userId).getSingleResult();
@@ -45,7 +45,7 @@ public class MyCartDAOImpl implements MyCartDAO {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             myCartEntity = session.createQuery("select C from MyCartEntity C join C.user U where U.id=:userId", MyCartEntity.class)
                     .setParameter("userId", userId).getResultList();
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return myCartEntity;
@@ -79,12 +79,12 @@ public class MyCartDAOImpl implements MyCartDAO {
     }
 
     @Override
-    public MyCartEntity findProductFromCart(Long userId, String productName) {
+    public MyCartEntity findProductFromCart(Long userId, Long productId) {
         MyCartEntity myCartEntity = new MyCartEntity();
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            myCartEntity = session.createQuery("select C from MyCartEntity C join C.user U where U.id=:userId and C.productName=:productName", MyCartEntity.class)
-                    .setParameter("userId", userId).setParameter("productName",productName).getSingleResult();
-        }catch (Exception e) {
+            myCartEntity = session.createQuery("select C from MyCartEntity C join C.user U where U.id=:userId and C.id=:productId", MyCartEntity.class)
+                    .setParameter("userId", userId).setParameter("productId", productId).getSingleResult();
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return myCartEntity;

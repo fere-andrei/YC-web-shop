@@ -7,6 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--<script src="js/updateCart.js"></script>--%>
 <html>
 <head>
     <title>My Cart</title>
@@ -25,20 +26,19 @@
         </tr>
         <c:set var ="index" value="0"></c:set>
         <c:forEach items="${myCartItems}" var="cartItem">
-            <tr>
+            <tr class = "js-product-from-cart">
                 <td><c:out value="${cartItem.productName}" /></td>
-                <td><c:out value="${cartItem.price}" /></td>
-                <td><input id = "quantityFromCart" type = "number" name = "quantity" value="${cartItem.quantity}" min="0" max="${cartItem.quantity}"></td>
-               <%-- <td><c:out value="${cartItem.quantity}" /></td>--%>
+                <td class="js-price-of-item"><c:out value="${cartItem.price}" /></td>
+                <td><input class = "js-quantity-to-update" id = "js-quantity-from-cart" type = "number" name = "newQuantity" value="${cartItem.quantity}" min="0"></td>
                 <td>
-                    <button id="js-remove-from-cart" >Update Cart</button>
+                    <button type = "submit" class="js-update-cart-button" id="js-update-cart" name="itemId" value="${cartItem.id}">Update Cart</button>
                 </td>
             </tr>
             </c:forEach>
 
     </table>
 </div>
-You have to pay : <b>${totalCost}</b> $
+You have to pay : <b id = "js-total-cost">${totalCost}</b> $
 <br/>
 <button id="js-place-order">Place Order</button>
 

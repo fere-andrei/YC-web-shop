@@ -40,9 +40,11 @@ public class CartServiceImpl implements CartService {
                 MyCartEntity myCart = new MyCartEntity();
                 UserEntity userEntity = UserTransformer.convertToEntity(user);
 
+                //set the entity to be updated
                 myCart.setUser(userEntity);
                 myCart.setProductName(product.getProductName());
                 myCart.setPrice(product.getPrice() * quantity);
+                myCart.setPricePerUnit(product.getPrice());
                 myCart.setQuantity(quantity);
 
                 myCartDAO.saveItemInMyCart(myCart);
@@ -50,6 +52,7 @@ public class CartServiceImpl implements CartService {
                 SessionUtil.storeNumberOfItemsInCart(session,numberOfItemsInCart);
             }else{
                 itemFromCart.setQuantity(quantity+itemFromCart.getQuantity());
+                itemFromCart.setPrice(itemFromCart.getPricePerUnit()*itemFromCart.getQuantity());
                 myCartDAO.updateItemFromCart(itemFromCart);
                 Long numberOfItemsInCart = myCartDAO.findNumberOfItems(user.getId());
                 SessionUtil.storeNumberOfItemsInCart(session,numberOfItemsInCart);
@@ -80,15 +83,16 @@ public class CartServiceImpl implements CartService {
     public void updateItemInCart(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
 
-        Long quantity = Long.parseLong(request.getParameter("quantity"));
-        String itemToBeUpdated = (String) request.getParameter("itemName");
+        Long newQuantity = Long.parseLong(request.getParameter("newQuantity"));
+        Long itemToBeUpdated = Long.parseLong(request.getParameter("productIdFromCart"));
         UserDTO user = (UserDTO) session.getAttribute("loginedUser");
 
         MyCartEntity productFromCart = myCartDAO.findProductFromCart(user.getId(),itemToBeUpdated);
-        if(quantity.equals(0)){
+        if(newQuantity.equals(0L)){
             myCartDAO.deleteFromCart(productFromCart);
         }else{
-            productFromCart.setQuantity(productFromCart.getQuantity()-quantity);
+            productFromCart.setQuantity(newQuantity);
+            productFromCart.setPrice(productFromCart.getPricePerUnit()*newQuantity);
             myCartDAO.updateItemFromCart(productFromCart);
         }
     }

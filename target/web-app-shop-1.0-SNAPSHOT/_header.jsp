@@ -9,6 +9,7 @@
       crossorigin="anonymous">
 <script src="http://code.jquery.com/jquery-1.4.3.min.js"></script>
 <script src="js/countCartItems.js"></script>
+
 <div style="background: #E0E0E0; height: 65px; padding: 5px; ">
     <div style="float: left; " >
         <h1>YC Shop</h1>

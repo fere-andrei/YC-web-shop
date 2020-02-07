@@ -48,14 +48,15 @@ public class CartController extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
 
-        String cartComponent = (String) request.getAttribute("updateProduct");
+        String cartComponent = request.getParameter("cartComponent");
 
-        if (cartComponent.equalsIgnoreCase("updateProduct")) {
-            cartService.updateItemInCart(request,response);
-        } else {
+        if ("updateProduct".equalsIgnoreCase(cartComponent)) {
+            cartService.updateItemInCart(request, response);
+        } else if (cartComponent != null) {
             cartService.addItemInCart(request, response);
+        } else {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("productPage.jsp");
+            dispatcher.forward(request, response);
         }
-        RequestDispatcher dispatcher = request.getRequestDispatcher("productPage.jsp");
-        dispatcher.forward(request, response);
     }
 }

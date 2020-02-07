@@ -29,6 +29,9 @@ public class MyCartEntity {
     @Column(name = "product_name")
     private String productName;
 
+    @Column(name = "price_per_unit")
+    private Double pricePerUnit;
+
     public Long getId() {
         return id;
     }
@@ -67,5 +70,13 @@ public class MyCartEntity {
 
     public void setProductName(String productName) {
         this.productName = productName;
+    }
+
+    public Double getPricePerUnit() {
+        return pricePerUnit;
+    }
+
+    public void setPricePerUnit(Double pricePerUnit) {
+        this.pricePerUnit = pricePerUnit;
     }
 }
