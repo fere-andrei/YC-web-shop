@@ -1,45 +1,20 @@
 package dto;
-
-
-import entity.ProductsEntity;
 import entity.UserEntity;
-
-import javax.persistence.*;
 
 public class MyCartDTO {
 
-
     private Long id;
 
-    private int productCount;
+    private Long quantity;
 
     private UserEntity user;
 
-    private Double totalPrice;
+    private Double price;
 
-    private ProductsEntity product;
+    private String productName;
 
-    private int statusCart;
+    private Double pricePerUnit;
 
-    private Long productId;
-
-    private Long userId;
-
-    public Long getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Long productId) {
-        this.productId = productId;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
     public Long getId() {
         return id;
     }
@@ -48,12 +23,12 @@ public class MyCartDTO {
         this.id = id;
     }
 
-    public int getProductCount() {
-        return productCount;
+    public Long getQuantity() {
+        return quantity;
     }
 
-    public void setProductCount(int productCount) {
-        this.productCount = productCount;
+    public void setQuantity(Long quantity) {
+        this.quantity = quantity;
     }
 
     public UserEntity getUser() {
@@ -64,27 +39,27 @@ public class MyCartDTO {
         this.user = user;
     }
 
-    public Double getTotalPrice() {
-        return totalPrice;
+    public Double getPrice() {
+        return price;
     }
 
-    public void setTotalPrice(Double totalPrice) {
-        this.totalPrice = totalPrice;
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
-    public ProductsEntity getProduct() {
-        return product;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setProduct(ProductsEntity product) {
-        this.product = product;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
-    public int getStatusCart() {
-        return statusCart;
+    public Double getPricePerUnit() {
+        return pricePerUnit;
     }
 
-    public void setStatusCart(int statusCart) {
-        this.statusCart = statusCart;
+    public void setPricePerUnit(Double pricePerUnit) {
+        this.pricePerUnit = pricePerUnit;
     }
 }

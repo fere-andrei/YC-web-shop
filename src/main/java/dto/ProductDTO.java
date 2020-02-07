@@ -1,8 +1,7 @@
 package dto;
 
-import javax.persistence.Column;
-
 public class ProductDTO {
+
     private Long id;
 
     private String productName;
@@ -12,6 +11,7 @@ public class ProductDTO {
     private String category;
 
     private Double price;
+
 
     public Long getId() {
         return id;

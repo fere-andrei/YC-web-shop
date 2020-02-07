@@ -25,6 +25,9 @@ public class OrderEntity {
     @Column(name = "product_name")
     private String productName;
 
+    @Column(name = "order_number")
+    private Long orderNumber;
+
     public Long getId() {
         return id;
     }
@@ -63,5 +66,13 @@ public class OrderEntity {
 
     public void setProductName(String productName) {
         this.productName = productName;
+    }
+
+    public Long getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(Long orderNumber) {
+        this.orderNumber = orderNumber;
     }
 }

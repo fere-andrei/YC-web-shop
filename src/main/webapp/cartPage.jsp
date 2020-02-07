@@ -7,7 +7,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--<script src="js/updateCart.js"></script>--%>
 <html>
 <head>
     <title>My Cart</title>
@@ -40,7 +39,9 @@
 </div>
 You have to pay : <b id = "js-total-cost">${totalCost}</b> $
 <br/>
-<button id="js-place-order">Place Order</button>
+
+    <button type = "submit" id="js-place-order" name="orderButton" value="${myCartItems}">Place Order</button>
+
 
 <jsp:include page="_footer.jsp"></jsp:include>
 </body>

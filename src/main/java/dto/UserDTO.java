@@ -1,8 +1,6 @@
 package dto;
-
-import javax.persistence.Column;
-
 public class UserDTO {
+
     private Long id;
 
     private String userName;
@@ -39,6 +37,14 @@ public class UserDTO {
         this.password = password;
     }
 
+    public int getAdminStatus() {
+        return adminStatus;
+    }
+
+    public void setAdminStatus(int adminStatus) {
+        this.adminStatus = adminStatus;
+    }
+
     public String getFullName() {
         return fullName;
     }
@@ -54,13 +60,4 @@ public class UserDTO {
     public void setAddress(String address) {
         this.address = address;
     }
-
-    public int getAdminStatus() {
-        return adminStatus;
-    }
-
-    public void setAdminStatus(int adminStatus) {
-        this.adminStatus = adminStatus;
-    }
-
 }

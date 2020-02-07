@@ -1,5 +1,6 @@
 package controller;
 
+import entity.MyCartEntity;
 import service.OrderService;
 import service.imp.LoginServiceImpl;
 import service.imp.OrderServiceImpl;
@@ -20,13 +21,14 @@ public class OrderController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("homeView.jsp");
+        response.sendRedirect("orderPage.jsp");
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            //metode din service
+            orderService.placeOrder(request,response);
+            //MyCartEntity myCartEntity = request.getParameter("orderItems");
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -4,7 +4,7 @@ import dto.ProductDTO;
 import entity.ProductsEntity;
 
 public class ProductsTransformer {
-    public ProductDTO convertToDto(ProductsEntity productsEntity){
+    public static ProductDTO convertToDto(ProductsEntity productsEntity){
         if(productsEntity==null){
             return null;
         }
@@ -14,10 +14,11 @@ public class ProductsTransformer {
         productDTO.setPrice(productsEntity.getPrice());
         productDTO.setProductName(productsEntity.getProductName());
         productDTO.setStockNumber(productsEntity.getStockNumber());
+
         return productDTO;
     }
 
-    public ProductsEntity convertToEntity(ProductDTO productsDto){
+    public static ProductsEntity convertToEntity(ProductDTO productsDto){
         if(productsDto==null){
             return null;
         }
@@ -27,6 +28,7 @@ public class ProductsTransformer {
         productEntity.setPrice(productsDto.getPrice());
         productEntity.setProductName(productsDto.getProductName());
         productEntity.setStockNumber(productsDto.getStockNumber());
+
         return productEntity;
     }
 }

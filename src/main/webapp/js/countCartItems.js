@@ -15,6 +15,8 @@ var MyCartComponent = (function(){
         QUANTITY_TO_UPDATE:".js-quantity-to-update",
         TABLE_CLASS_TO_UPDATE:".js-product-from-cart",
 
+        //place order
+        PLACE_ORDER: "#js-place-order",
 
         //common
         MY_CART_VIEW:"#JS-cart-item-count"
@@ -24,6 +26,7 @@ var MyCartComponent = (function(){
     var bindAllComponents = function () {
          addToCart();
          updateCart();
+         placeOrder();
     }
 
     var addToCart = function () {
@@ -84,6 +87,30 @@ var MyCartComponent = (function(){
         });
     }
 
+    var placeOrder = function () {
+        $(Config.PLACE_ORDER).click(function(event){
+            var orderItems = $(event.target).val();
+
+            $.ajax({
+                type:"POST",
+                data: {
+                    orderItems : orderItems,
+                    cartComponent : "placeOrder"
+                },
+                url : "order",
+                success : function(){
+
+                },
+                error : function(){
+                    alert("FAIL");
+                }
+            });
+        });
+
+    }
+
+
+    //TODO ADD IMPLEMENTATION IN NEXT METHODS
     function deleteItem() {
 
     }
