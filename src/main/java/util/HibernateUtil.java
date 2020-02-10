@@ -1,6 +1,7 @@
 package util;
 
 import entity.MyCartEntity;
+import entity.OrderEntity;
 import entity.ProductsEntity;
 import entity.UserEntity;
 import org.hibernate.SessionFactory;
@@ -37,6 +38,7 @@ public class HibernateUtil {
                 configuration.addAnnotatedClass(UserEntity.class);
                 configuration.addAnnotatedClass(ProductsEntity.class);
                 configuration.addAnnotatedClass(MyCartEntity.class);
+                configuration.addAnnotatedClass(OrderEntity.class);
 
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                         .applySettings(configuration.getProperties()).build();

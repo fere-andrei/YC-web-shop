@@ -17,7 +17,7 @@ public class ProductsEntity {
     private String productName;
 
     @Column(name = "stock_number")
-    private int stockNumber;
+    private Long stockNumber;
 
     @Column(name = "category")
     private String category;
@@ -42,11 +42,11 @@ public class ProductsEntity {
         this.productName = productName;
     }
 
-    public int getStockNumber() {
+    public Long getStockNumber() {
         return stockNumber;
     }
 
-    public void setStockNumber(int stockNumber) {
+    public void setStockNumber(Long stockNumber) {
         this.stockNumber = stockNumber;
     }
 

@@ -6,7 +6,7 @@ public class ProductDTO {
 
     private String productName;
 
-    private int stockNumber;
+    private Long stockNumber;
 
     private String category;
 
@@ -29,11 +29,11 @@ public class ProductDTO {
         this.productName = productName;
     }
 
-    public int getStockNumber() {
+    public Long getStockNumber() {
         return stockNumber;
     }
 
-    public void setStockNumber(int stockNumber) {
+    public void setStockNumber(Long stockNumber) {
         this.stockNumber = stockNumber;
     }
 

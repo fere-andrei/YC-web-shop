@@ -1,5 +1,7 @@
 package dto;
 
+import entity.UserEntity;
+
 public class OrderDTO {
 
     private Long id;
@@ -8,7 +10,7 @@ public class OrderDTO {
 
     private Double price;
 
-    private Long userId;
+    private UserEntity user;
 
     private String productName;
 
@@ -38,12 +40,12 @@ public class OrderDTO {
         this.price = price;
     }
 
-    public Long getUserId() {
-        return userId;
+    public UserEntity getUser() {
+        return user;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
 
     public String getProductName() {

@@ -17,7 +17,7 @@ public class OrderTransformer {
         orderDTO.setPrice(orderEntity.getPrice());
         orderDTO.setProductName(orderEntity.getProductName());
         orderDTO.setQuantity(orderEntity.getQuantity());
-        orderDTO.setUserId(orderEntity.getUserId());
+        orderDTO.setUser(orderEntity.getUser());
 
         return orderDTO;
     }
@@ -32,7 +32,7 @@ public class OrderTransformer {
         orderEntity.setPrice(orderDTO.getPrice());
         orderEntity.setProductName(orderDTO.getProductName());
         orderEntity.setQuantity(orderDTO.getQuantity());
-        orderEntity.setUserId(orderDTO.getUserId());
+        orderEntity.setUser(orderDTO.getUser());
 
         return orderEntity;
     }

@@ -21,7 +21,6 @@ public class CartServiceImpl implements CartService {
     ProductsDAO productsDao = new ProductsDAOImpl();
     MyCartDAO myCartDAO = new MyCartDAOImpl();
 
-    //TODO refactor this method in more specific methods
     @Override
     public void addItemInCart(HttpServletRequest request, HttpServletResponse response) {
         try {
@@ -47,8 +46,6 @@ public class CartServiceImpl implements CartService {
                 myCart.setPricePerUnit(product.getPrice());
                 myCart.setQuantity(quantity);
 
-                //myCartDAO.saveItemInMyCart(myCart);
-                //myCartDAO.saveItemInMyCart(myCart);
                 myCartDAO.saveEntity(myCart);
                 Long numberOfItemsInCart = myCartDAO.findNumberOfItems(user.getId());
                 SessionUtil.storeNumberOfItemsInCart(session,numberOfItemsInCart);
@@ -92,10 +89,14 @@ public class CartServiceImpl implements CartService {
         MyCartEntity productFromCart = myCartDAO.findProductFromCart(user.getId(),itemToBeUpdated);
         if(newQuantity.equals(0L)){
             myCartDAO.deleteEntity(productFromCart);
+            Long numberOfItemsInCart = myCartDAO.findNumberOfItems(user.getId());
+            SessionUtil.storeNumberOfItemsInCart(session,numberOfItemsInCart);
         }else{
             productFromCart.setQuantity(newQuantity);
             productFromCart.setPrice(productFromCart.getPricePerUnit()*newQuantity);
             myCartDAO.updateEntity(productFromCart);
+            Long numberOfItemsInCart = myCartDAO.findNumberOfItems(user.getId());
+            SessionUtil.storeNumberOfItemsInCart(session,numberOfItemsInCart);
         }
     }
 }

@@ -14,7 +14,7 @@ public class OrderDAOImpl extends CommonDAOImpl  implements OrderDAO{
     public Long lastOrderNumberFromUser(Long userId) {
         Long lastOrderNumber = 0L;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            lastOrderNumber = (Long) session.createQuery("SELECT coalesce(max(O.orderNumber),0) FROM OrderEntity O JOIN C.user U WHERE U.id=:userId")
+            lastOrderNumber = (Long) session.createQuery("SELECT max(O.orderNumber) FROM OrderEntity O JOIN C.user U WHERE U.id=:userId")
                     .setParameter("userId", userId).getSingleResult();
         } catch (Exception e) {
             e.printStackTrace();

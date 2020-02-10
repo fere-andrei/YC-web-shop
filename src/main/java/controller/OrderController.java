@@ -28,7 +28,6 @@ public class OrderController extends HttpServlet {
             throws ServletException, IOException {
         try {
             orderService.placeOrder(request,response);
-            //MyCartEntity myCartEntity = request.getParameter("orderItems");
         } catch (Exception e) {
             e.printStackTrace();
         }

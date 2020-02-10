@@ -3,7 +3,6 @@ package controller;
 import dao.ProductsDAO;
 import daoImpl.ProductsDAOImpl;
 import entity.ProductsEntity;
-import sun.plugin.dom.core.Element;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -26,7 +25,7 @@ public class ProductsController extends HttpServlet {
             throws ServletException, IOException {
         response.sendRedirect("productPage.jsp");
         try {
-            List<ProductsEntity> products = productsDao.findProducts();
+            List<ProductsEntity> products = productsDao.findAvailableProducts();
             HttpSession session = request.getSession();
             session.setAttribute("products",products);
         } catch (Exception e) {
@@ -37,7 +36,7 @@ public class ProductsController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            List<ProductsEntity> products = productsDao.findProducts();
+            List<ProductsEntity> products = productsDao.findAvailableProducts();
             request.setAttribute("products",products);
         } catch (Exception e) {
             e.printStackTrace();

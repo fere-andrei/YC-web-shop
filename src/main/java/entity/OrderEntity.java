@@ -10,17 +10,18 @@ public class OrderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id")
-    @SequenceGenerator(name = "generator", sequenceName = "cart_sequence")
+    @SequenceGenerator(name = "generator", sequenceName = "order_sequence")
     private Long id;
 
     @Column(name = "quantity")
     private Long quantity;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="user_id",referencedColumnName = "ID")
+    private UserEntity user;
+
     @Column(name = "price")
     private Double price;
-
-    @Column(name ="user_id")
-    private Long userId;
 
     @Column(name = "product_name")
     private String productName;
@@ -52,12 +53,12 @@ public class OrderEntity {
         this.price = price;
     }
 
-    public Long getUserId() {
-        return userId;
+    public UserEntity getUser() {
+        return user;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
 
     public String getProductName() {
