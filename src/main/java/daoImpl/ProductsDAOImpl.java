@@ -7,7 +7,7 @@ import util.HibernateUtil;
 
 import java.util.List;
 
-public class ProductsDAOImpl implements ProductsDAO {
+public class ProductsDAOImpl extends CommonDAOImpl  implements ProductsDAO {
 
 
     public List<ProductsEntity> findProducts() {

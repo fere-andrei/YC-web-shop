@@ -41,9 +41,9 @@ public class RegisterController extends HttpServlet {
         user.setAddress(address);
         user.setFullName(fullName);
 
-        userDao.saveUser(user);
+        userDao.saveEntity(user);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("userHomePage.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
         dispatcher.forward(request, response);
     }
 }

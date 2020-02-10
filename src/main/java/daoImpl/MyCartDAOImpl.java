@@ -9,29 +9,13 @@ import util.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyCartDAOImpl implements MyCartDAO {
-    //TODO create a single class for save,update,delete(generic entities)
-    @Override
-    public void saveItemInMyCart(MyCartEntity myCartEntity) {
-        Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
-            session.save(myCartEntity);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        }
-    }
+public class MyCartDAOImpl extends CommonDAOImpl implements MyCartDAO {
 
-    //TODO if the cart is empty init with 0 numberOfItems
     @Override
     public Long findNumberOfItems(Long userId) {
         Long numberOfItems = 0L;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            numberOfItems = (Long) session.createQuery("SELECT sum(C.quantity) FROM MyCartEntity C JOIN C.user U WHERE U.id=:userId")
+            numberOfItems = (Long) session.createQuery("SELECT coalesce(sum(C.quantity),0) FROM MyCartEntity C JOIN C.user U WHERE U.id=:userId")
                     .setParameter("userId", userId).getSingleResult();
         } catch (Exception e) {
             e.printStackTrace();
@@ -51,26 +35,12 @@ public class MyCartDAOImpl implements MyCartDAO {
         return myCartEntity;
     }
 
-    @Override
-    public void updateItemFromCart(MyCartEntity itemFromCart) {
-        Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
-            session.update(itemFromCart);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        }
-    }
 
     @Override
     public Double totalCostOfMyCart(Long userId) {
         Double totalPrice = 0.0;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            totalPrice = (Double) session.createQuery("SELECT sum(C.price) FROM MyCartEntity C JOIN C.user U WHERE U.id=:userId")
+            totalPrice = (Double) session.createQuery("SELECT coalesce(sum(C.price),0) FROM MyCartEntity C JOIN C.user U WHERE U.id=:userId")
                     .setParameter("userId", userId).getSingleResult();
         } catch (Exception e) {
             e.printStackTrace();
@@ -90,18 +60,4 @@ public class MyCartDAOImpl implements MyCartDAO {
         return myCartEntity;
     }
 
-    @Override
-    public void deleteFromCart(MyCartEntity productFromCart) {
-        Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
-            session.delete(productFromCart);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        }
-    }
 }

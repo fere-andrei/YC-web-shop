@@ -47,13 +47,15 @@ public class CartServiceImpl implements CartService {
                 myCart.setPricePerUnit(product.getPrice());
                 myCart.setQuantity(quantity);
 
-                myCartDAO.saveItemInMyCart(myCart);
+                //myCartDAO.saveItemInMyCart(myCart);
+                //myCartDAO.saveItemInMyCart(myCart);
+                myCartDAO.saveEntity(myCart);
                 Long numberOfItemsInCart = myCartDAO.findNumberOfItems(user.getId());
                 SessionUtil.storeNumberOfItemsInCart(session,numberOfItemsInCart);
             }else{
                 itemFromCart.setQuantity(quantity+itemFromCart.getQuantity());
                 itemFromCart.setPrice(itemFromCart.getPricePerUnit()*itemFromCart.getQuantity());
-                myCartDAO.updateItemFromCart(itemFromCart);
+                myCartDAO.updateEntity(itemFromCart);
                 Long numberOfItemsInCart = myCartDAO.findNumberOfItems(user.getId());
                 SessionUtil.storeNumberOfItemsInCart(session,numberOfItemsInCart);
 
@@ -89,11 +91,11 @@ public class CartServiceImpl implements CartService {
 
         MyCartEntity productFromCart = myCartDAO.findProductFromCart(user.getId(),itemToBeUpdated);
         if(newQuantity.equals(0L)){
-            myCartDAO.deleteFromCart(productFromCart);
+            myCartDAO.deleteEntity(productFromCart);
         }else{
             productFromCart.setQuantity(newQuantity);
             productFromCart.setPrice(productFromCart.getPricePerUnit()*newQuantity);
-            myCartDAO.updateItemFromCart(productFromCart);
+            myCartDAO.updateEntity(productFromCart);
         }
     }
 }

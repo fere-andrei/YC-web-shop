@@ -10,21 +10,9 @@ import util.HibernateUtil;
 
 import javax.jws.soap.SOAPBinding;
 
-public class UserDAOImpl implements UserDAO {
-    public void saveUser(UserEntity userEntity) {
-        Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
-            session.save(userEntity);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        }
-    }
+public class UserDAOImpl extends CommonDAOImpl implements UserDAO {
 
+    @Override
     public UserDTO checkLogin(String userName, String password) {
 
         Transaction transaction = null;

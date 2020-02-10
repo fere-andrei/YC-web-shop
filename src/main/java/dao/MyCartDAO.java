@@ -4,13 +4,12 @@ import entity.MyCartEntity;
 
 import java.util.List;
 
-public interface MyCartDAO {
-    public void saveItemInMyCart(MyCartEntity myCartEntity);
-    public Long findNumberOfItems(Long userId);
-    public List<MyCartEntity> findSpecificCartByUser(Long userId);
-    public void updateItemFromCart(MyCartEntity itemFromCart);
-    public Double totalCostOfMyCart(Long userId);
-    public MyCartEntity findProductFromCart(Long userId,Long productId);
+public interface MyCartDAO extends CommonDAO {
 
-    void deleteFromCart(MyCartEntity productFromCart);
+     Long findNumberOfItems(Long userId);
+     List<MyCartEntity> findSpecificCartByUser(Long userId);
+     Double totalCostOfMyCart(Long userId);
+     MyCartEntity findProductFromCart(Long userId,Long productId);
+
+
 }
