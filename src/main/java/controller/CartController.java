@@ -46,8 +46,6 @@ public class CartController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-
         String cartComponent = request.getParameter("cartComponent");
 
         if ("updateProduct".equalsIgnoreCase(cartComponent)) {

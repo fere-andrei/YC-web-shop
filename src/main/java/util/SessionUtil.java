@@ -2,6 +2,7 @@ package util;
 
 import dto.UserDTO;
 import entity.MyCartEntity;
+import entity.OrderDetailsEntity;
 import entity.OrderEntity;
 
 import javax.servlet.http.HttpSession;
@@ -27,5 +28,9 @@ public class SessionUtil {
 
     public static void storeOrders(HttpSession session, List<OrderEntity> orderEntities){
         session.setAttribute("orderItems",orderEntities);
+    }
+
+    public static void storeOrderDetailsList(HttpSession session, List<OrderDetailsEntity> orderDetailsList) {
+        session.setAttribute("orderDetailsList",orderDetailsList);
     }
 }

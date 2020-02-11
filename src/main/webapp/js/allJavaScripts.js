@@ -18,6 +18,9 @@ var MyCartComponent = (function(){
         //place order
         PLACE_ORDER: "#js-place-order",
 
+        //order details
+        DETAILS_BUTTON: ".js-show-order-details",
+
         //common
         MY_CART_VIEW:"#JS-cart-item-count"
 
@@ -27,6 +30,7 @@ var MyCartComponent = (function(){
          addToCart();
          updateCart();
          placeOrder();
+         showOrderDetails();
     }
 
     var addToCart = function () {
@@ -89,16 +93,40 @@ var MyCartComponent = (function(){
 
     var placeOrder = function () {
         $(Config.PLACE_ORDER).click(function(event){
+            var orderNumber = $(event.target).val();
+
+            $.ajax({
+                type:"POST",
+                data: {
+                    orderNumber : orderNumber,
+                    cartComponent : "orderDetails"
+                },
+                url : "order",
+                success : function(){
+
+                },
+                error : function(){
+                    alert("FAIL");
+                }
+            });
+        });
+
+    }
+
+
+    var showOrderDetails = function () {
+        $(Config.DETAILS_BUTTON).click(function(event){
             var orderItems = $(event.target).val();
 
             $.ajax({
                 type:"POST",
                 data: {
                     orderItems : orderItems,
-                    cartComponent : "placeOrder"
+                    orderComponent : "orderDetails"
                 },
                 url : "order",
                 success : function(){
+                    window.open("orderDetails.jsp", "_blank", "scrollbars=1,resizable=1,height=300,width=950");
 
                 },
                 error : function(){

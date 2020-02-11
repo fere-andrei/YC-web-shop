@@ -16,8 +16,10 @@
     <br>
     <b>ALL ORDERS</b>
     <br>
+    <br>
+    <br>
     <div>
-        <table border="2" cellpadding="5" align="center">
+        <table border="1" style="width:90%" align="center">
             <tr>
                 <th>Order number</th>
                 <th>User Name</th>
@@ -32,10 +34,15 @@
                     <td><c:out value="${currentUser.fullName}"/></td>
                     <td><c:out value="${item.address}" /></td>
                     <td><c:out value="${item.orderDate}" /></td>
-                    <td><c:out value="${item.totalCost}"/> </td>
+                    <td><c:out value="${item.totalCost}"/>$</td>
+                   <%-- <td>
+                        <a href='#' onclick='javascript:window.open("orderDetails.jsp", "_blank", "scrollbars=1,resizable=1,height=300,width=450");' title='Order Details'>Show details</a>
+                    </td>--%>
+
                     <td>
-                        <button type = "submit">Show Order Details</button>
+                        <button type = "submit" class="js-show-order-details" id="js-show-details" name="orderNUmber" value="${item.orderNumber}">Show details</button>
                     </td>
+
                 </tr>
             </c:forEach>
         </table>

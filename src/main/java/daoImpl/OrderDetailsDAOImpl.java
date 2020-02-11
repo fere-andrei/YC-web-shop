@@ -7,7 +7,7 @@ import util.HibernateUtil;
 
 import java.util.List;
 
-public class OrderDetailsDAOImpl extends CommonDAOImpl  implements OrderDetailsDAO {
+public class OrderDetailsDAOImpl extends CommonDAOImpl implements OrderDetailsDAO {
 
 
     @Override
@@ -28,6 +28,18 @@ public class OrderDetailsDAOImpl extends CommonDAOImpl  implements OrderDetailsD
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             orderList = (List<OrderDetailsEntity>) session.createQuery("select O from OrderDetailsEntity O join O.user U where U.id=:userId order by O.orderNumber")
                     .setParameter("userId", userId).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return orderList;
+    }
+
+    @Override
+    public List<OrderDetailsEntity> findOrderDetailsByUserIdAndOrderNUmber(Long userId, Long orderNumber) {
+        List<OrderDetailsEntity> orderList = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            orderList = (List<OrderDetailsEntity>) session.createQuery("select O from OrderDetailsEntity O join O.user U where U.id=:userId and O.orderNumber=:orderNumber order by O.orderNumber")
+                    .setParameter("userId", userId).setParameter("orderNumber", orderNumber).getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -61,6 +61,15 @@ public class OrderServiceImpl implements OrderService {
         SessionUtil.storeOrders(session,orderList);
     }
 
+    @Override
+    public void displayOrdeDetails(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        UserDTO user = (UserDTO) session.getAttribute("currentUser");
+        Long orderNumber = Long.parseLong(request.getParameter("orderItems"));;
+        List<OrderDetailsEntity> orderDetailsList = orderDetailsDAO.findOrderDetailsByUserIdAndOrderNUmber(user.getId(),orderNumber);
+        SessionUtil.storeOrderDetailsList(session,orderDetailsList);
+    }
+
     private void updateProductStock(MyCartEntity itemFromCart) {
         ProductsEntity productToUpdate = productsDAO.findProductByName(itemFromCart.getProductName());
         productToUpdate.setStockNumber(productToUpdate.getStockNumber()-itemFromCart.getQuantity());

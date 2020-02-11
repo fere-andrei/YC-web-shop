@@ -35,8 +35,13 @@ public class OrderController extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String orderComponent = request.getParameter("orderComponent");
         try {
+            if("orderDetails".equalsIgnoreCase(orderComponent)){
+                orderService.displayOrdeDetails(request,response);
+            }else{
             orderService.placeOrder(request,response);
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
