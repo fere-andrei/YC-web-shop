@@ -1,7 +1,7 @@
 package entity;
 
-
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "t_order")
@@ -10,24 +10,24 @@ public class OrderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id")
-    @SequenceGenerator(name = "generator", sequenceName = "order_sequence")
+    @SequenceGenerator(name = "generator", sequenceName = "orders_sequence")
     private Long id;
 
-    @Column(name = "quantity")
-    private Long quantity;
+    @Column(name = "total_cost")
+    private Double totalCost;
+
+    @Column(name = "order_number")
+    private Long orderNumber;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id",referencedColumnName = "ID")
     private UserEntity user;
 
-    @Column(name = "price")
-    private Double price;
+    @Column(name = "address")
+    private String address;
 
-    @Column(name = "product_name")
-    private String productName;
-
-    @Column(name = "order_number")
-    private Long orderNumber;
+    @Column(name = "order_date")
+    private Date orderDate;
 
     public Long getId() {
         return id;
@@ -37,20 +37,20 @@ public class OrderEntity {
         this.id = id;
     }
 
-    public Long getQuantity() {
-        return quantity;
+    public Double getTotalCost() {
+        return totalCost;
     }
 
-    public void setQuantity(Long quantity) {
-        this.quantity = quantity;
+    public void setTotalCost(Double totalCost) {
+        this.totalCost = totalCost;
     }
 
-    public Double getPrice() {
-        return price;
+    public Long getOrderNumber() {
+        return orderNumber;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
+    public void setOrderNumber(Long orderNumber) {
+        this.orderNumber = orderNumber;
     }
 
     public UserEntity getUser() {
@@ -61,19 +61,19 @@ public class OrderEntity {
         this.user = user;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getAddress() {
+        return address;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public Long getOrderNumber() {
-        return orderNumber;
+    public Date getOrderDate() {
+        return orderDate;
     }
 
-    public void setOrderNumber(Long orderNumber) {
-        this.orderNumber = orderNumber;
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
     }
 }
