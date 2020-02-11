@@ -12,7 +12,7 @@
 <jsp:include page="_menu.jsp"></jsp:include>
 
 <h3>Home Page</h3>
-User Name: <b>${loginedUser.userName}</b>
+User Name: <b>${currentUser.userName}</b>
 
 <jsp:include page="_footer.jsp"></jsp:include>
 

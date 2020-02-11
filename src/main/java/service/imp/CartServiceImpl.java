@@ -28,7 +28,7 @@ public class CartServiceImpl implements CartService {
 
             Long productId = Long.parseLong(request.getParameter("productId"));
             Long quantity = Long.parseLong(request.getParameter("quantity"));
-            UserDTO user = (UserDTO) session.getAttribute("loginedUser");
+            UserDTO user = (UserDTO) session.getAttribute("currentUser");
 
             ProductsEntity product = productsDao.findProductById(productId);
             List<MyCartEntity> productsFromCart = myCartDAO.findSpecificCartByUser(user.getId());
@@ -84,7 +84,7 @@ public class CartServiceImpl implements CartService {
 
         Long newQuantity = Long.parseLong(request.getParameter("newQuantity"));
         Long itemToBeUpdated = Long.parseLong(request.getParameter("productIdFromCart"));
-        UserDTO user = (UserDTO) session.getAttribute("loginedUser");
+        UserDTO user = (UserDTO) session.getAttribute("currentUser");
 
         MyCartEntity productFromCart = myCartDAO.findProductFromCart(user.getId(),itemToBeUpdated);
         if(newQuantity.equals(0L)){

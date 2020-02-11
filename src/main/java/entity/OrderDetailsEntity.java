@@ -1,19 +1,32 @@
-package dto;
+package entity;
 
-import entity.UserEntity;
 
-public class OrderDTO {
+import javax.persistence.*;
 
+@Entity
+@Table(name = "t_order_details")
+public class OrderDetailsEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id")
+    @SequenceGenerator(name = "generator", sequenceName = "order_sequence")
     private Long id;
 
+    @Column(name = "quantity")
     private Long quantity;
 
-    private Double price;
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="user_id",referencedColumnName = "ID")
     private UserEntity user;
 
+    @Column(name = "price")
+    private Double price;
+
+    @Column(name = "product_name")
     private String productName;
 
+    @Column(name = "order_number")
     private Long orderNumber;
 
     public Long getId() {

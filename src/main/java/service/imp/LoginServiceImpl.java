@@ -29,7 +29,7 @@ public class LoginServiceImpl implements LoginService {
         Long numberOfItemsInCart = myCart.findNumberOfItems(user.getId());
         String destPage = "login.jsp";
         if (null!=user) {
-            SessionUtil.storeLoginedUser(session,user);
+            SessionUtil.storeCurrentUser(session,user);
             SessionUtil.storeNumberOfItemsInCart(session,numberOfItemsInCart);
             destPage = "userHomePage.jsp";
         }else {

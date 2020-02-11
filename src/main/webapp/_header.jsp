@@ -1,4 +1,4 @@
-<%--@elvariable id="loginedUser" type="entity.UserDTO"--%>
+<%--@elvariable id="" type="entity.UserDTO"--%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" session="true"%>
 <link href="css/background.css" rel="stylesheet" type="text/css">
@@ -21,13 +21,13 @@
 
 
         <br/>
-        <c:if test = "${loginedUser.userName != null}">
-            Hello <b>${loginedUser.userName}</b>
+        <c:if test = "${currentUser.userName != null}">
+            Hello <b>${currentUser.userName}</b>
             <br/>
             <a href="logout">Logout</a>
         </c:if>
 
-        <c:if test = "${loginedUser.userName == null}">
+        <c:if test = "${currentUser.userName == null}">
             <a href="register">Register</a>
             /
             <a href="login">Login</a>

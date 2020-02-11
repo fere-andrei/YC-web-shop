@@ -1,24 +1,25 @@
 package daoImpl;
 
 import dao.OrderDAO;
-import entity.MyCartEntity;
+import entity.OrderDetailsEntity;
 import entity.OrderEntity;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import util.HibernateUtil;
 
-public class OrderDAOImpl extends CommonDAOImpl  implements OrderDAO{
+import java.util.List;
+
+public class OrderDAOImpl extends CommonDAOImpl implements OrderDAO {
 
 
     @Override
-    public Long lastOrderNumberFromUser(Long userId) {
-        Long lastOrderNumber = 0L;
+    public List<OrderEntity> findOrdersByUser(Long userId) {
+        List<OrderEntity> orderList = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            lastOrderNumber = (Long) session.createQuery("SELECT max(O.orderNumber) FROM OrderEntity O JOIN C.user U WHERE U.id=:userId")
-                    .setParameter("userId", userId).getSingleResult();
+            orderList = (List<OrderEntity>) session.createQuery("select O from OrderEntity O join O.user U where U.id=:userId order by O.orderNumber")
+                    .setParameter("userId", userId).getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return lastOrderNumber;
+        return orderList;
     }
 }
