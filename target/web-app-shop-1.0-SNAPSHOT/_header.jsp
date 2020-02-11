@@ -10,6 +10,10 @@
 <script src="http://code.jquery.com/jquery-1.4.3.min.js"></script>
 <script src="js/allJavaScripts.js"></script>
 
+<style type="text/css">
+    @import "css/header.css";
+</style>
+
 <div style="background: #E0E0E0; height: 65px; padding: 5px; ">
     <div style="float: left; " >
         <h1>YC Shop</h1>
@@ -17,21 +21,25 @@
 
     <img src="img/app-icon.png" style="width: 55px; height: 55px; padding-bottom: inherit">
 
-    <div id="js-user-logined" style="float: right; padding: 10px; text-align: right;">
+    <div class = "header-user-panel">
 
 
         <br/>
-        <c:if test = "${currentUser.userName != null}">
-            Hello <b>${currentUser.userName}</b>
-            <br/>
-            <a href="logout">Logout</a>
-        </c:if>
+        <div>
+            <c:if test = "${currentUser.userName != null}">
+                Hello! <b id="user-name-label">${currentUser.userName}</b>
+                <br/>
+                <a href="logout">Logout</a>
+            </c:if>
+        </div>
 
+        <div>
         <c:if test = "${currentUser.userName == null}">
             <a href="register">Register</a>
             /
             <a href="login">Login</a>
         </c:if>
+        </div>
 
     </div>
 
