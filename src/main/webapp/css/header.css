@@ -1,0 +1,11 @@
+.shopping-item {
+    position: absolute;
+    top: 0;
+    right: 7%;
+}
+
+.header-user-panel {
+    position: fixed;
+    left: 95%;
+    top: -2%;
+}
