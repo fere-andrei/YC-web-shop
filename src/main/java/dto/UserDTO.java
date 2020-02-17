@@ -1,6 +1,8 @@
 package dto;
 
 
+import java.util.Date;
+
 public class UserDTO {
     private Long id;
 
@@ -13,6 +15,8 @@ public class UserDTO {
     private String fullName;
 
     private String address;
+
+    private Date registerDate;
 
     public Long getId() {
         return id;
@@ -60,5 +64,13 @@ public class UserDTO {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Date getRegisterDate() {
+        return registerDate;
+    }
+
+    public void setRegisterDate(Date registerDate) {
+        this.registerDate = registerDate;
     }
 }

@@ -10,11 +10,12 @@ public class UserTransformer {
         }
         UserDTO userDTO = new UserDTO();
         userDTO.setAddress(userEntity.getAddress());
-        userDTO.setAdminStatus(userEntity.getAdminStatus());
+        userDTO.setAdminStatus(userEntity.getUserStatus());
         userDTO.setFullName(userEntity.getFullName());
         userDTO.setId(userEntity.getId());
         userDTO.setPassword(userEntity.getPassword());
         userDTO.setUserName(userEntity.getUserName());
+        userDTO.setRegisterDate(userEntity.getRegisterDate());
         return userDTO;
     }
 
@@ -25,11 +26,12 @@ public class UserTransformer {
         }
         UserEntity userEntity = new UserEntity();
         userEntity.setAddress(userDTO.getAddress());
-        userEntity.setAdminStatus(userDTO.getAdminStatus());
+        userEntity.setUserStatus(userDTO.getAdminStatus());
         userEntity.setFullName(userDTO.getFullName());
         userEntity.setId(userDTO.getId());
         userEntity.setPassword(userDTO.getPassword());
         userEntity.setUserName(userDTO.getUserName());
+        userEntity.setRegisterDate(userDTO.getRegisterDate());
         return userEntity;
     }
 }

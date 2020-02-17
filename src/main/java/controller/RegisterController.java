@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Date;
 
 public class RegisterController extends HttpServlet {
     private UserDAO userDao;
@@ -40,6 +41,7 @@ public class RegisterController extends HttpServlet {
         user.setPassword(password);
         user.setAddress(address);
         user.setFullName(fullName);
+        user.setRegisterDate(new Date());
 
         userDao.saveEntity(user);
 

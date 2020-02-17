@@ -17,9 +17,8 @@ public class LogoutServiceImpl implements LogoutService {
 
         HttpSession session = request.getSession(false);
         if (session != null) {
-            session.removeAttribute("currentUser");
-            SessionUtil.storeNumberOfItemsInCart(session,0L);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+            session.invalidate();
+            RequestDispatcher dispatcher = request.getRequestDispatcher("home");
             dispatcher.forward(request, response);
         }
     }

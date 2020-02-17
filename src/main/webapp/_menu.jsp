@@ -23,7 +23,7 @@
             </c:forEach>
         </div>
     </div>
-    <c:if test = "${currentUser.userName != null}">
+    <c:if test = "${currentUser.fullName != 'guest'}">
         <a href="order">Orders</a>
     </c:if>
 

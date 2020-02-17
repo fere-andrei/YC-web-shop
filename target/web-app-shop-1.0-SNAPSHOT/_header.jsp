@@ -29,7 +29,7 @@
         </a>
 
 
-        <c:if test="${currentUser.userName != null}">
+        <c:if test="${currentUser.fullName != 'guest'}">
 
                <a href="home" id="user-name-label">Hello ${currentUser.userName}</a>
                     <a href="logout">Logout</a>
@@ -38,7 +38,7 @@
 
 
         <a>
-            <c:if test="${currentUser.userName == null}">
+            <c:if test="${currentUser.userName == null || currentUser.fullName == 'guest'}">
                 <a href="register">Register</a>
                 /
                 <a href="login">Login</a>

@@ -1,9 +1,8 @@
 package entity;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 /*@Getter
 @Setter*/
@@ -22,14 +21,17 @@ public class UserEntity implements Serializable {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "admin_status")
-    private int adminStatus;
+    @Column(name = "user_status")
+    private int userStatus;
 
     @Column(name = "full_name")
     private String fullName;
 
     @Column(name = "address")
     private String address;
+
+    @Column(name = "register_date")
+    private Date registerDate;
 
     public UserEntity() {
     }
@@ -58,12 +60,12 @@ public class UserEntity implements Serializable {
         this.password = password;
     }
 
-    public int getAdminStatus() {
-        return adminStatus;
+    public int getUserStatus() {
+        return userStatus;
     }
 
-    public void setAdminStatus(int adminStatus) {
-        this.adminStatus = adminStatus;
+    public void setUserStatus(int adminStatus) {
+        this.userStatus = adminStatus;
     }
 
     public String getFullName() {
@@ -80,5 +82,13 @@ public class UserEntity implements Serializable {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Date getRegisterDate() {
+        return registerDate;
+    }
+
+    public void setRegisterDate(Date registerDate) {
+        this.registerDate = registerDate;
     }
 }

@@ -33,7 +33,8 @@ public class OrderServiceImpl implements OrderService {
     public void placeOrder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
 
-        UserDTO user = (UserDTO) session.getAttribute("currentUser");
+        UserDTO user = SessionUtil.getCurrentUserFromSession(session);
+        //UserDTO user = (UserDTO) session.getAttribute("currentUser");
         UserEntity userEntity = UserTransformer.convertToEntity(user);
         Long orderNumber = orderDetailsDAO.lastOrderNumberFromUser(user.getId())+1;
         Double totalCost = (Double) session.getAttribute("totalCost");
@@ -56,7 +57,8 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void displayAllOrders(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
-        UserDTO user = (UserDTO) session.getAttribute("currentUser");
+        UserDTO user = SessionUtil.getCurrentUserFromSession(session);
+        // UserDTO user = (UserDTO) session.getAttribute("currentUser");
         List<OrderEntity> orderList = orderDAO.findOrdersByUser(user.getId());
         SessionUtil.storeOrders(session,orderList);
     }
@@ -64,7 +66,8 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void displayOrdeDetails(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
-        UserDTO user = (UserDTO) session.getAttribute("currentUser");
+        UserDTO user = SessionUtil.getCurrentUserFromSession(session);
+       // UserDTO user = (UserDTO) session.getAttribute("currentUser");
         Long orderNumber = Long.parseLong(request.getParameter("orderItems"));;
         List<OrderDetailsEntity> orderDetailsList = orderDetailsDAO.findOrderDetailsByUserIdAndOrderNUmber(user.getId(),orderNumber);
         SessionUtil.storeOrderDetailsList(session,orderDetailsList);

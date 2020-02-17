@@ -1,9 +1,13 @@
 package util;
 
+import dao.UserDAO;
+import daoImpl.UserDAOImpl;
 import dto.UserDTO;
 import entity.MyCartEntity;
 import entity.OrderDetailsEntity;
 import entity.OrderEntity;
+import entity.UserEntity;
+import transformer.UserTransformer;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -36,5 +40,10 @@ public class SessionUtil {
 
     public static void storeCategoryList(HttpSession session,List<String> categoryList){
         session.setAttribute("categoryList",categoryList);
+    }
+
+    public static UserDTO getCurrentUserFromSession(HttpSession session){
+        UserDTO user = (UserDTO) session.getAttribute("currentUser");
+        return user;
     }
 }

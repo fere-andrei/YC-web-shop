@@ -40,7 +40,13 @@
 You have to pay : <b id = "js-total-cost">${totalCost}</b> $
 <br/>
 
+<c:if test = "${currentUser.fullName != 'guest'}">
     <button type = "submit" id="js-place-order" name="orderButton" value="${myCartItems}">Place Order</button>
+</c:if>
+
+<c:if test = "${currentUser.fullName == 'guest'}">
+    Pleas <a href="login">Login</a> to buy!
+</c:if>
 
 
 <jsp:include page="_footer.jsp"></jsp:include>
