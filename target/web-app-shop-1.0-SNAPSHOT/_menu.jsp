@@ -3,6 +3,7 @@
          pageEncoding="UTF-8"%>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style type="text/css">
     @import "css/menu.css";
 </style>
@@ -10,9 +11,22 @@
 <div class="navbar-custom">
     <a href="${pageContext.request.contextPath}/home">Home</a>
     <a href="${pageContext.request.contextPath}/products">Product List</a>
+    <div class="dropdown-custom">
+        <button href="products" class="dropbtn-custom">Category
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content-custom">
+            <c:forEach items="${categoryList}" var="category">
+                <tr class = "categoryItems">
+                    <a class= "dropbtn-custom" ><c:out value="${category}"/></a>
+                </tr>
+            </c:forEach>
+        </div>
+    </div>
     <c:if test = "${currentUser.userName != null}">
-        <a href="order">Order</a>
+        <a href="order">Orders</a>
     </c:if>
+
 </div>
 
 

@@ -7,10 +7,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<link rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous">
+<style type="text/css">
+    @import "css/displayProducts.css";
+</style>
 <script src="js/allJavaScripts.js"></script>
 <html>
 <head>
@@ -23,7 +22,7 @@
 <br>
 <br>
 <div>
-    <table border="2" cellpadding="5" align="center">
+    <%--<table border="2" cellpadding="5" align="center">
         <tr>
             <th>Product Name</th>
             <th>Price$</th>
@@ -31,20 +30,28 @@
             <th>Stock</th>
             <th>Number of units</th>
             <th>Add to cart</th>
-        </tr>
+        </tr>--%>
+    <div class="grid-container">
            <c:forEach items="${products}" var="item">
-               <tr class = "js-product-details">
-                   <td><c:out value="${item.productName}" /></td>
-                   <td><c:out value="${item.price}"/>$</td>
-                   <td><c:out value="${item.category}" /></td>
-                   <td><c:out value="${item.stockNumber}" /></td>
-                   <td><input class = "js-quantity-class" id = "js-quantity-id" type = "number" name = "quantity" value="1" min="1" max="${item.stockNumber}"></td>
-                   <td>
-                       <button id="js-button-id" type="submit" name="productId" value = "${item.id}" class="js-add-to-cart-button">Add to cart</button>
-                   </td>
-               </tr>
+              <div class="grid-item">
+                  <tr class = "js-product-details">
+                      <td><c:out value="${item.productName}" /></td>
+                        <br>
+                      <td><c:out value="${item.price}"/>$</td>
+                        <br>
+                      <td><c:out value="${item.category}" /></td>
+                        <br>
+                      <td><c:out value="${item.stockNumber}" /></td>
+                        <br>
+                      <td><input class = "js-quantity-class" id = "js-quantity-id" type = "number" name = "quantity" value="1" min="1" max="${item.stockNumber}"></td>
+                      <td>
+                           <button id="js-button-id" type="submit" name="productId" value = "${item.id}" class="js-add-to-cart-button">Add to cart</button>
+                      </td>
+                </tr>
+              </div>
            </c:forEach>
-    </table>
+    </div>
+    <%--</table>--%>
 </div>
 <jsp:include page="_footer.jsp"></jsp:include>
 </body>

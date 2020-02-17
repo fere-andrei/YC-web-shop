@@ -10,9 +10,11 @@ public interface ProductsDAO extends CommonDAO {
 
     List<ProductsEntity> findProductsByCategory(String category);
 
-    List<String> findAllCategory();
+    List<String> findAllAvailableCategory();
 
     ProductsEntity findProductById(Long productId);
 
     ProductsEntity findProductByName(String productName);
+
+    List<ProductsEntity> findAvailableProductsByCategory(String categoryType);
 }

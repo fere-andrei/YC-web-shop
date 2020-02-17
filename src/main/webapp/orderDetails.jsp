@@ -30,7 +30,7 @@
         <c:forEach items="${orderDetailsList}" var="orderDetailsItems">
             <tr class = "js-product-from-cart">
                 <td><c:out value="${orderDetailsItems.productName}" /></td>
-                <td><c:out value="${orderDetailsItems.price}" /></td>
+                <td><c:out value="${orderDetailsItems.price}"/>$</td>
                 <td> <c:out value="${orderDetailsItems.quantity}" /></td>
             </tr>
         </c:forEach>

@@ -33,4 +33,8 @@ public class SessionUtil {
     public static void storeOrderDetailsList(HttpSession session, List<OrderDetailsEntity> orderDetailsList) {
         session.setAttribute("orderDetailsList",orderDetailsList);
     }
+
+    public static void storeCategoryList(HttpSession session,List<String> categoryList){
+        session.setAttribute("categoryList",categoryList);
+    }
 }

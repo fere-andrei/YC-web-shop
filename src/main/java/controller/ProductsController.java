@@ -3,6 +3,8 @@ package controller;
 import dao.ProductsDAO;
 import daoImpl.ProductsDAOImpl;
 import entity.ProductsEntity;
+import service.ProductsService;
+import service.imp.ProductsServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,21 +15,14 @@ import java.io.IOException;
 import java.util.List;
 
 public class ProductsController extends HttpServlet {
-
-    ProductsDAO productsDao;
-
-    public void init() {
-        productsDao = new ProductsDAOImpl() {
-        };
-    }
+    ProductsService productsService = new ProductsServiceImpl();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.sendRedirect("productPage.jsp");
         try {
-            List<ProductsEntity> products = productsDao.findAvailableProducts();
-            HttpSession session = request.getSession();
-            session.setAttribute("products",products);
+            productsService.displayProducts(request,response);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -36,8 +31,8 @@ public class ProductsController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            List<ProductsEntity> products = productsDao.findAvailableProducts();
-            request.setAttribute("products",products);
+            productsService.displayProductsByCategory(request,response);
+
         } catch (Exception e) {
             e.printStackTrace();
         }

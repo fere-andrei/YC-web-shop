@@ -22,7 +22,10 @@ var MyCartComponent = (function(){
         DETAILS_BUTTON: ".js-show-order-details",
 
         //common
-        MY_CART_VIEW:"#JS-cart-item-count"
+        MY_CART_VIEW:"#JS-cart-item-count",
+
+        //dropdown category
+        DROPDOWN_CATEGORY:".dropbtn-custom"
 
     };
 
@@ -31,6 +34,7 @@ var MyCartComponent = (function(){
          updateCart();
          placeOrder();
          showOrderDetails();
+         selectCategory();
     }
 
     var addToCart = function () {
@@ -38,7 +42,7 @@ var MyCartComponent = (function(){
             var productId = $(event.target).val();
             //var quantity = $(Config.NO_OF_ITEMES).val();
 
-            var quantity = $(event.target).closest(".js-product-details").find(".js-quantity-class").val();
+            var quantity = $(event.target).closest(".grid-item").find(".js-quantity-class").val();
             $.ajax({
                 type:"POST",
                 data: {
@@ -136,6 +140,31 @@ var MyCartComponent = (function(){
         });
 
     }
+
+    var selectCategory = function () {
+        $(Config.DROPDOWN_CATEGORY).click(function(event){
+            var category = $(event.target).text();
+
+            $.ajax({
+                type:"POST",
+                data: {
+                    category : category
+                },
+                url : "products",
+                success : function(){
+                    /*window.location.reload();*/
+                    window.location.href = "productPage.jsp"
+                },
+                error : function(){
+                    alert("FAIL");
+                }
+            });
+        });
+
+    }
+
+
+
 
 
     //TODO ADD IMPLEMENTATION IN NEXT METHODS
