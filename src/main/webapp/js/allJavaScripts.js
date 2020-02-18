@@ -107,6 +107,7 @@ var MyCartComponent = (function(){
                 },
                 url : "order",
                 success : function(){
+                    $('#showMe').delay(5000).show(0);
 
                 },
                 error : function(){
