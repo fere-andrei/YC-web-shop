@@ -1,18 +1,9 @@
 package controller;
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
-import dao.MyCartDAO;
-import dao.ProductsDAO;
-import daoImpl.MyCartDAOImpl;
-import daoImpl.ProductsDAOImpl;
 import dto.UserDTO;
-import entity.MyCartEntity;
-import entity.ProductsEntity;
-import entity.UserEntity;
 
 import service.CartService;
 import service.imp.CartServiceImpl;
-import transformer.UserTransformer;
 import util.SessionUtil;
 
 import javax.servlet.RequestDispatcher;
@@ -22,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.List;
 
 public class CartController extends HttpServlet {
     CartService cartService = new CartServiceImpl();
@@ -37,7 +27,7 @@ public class CartController extends HttpServlet {
         response.sendRedirect("cartPage.jsp");
         try {
             UserDTO user = SessionUtil.getCurrentUserFromSession(session);
-            cartService.displayCartAndTotalCost(session, user);
+            cartService.displayCartAndTotalCost(session,user.getId());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -47,11 +37,19 @@ public class CartController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String cartComponent = request.getParameter("cartComponent");
+        HttpSession session = request.getSession();
+
+        UserDTO user = SessionUtil.getCurrentUserFromSession(session);
 
         if ("updateProduct".equalsIgnoreCase(cartComponent)) {
-            cartService.updateItemInCart(request, response);
+            Long itemToBeUpdated = Long.parseLong(request.getParameter("productIdFromCart"));
+            Long newQuantity = Long.parseLong(request.getParameter("newQuantity"));
+
+            cartService.updateItemInCart(session,newQuantity,itemToBeUpdated);
         } else if (cartComponent != null) {
-            cartService.addItemInCart(request, response);
+            Long productId = Long.parseLong(request.getParameter("productId"));
+            Long quantity = Long.parseLong(request.getParameter("quantity"));
+            cartService.addItemInCart(user,productId,quantity, session);
         } else {
             RequestDispatcher dispatcher = request.getRequestDispatcher("productPage.jsp");
             dispatcher.forward(request, response);

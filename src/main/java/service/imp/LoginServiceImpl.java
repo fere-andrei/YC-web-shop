@@ -8,16 +8,12 @@ import daoImpl.UserDAOImpl;
 import dto.UserDTO;
 import entity.MyCartEntity;
 import entity.UserEntity;
+import javafx.util.Pair;
 import service.LoginService;
 import transformer.UserTransformer;
 import util.SessionUtil;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,12 +24,10 @@ public class LoginServiceImpl implements LoginService {
 
 
     @Override
-    public void authenticate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public Pair<String, String> authenticate(HttpSession session, String username, String password) {
 
-        HttpSession session = request.getSession();
-        String username = request.getParameter("username");
         final String encryptedPassword = Hashing.sha256()
-                .hashString(request.getParameter("password"), StandardCharsets.UTF_8)
+                .hashString(password, StandardCharsets.UTF_8)
                 .toString();
         UserDTO userDTO = loginDao.checkLogin(username, encryptedPassword);
         UserEntity userEntity = UserTransformer.convertToEntity(userDTO);
@@ -45,12 +39,13 @@ public class LoginServiceImpl implements LoginService {
             SessionUtil.storeCurrentUser(session, userDTO);
             SessionUtil.storeNumberOfItemsInCart(session, numberOfItemsInCart);
             destPage = "userHomePage.jsp";
+            return new Pair<>(destPage,null);
         } else {
             String message = "Invalid email/password";
-            request.setAttribute("message", message);
+            return new Pair<>(destPage,message);
+            //request.setAttribute("message", message);
         }
-        RequestDispatcher dispatcher = request.getRequestDispatcher(destPage);
-        dispatcher.forward(request, response);
+
     }
 
     private void mergeUserWithGuest(HttpSession session, UserDTO userDTO, UserEntity userEntity) {

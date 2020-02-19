@@ -1,14 +1,11 @@
 package service;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import javax.servlet.http.HttpSession;
 
 public interface ProductsService {
 
-    void displayProducts(HttpServletRequest request, HttpServletResponse response);
+    void displayProducts(HttpSession session);
 
-    void displayProductsByCategory(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException;
+    void displayProductsByCategory(HttpSession session, String categoryType);
 
 }

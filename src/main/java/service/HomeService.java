@@ -1,15 +1,14 @@
 package service;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public interface HomeService {
 
-    void loadCategoryList(HttpServletRequest request, HttpServletResponse response);
+    void loadCategoryList(HttpSession session);
 
-    void loadCartItemsCounter(HttpServletRequest request, HttpServletResponse response);
+    void loadCartItemsCounter(HttpSession session);
 
-    void loadUser(HttpServletRequest request, HttpServletResponse response);
+    void loadUser(HttpSession session);
 
-    void clearGuestUsers(HttpServletRequest request, HttpServletResponse response);
+    void clearGuestUsers();
 }

@@ -3,19 +3,14 @@ package service;
 import dto.UserDTO;
 import entity.MyCartEntity;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 public interface CartService {
 
-    void addItemInCart(HttpServletRequest request, HttpServletResponse response);
+    void addItemInCart(UserDTO user, Long productId, Long quantity, HttpSession session);
 
-    MyCartEntity getProductFromCartIfExists(List<MyCartEntity> productsFromCart, String productNametoCheck);
+    void displayCartAndTotalCost(HttpSession session,Long userId);
 
-    void displayCartAndTotalCost(HttpSession session, UserDTO user);
-
-    void updateItemInCart(HttpServletRequest request, HttpServletResponse response);
+    void updateItemInCart(HttpSession session, Long newQuantity, Long itemToBeUpdated);
 
 }

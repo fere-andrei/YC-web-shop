@@ -12,8 +12,6 @@ import service.CartService;
 import transformer.UserTransformer;
 import util.SessionUtil;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -22,13 +20,8 @@ public class CartServiceImpl implements CartService {
     MyCartDAO myCartDAO = new MyCartDAOImpl();
 
     @Override
-    public void addItemInCart(HttpServletRequest request, HttpServletResponse response) {
+    public void addItemInCart(UserDTO user, Long productId, Long quantity, HttpSession session) {
         try {
-            HttpSession session = request.getSession();
-
-            Long productId = Long.parseLong(request.getParameter("productId"));
-            Long quantity = Long.parseLong(request.getParameter("quantity"));
-            UserDTO user = SessionUtil.getCurrentUserFromSession(session);
 
             ProductsEntity product = productsDao.findProductById(productId);
             List<MyCartEntity> productsFromCart = myCartDAO.findSpecificCartByUser(user.getId());
@@ -61,7 +54,6 @@ public class CartServiceImpl implements CartService {
         }
     }
 
-    @Override
     public MyCartEntity getProductFromCartIfExists(List<MyCartEntity> productsFromCart, String productNameToCheck) {
         for (MyCartEntity myCart : productsFromCart) {
             if (myCart.getProductName().equalsIgnoreCase(productNameToCheck)) {
@@ -72,19 +64,16 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public void displayCartAndTotalCost(HttpSession session, UserDTO user) {
-        List<MyCartEntity> productsFromCart = myCartDAO.findSpecificCartByUser(user.getId());
-        Double totalCost = myCartDAO.totalCostOfMyCart(user.getId());
+    public void displayCartAndTotalCost(HttpSession session,Long userId) {
+        List<MyCartEntity> productsFromCart = myCartDAO.findSpecificCartByUser(userId);
+        Double totalCost = myCartDAO.totalCostOfMyCart(userId);
         SessionUtil.storeItemsFromCart(session, productsFromCart);
         SessionUtil.storeTotalCost(session, totalCost);
     }
 
     @Override
-    public void updateItemInCart(HttpServletRequest request, HttpServletResponse response) {
-        HttpSession session = request.getSession();
+    public void updateItemInCart(HttpSession session, Long newQuantity,Long itemToBeUpdated) {
 
-        Long newQuantity = Long.parseLong(request.getParameter("newQuantity"));
-        Long itemToBeUpdated = Long.parseLong(request.getParameter("productIdFromCart"));
         UserDTO user = SessionUtil.getCurrentUserFromSession(session);
 
         MyCartEntity productFromCart = myCartDAO.findProductFromCart(user.getId(), itemToBeUpdated);

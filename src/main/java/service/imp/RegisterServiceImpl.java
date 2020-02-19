@@ -3,14 +3,11 @@ package service.imp;
 import com.google.common.hash.Hashing;
 import dao.UserDAO;
 import daoImpl.UserDAOImpl;
+import dto.UserDTO;
 import entity.UserEntity;
 import service.RegisterService;
+import transformer.UserTransformer;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
@@ -18,26 +15,13 @@ public class RegisterServiceImpl implements RegisterService {
     private UserDAO userDao = new UserDAOImpl();
 
     @Override
-    public void register(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    public void register(UserDTO userDTO) {
+        final String encryptedPassword = Hashing.sha256().hashString(userDTO.getPassword(), StandardCharsets.UTF_8).toString();
+        userDTO.setPassword(encryptedPassword);
+        userDTO.setRegisterDate(new Date());
 
-        if (request.getAttribute("errMsg") == null) {
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
+        UserEntity user = UserTransformer.convertToEntity(userDTO);
 
-            final String encryptedPassword = Hashing.sha256().hashString(password, StandardCharsets.UTF_8).toString();
-
-            String address = request.getParameter("address");
-            String fullName = request.getParameter("fullname");
-
-            UserEntity user = new UserEntity();
-            user.setUserName(username);
-            user.setPassword(encryptedPassword);
-            user.setAddress(address);
-            user.setFullName(fullName);
-            user.setRegisterDate(new Date());
-
-            userDao.saveEntity(user);
-
-        }
+        userDao.saveEntity(user);
     }
 }

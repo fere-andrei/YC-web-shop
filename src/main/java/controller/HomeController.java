@@ -26,10 +26,10 @@ public class HomeController extends HttpServlet {
             UserDTO user = (UserDTO) session.getAttribute("currentUser");
 
             if (user == null) {
-                homeService.loadUser(request, response);
-                homeService.loadCategoryList(request, response);
-                homeService.loadCartItemsCounter(request, response);
-                homeService.clearGuestUsers(request, response);
+                homeService.loadUser(session);
+                homeService.loadCategoryList(session);
+                homeService.loadCartItemsCounter(session);
+                homeService.clearGuestUsers();
             }
             response.sendRedirect("homeView.jsp");
         } catch (Exception e) {

@@ -14,8 +14,6 @@ import service.HomeService;
 import transformer.UserTransformer;
 import util.SessionUtil;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
@@ -26,26 +24,23 @@ public class HomeServiceImpl implements HomeService {
     MyCartDAO myCartDAO = new MyCartDAOImpl();
     UserDAO userDAO = new UserDAOImpl();
 
-    //TODO replace request and response with session
 
     @Override
-    public void loadCategoryList(HttpServletRequest request, HttpServletResponse response) {
-        HttpSession session = request.getSession();
+    public void loadCategoryList(HttpSession session) {
+
         List<String> categoryList = productsDAO.findAllAvailableCategory();
         SessionUtil.storeCategoryList(session, categoryList);
     }
 
     @Override
-    public void loadCartItemsCounter(HttpServletRequest request, HttpServletResponse response) {
-        HttpSession session = request.getSession();
+    public void loadCartItemsCounter(HttpSession session) {
         UserDTO user = SessionUtil.getCurrentUserFromSession(session);
         Long numberOfItemsInCart = myCartDAO.findNumberOfItems(user.getId());
         SessionUtil.storeNumberOfItemsInCart(session, numberOfItemsInCart);
     }
 
     @Override
-    public void loadUser(HttpServletRequest request, HttpServletResponse response) {
-        HttpSession session = request.getSession();
+    public void loadUser(HttpSession session) {
         UserDTO user = SessionUtil.getCurrentUserFromSession(session);
         if (user == null) {
             UserEntity userEntity = createGuestUser(session);
@@ -59,7 +54,7 @@ public class HomeServiceImpl implements HomeService {
     }
 
     @Override
-    public void clearGuestUsers(HttpServletRequest request, HttpServletResponse response) {
+    public void clearGuestUsers() {
         List<UserEntity> userEntities = userDAO.findOldGuestUsers();
         for (UserEntity guestToDelete : userEntities) {
             deleteItemsFromCart(guestToDelete.getId());

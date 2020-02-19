@@ -1,16 +1,15 @@
 package service;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public interface OrderService {
 
-    void placeOrder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
+    void placeOrder(HttpSession session) throws ServletException, IOException;
 
-    void displayAllOrders(HttpServletRequest request, HttpServletResponse response);
+    void displayAllOrders(HttpSession session);
 
-    void displayOrdeDetails(HttpServletRequest request, HttpServletResponse response);
+    void displayOrderDetails(HttpSession session, Long orderNumber);
 
 }

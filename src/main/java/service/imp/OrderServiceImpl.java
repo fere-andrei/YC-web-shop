@@ -14,10 +14,7 @@ import service.OrderService;
 import transformer.UserTransformer;
 import util.SessionUtil;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Date;
@@ -30,8 +27,7 @@ public class OrderServiceImpl implements OrderService {
     OrderDAO orderDAO = new OrderDAOImpl();
 
     @Override
-    public void placeOrder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
+    public void placeOrder(HttpSession session) throws ServletException, IOException {
 
         UserDTO user = SessionUtil.getCurrentUserFromSession(session);
         UserEntity userEntity = UserTransformer.convertToEntity(user);
@@ -48,24 +44,19 @@ public class OrderServiceImpl implements OrderService {
             orderDetailsDAO.saveEntity(orderDetails);
             myCartDAO.deleteEntity(itemFromCart);
         }
-        RequestDispatcher dispatcher = request.getRequestDispatcher("orderPage.jsp");
-        dispatcher.forward(request, response);
         SessionUtil.storeNumberOfItemsInCart(session, 0L);
     }
 
     @Override
-    public void displayAllOrders(HttpServletRequest request, HttpServletResponse response) {
-        HttpSession session = request.getSession();
+    public void displayAllOrders(HttpSession session) {
         UserDTO user = SessionUtil.getCurrentUserFromSession(session);
         List<OrderEntity> orderList = orderDAO.findOrdersByUser(user.getId());
         SessionUtil.storeOrders(session, orderList);
     }
 
     @Override
-    public void displayOrdeDetails(HttpServletRequest request, HttpServletResponse response) {
-        HttpSession session = request.getSession();
+    public void displayOrderDetails(HttpSession session, Long orderNumber) {
         UserDTO user = SessionUtil.getCurrentUserFromSession(session);
-        Long orderNumber = Long.parseLong(request.getParameter("orderItems"));
         List<OrderDetailsEntity> orderDetailsList = orderDetailsDAO.findOrderDetailsByUserIdAndOrderNUmber(user.getId(), orderNumber);
         SessionUtil.storeOrderDetailsList(session, orderDetailsList);
     }

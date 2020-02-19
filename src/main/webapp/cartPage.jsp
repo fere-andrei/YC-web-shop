@@ -45,7 +45,7 @@ You have to pay : <b id = "js-total-cost">${totalCost}</b> $
 </c:if>
 
 <c:if test = "${currentUser.fullName == 'guest'}">
-    Pleas <a href="login">Login</a> to buy!
+    Please <a href="login">Login</a> to buy!
 </c:if>
 
 

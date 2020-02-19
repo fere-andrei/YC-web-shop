@@ -1,7 +1,7 @@
 package controller;
 
+import dto.UserDTO;
 import service.RegisterService;
-import service.imp.LoginServiceImpl;
 import service.imp.RegisterServiceImpl;
 
 import javax.servlet.RequestDispatcher;
@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
 
 public class RegisterController extends HttpServlet {
     private RegisterService registerService;
@@ -21,8 +20,17 @@ public class RegisterController extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        UserDTO userDTO = new UserDTO();
         try {
-            registerService.register(request, response);
+            userDTO.setUserName(request.getParameter("username"));
+            userDTO.setPassword(request.getParameter("password"));
+            userDTO.setFullName(request.getParameter("fullname"));
+            userDTO.setAddress(request.getParameter("address"));
+
+            if (request.getAttribute("errMsg") == null) {
+                registerService.register(userDTO);
+                request.setAttribute("succesMessage", "Registration successful!");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

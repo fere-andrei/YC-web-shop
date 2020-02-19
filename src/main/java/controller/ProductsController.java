@@ -1,8 +1,5 @@
 package controller;
 
-import dao.ProductsDAO;
-import daoImpl.ProductsDAOImpl;
-import entity.ProductsEntity;
 import service.ProductsService;
 import service.imp.ProductsServiceImpl;
 
@@ -12,16 +9,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.List;
 
 public class ProductsController extends HttpServlet {
     ProductsService productsService = new ProductsServiceImpl();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
         response.sendRedirect("productPage.jsp");
         try {
-            productsService.displayProducts(request, response);
+            productsService.displayProducts(session);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -29,8 +26,11 @@ public class ProductsController extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
         try {
-            productsService.displayProductsByCategory(request, response);
+            String categoryType = request.getParameter("category");
+            productsService.displayProductsByCategory(session, categoryType);
+            response.sendRedirect("productPage.jsp");
 
         } catch (Exception e) {
             e.printStackTrace();
