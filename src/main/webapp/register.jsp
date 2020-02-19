@@ -54,7 +54,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-primary">Submit</button>
-
+                    <a style="color: red">${errMsg}</a>
                 </form>
             </div>
         </div>

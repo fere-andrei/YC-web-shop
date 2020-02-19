@@ -8,4 +8,5 @@ import java.util.List;
 public interface OrderDAO extends CommonDAO {
 
     List<OrderEntity> findOrdersByUser(Long userId);
+
 }

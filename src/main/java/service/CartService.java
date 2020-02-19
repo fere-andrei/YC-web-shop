@@ -9,9 +9,13 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public interface CartService {
+
     void addItemInCart(HttpServletRequest request, HttpServletResponse response);
+
     MyCartEntity getProductFromCartIfExists(List<MyCartEntity> productsFromCart, String productNametoCheck);
+
     void displayCartAndTotalCost(HttpSession session, UserDTO user);
 
     void updateItemInCart(HttpServletRequest request, HttpServletResponse response);
+
 }

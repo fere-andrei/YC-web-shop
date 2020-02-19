@@ -27,7 +27,7 @@ public class UserDAOImpl extends CommonDAOImpl implements UserDAO {
             userEntity = (UserEntity) session.createQuery("FROM UserEntity  U WHERE U.userName = :userName").setParameter("userName", userName)
                     .uniqueResult();
             userDTO = UserTransformer.convertToDto(userEntity);
-            if(userEntity != null && userEntity.getPassword().equals(password)) {
+            if (userEntity != null && userEntity.getPassword().equals(password)) {
                 return userDTO;
             }
             transaction.commit();
@@ -58,11 +58,18 @@ public class UserDAOImpl extends CommonDAOImpl implements UserDAO {
 
     @Override
     public UserEntity findUserByUserName(String userName) {
-        UserEntity userEntity = new UserEntity();
+        Transaction transaction = null;
+        UserEntity userEntity = null;
+
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            userEntity = session.createQuery("select U FROM UserEntity U where U.userName=:userName", UserEntity.class).
-                    setParameter("userName", userName).getSingleResult();
+            transaction = session.beginTransaction();
+            userEntity = (UserEntity) session.createQuery("FROM UserEntity  U WHERE U.userName = :userName").setParameter("userName", userName)
+                    .uniqueResult();
+            transaction.commit();
         } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
             e.printStackTrace();
         }
         return userEntity;

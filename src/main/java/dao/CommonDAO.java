@@ -1,7 +1,10 @@
 package dao;
 
 public interface CommonDAO<T> {
-    public void saveEntity(T entity);
-    public void updateEntity(T entity);
-    public void deleteEntity(T entity);
+     void saveEntity(T entity);
+
+     void updateEntity(T entity);
+
+     void deleteEntity(T entity);
+
 }

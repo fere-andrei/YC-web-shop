@@ -29,14 +29,13 @@ public class CartServiceImpl implements CartService {
             Long productId = Long.parseLong(request.getParameter("productId"));
             Long quantity = Long.parseLong(request.getParameter("quantity"));
             UserDTO user = SessionUtil.getCurrentUserFromSession(session);
-            //UserDTO user = (UserDTO) session.getAttribute("currentUser");
 
             ProductsEntity product = productsDao.findProductById(productId);
             List<MyCartEntity> productsFromCart = myCartDAO.findSpecificCartByUser(user.getId());
 
-            MyCartEntity itemFromCart = getProductFromCartIfExists(productsFromCart,product.getProductName());
+            MyCartEntity itemFromCart = getProductFromCartIfExists(productsFromCart, product.getProductName());
 
-            if(itemFromCart==null) {
+            if (itemFromCart == null) {
                 MyCartEntity myCart = new MyCartEntity();
                 UserEntity userEntity = UserTransformer.convertToEntity(user);
 
@@ -49,22 +48,23 @@ public class CartServiceImpl implements CartService {
 
                 myCartDAO.saveEntity(myCart);
                 Long numberOfItemsInCart = myCartDAO.findNumberOfItems(user.getId());
-                SessionUtil.storeNumberOfItemsInCart(session,numberOfItemsInCart);
-            }else{
-                itemFromCart.setQuantity(quantity+itemFromCart.getQuantity());
-                itemFromCart.setPrice(itemFromCart.getPricePerUnit()*itemFromCart.getQuantity());
+                SessionUtil.storeNumberOfItemsInCart(session, numberOfItemsInCart);
+            } else {
+                itemFromCart.setQuantity(quantity + itemFromCart.getQuantity());
+                itemFromCart.setPrice(itemFromCart.getPricePerUnit() * itemFromCart.getQuantity());
                 myCartDAO.updateEntity(itemFromCart);
                 Long numberOfItemsInCart = myCartDAO.findNumberOfItems(user.getId());
-                SessionUtil.storeNumberOfItemsInCart(session,numberOfItemsInCart);
-
+                SessionUtil.storeNumberOfItemsInCart(session, numberOfItemsInCart);
             }
-        }catch (Exception e){ e.printStackTrace();}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public MyCartEntity getProductFromCartIfExists(List<MyCartEntity> productsFromCart, String productNametoCheck) {
-        for(MyCartEntity myCart:productsFromCart) {
-            if (myCart.getProductName().equalsIgnoreCase(productNametoCheck)) {
+    public MyCartEntity getProductFromCartIfExists(List<MyCartEntity> productsFromCart, String productNameToCheck) {
+        for (MyCartEntity myCart : productsFromCart) {
+            if (myCart.getProductName().equalsIgnoreCase(productNameToCheck)) {
                 return myCart;
             }
         }
@@ -75,8 +75,8 @@ public class CartServiceImpl implements CartService {
     public void displayCartAndTotalCost(HttpSession session, UserDTO user) {
         List<MyCartEntity> productsFromCart = myCartDAO.findSpecificCartByUser(user.getId());
         Double totalCost = myCartDAO.totalCostOfMyCart(user.getId());
-        SessionUtil.storeItemsFromCart(session,productsFromCart);
-        SessionUtil.storeTotalCost(session,totalCost);
+        SessionUtil.storeItemsFromCart(session, productsFromCart);
+        SessionUtil.storeTotalCost(session, totalCost);
     }
 
     @Override
@@ -86,19 +86,18 @@ public class CartServiceImpl implements CartService {
         Long newQuantity = Long.parseLong(request.getParameter("newQuantity"));
         Long itemToBeUpdated = Long.parseLong(request.getParameter("productIdFromCart"));
         UserDTO user = SessionUtil.getCurrentUserFromSession(session);
-        // UserDTO user = (UserDTO) session.getAttribute("currentUser");
 
-        MyCartEntity productFromCart = myCartDAO.findProductFromCart(user.getId(),itemToBeUpdated);
-        if(newQuantity.equals(0L)){
+        MyCartEntity productFromCart = myCartDAO.findProductFromCart(user.getId(), itemToBeUpdated);
+        if (newQuantity.equals(0L)) {
             myCartDAO.deleteEntity(productFromCart);
             Long numberOfItemsInCart = myCartDAO.findNumberOfItems(user.getId());
-            SessionUtil.storeNumberOfItemsInCart(session,numberOfItemsInCart);
-        }else{
+            SessionUtil.storeNumberOfItemsInCart(session, numberOfItemsInCart);
+        } else {
             productFromCart.setQuantity(newQuantity);
-            productFromCart.setPrice(productFromCart.getPricePerUnit()*newQuantity);
+            productFromCart.setPrice(productFromCart.getPricePerUnit() * newQuantity);
             myCartDAO.updateEntity(productFromCart);
             Long numberOfItemsInCart = myCartDAO.findNumberOfItems(user.getId());
-            SessionUtil.storeNumberOfItemsInCart(session,numberOfItemsInCart);
+            SessionUtil.storeNumberOfItemsInCart(session, numberOfItemsInCart);
         }
     }
 }

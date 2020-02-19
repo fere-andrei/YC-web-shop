@@ -26,23 +26,23 @@ public class SessionUtil {
         session.setAttribute("totalCost", totalCost);
     }
 
-    public static void storeItemsFromCart(HttpSession session, List<MyCartEntity> myCartEntityList){
-        session.setAttribute("myCartItems",myCartEntityList);
+    public static void storeItemsFromCart(HttpSession session, List<MyCartEntity> myCartEntityList) {
+        session.setAttribute("myCartItems", myCartEntityList);
     }
 
-    public static void storeOrders(HttpSession session, List<OrderEntity> orderEntities){
-        session.setAttribute("orderItems",orderEntities);
+    public static void storeOrders(HttpSession session, List<OrderEntity> orderEntities) {
+        session.setAttribute("orderItems", orderEntities);
     }
 
     public static void storeOrderDetailsList(HttpSession session, List<OrderDetailsEntity> orderDetailsList) {
-        session.setAttribute("orderDetailsList",orderDetailsList);
+        session.setAttribute("orderDetailsList", orderDetailsList);
     }
 
-    public static void storeCategoryList(HttpSession session,List<String> categoryList){
-        session.setAttribute("categoryList",categoryList);
+    public static void storeCategoryList(HttpSession session, List<String> categoryList) {
+        session.setAttribute("categoryList", categoryList);
     }
 
-    public static UserDTO getCurrentUserFromSession(HttpSession session){
+    public static UserDTO getCurrentUserFromSession(HttpSession session) {
         UserDTO user = (UserDTO) session.getAttribute("currentUser");
         return user;
     }

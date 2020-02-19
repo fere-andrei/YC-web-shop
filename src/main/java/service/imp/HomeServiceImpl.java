@@ -50,7 +50,6 @@ public class HomeServiceImpl implements HomeService {
         if (user == null) {
             UserEntity userEntity = createGuestUser(session);
             userDAO.saveEntity(userEntity);
-
             //set the guest user in session
             userEntity = userDAO.findUserByUserName(userEntity.getUserName());
             SessionUtil.storeCurrentUser(session, UserTransformer.convertToDto(userEntity));

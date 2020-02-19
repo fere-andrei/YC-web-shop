@@ -1,17 +1,15 @@
 package filters;
 
-import com.google.common.hash.Hashing;
 import dao.UserDAO;
 import daoImpl.UserDAOImpl;
-import dto.UserDTO;
+import entity.UserEntity;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 
-public class LoginFilter implements Filter {
+public class RegisterFilter implements Filter {
     UserDAO userDAO = new UserDAOImpl();
 
     @Override
@@ -23,16 +21,15 @@ public class LoginFilter implements Filter {
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
-
-        if (request.getMethod().equalsIgnoreCase("POST")) {
-            String userName = request.getParameter("username");
-            final String encryptedPassword = Hashing.sha256()
-                    .hashString(request.getParameter("password"), StandardCharsets.UTF_8)
-                    .toString();
-            UserDTO checkedUser = userDAO.checkLogin(userName, encryptedPassword);
-
-            if (checkedUser == null) {
-                request.setAttribute("errMsg", "The username/password you've entered doesn't match. ");
+        String userName = request.getParameter("username");
+        if (userName != null) {
+            UserEntity checkedUser = userDAO.findUserByUserName(userName);
+            if (checkedUser != null) {
+                if (userName.equalsIgnoreCase(checkedUser.getUserName())) {
+                    request.setAttribute("errMsg", "The username already exists ");
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
+                    dispatcher.forward(request, response);
+                }
             }
         }
         chain.doFilter(request, response);

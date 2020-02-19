@@ -6,5 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public interface LogoutService {
+
     void logoutUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
+
 }

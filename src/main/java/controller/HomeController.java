@@ -31,8 +31,6 @@ public class HomeController extends HttpServlet {
                 homeService.loadCartItemsCounter(request, response);
                 homeService.clearGuestUsers(request, response);
             }
-
-
             response.sendRedirect("homeView.jsp");
         } catch (Exception e) {
             e.printStackTrace();

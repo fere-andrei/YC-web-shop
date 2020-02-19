@@ -32,7 +32,6 @@ public class LoginServiceImpl implements LoginService {
 
         HttpSession session = request.getSession();
         String username = request.getParameter("username");
-
         final String encryptedPassword = Hashing.sha256()
                 .hashString(request.getParameter("password"), StandardCharsets.UTF_8)
                 .toString();

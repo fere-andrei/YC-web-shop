@@ -21,8 +21,7 @@ public class ProductsController extends HttpServlet {
             throws ServletException, IOException {
         response.sendRedirect("productPage.jsp");
         try {
-            productsService.displayProducts(request,response);
-
+            productsService.displayProducts(request, response);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -31,7 +30,7 @@ public class ProductsController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            productsService.displayProductsByCategory(request,response);
+            productsService.displayProductsByCategory(request, response);
 
         } catch (Exception e) {
             e.printStackTrace();

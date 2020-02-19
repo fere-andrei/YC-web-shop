@@ -14,7 +14,6 @@ public class LogoutServiceImpl implements LogoutService {
 
     @Override
     public void logoutUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         HttpSession session = request.getSession(false);
         if (session != null) {
             session.invalidate();

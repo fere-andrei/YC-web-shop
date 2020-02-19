@@ -20,7 +20,7 @@ public class ProductsServiceImpl implements ProductsService {
     public void displayProducts(HttpServletRequest request, HttpServletResponse response) {
         List<ProductsEntity> products = productsDao.findAvailableProducts();
         HttpSession session = request.getSession();
-        session.setAttribute("products",products);
+        session.setAttribute("products", products);
     }
 
     @Override
@@ -29,13 +29,10 @@ public class ProductsServiceImpl implements ProductsService {
         String categoryType = request.getParameter("category");
         HttpSession session = request.getSession();
         List<String> allCategory = (List<String>) session.getAttribute("categoryList");
-        if(allCategory.contains(categoryType)){
+        if (allCategory.contains(categoryType)) {
             List<ProductsEntity> products = productsDao.findAvailableProductsByCategory(categoryType);
-            session.setAttribute("products",products);
+            session.setAttribute("products", products);
             response.sendRedirect("productPage.jsp");
-           /* RequestDispatcher dispatcher = request.getRequestDispatcher("productPage.jsp");
-            dispatcher.forward(request, response);*/
-
         }
     }
 }

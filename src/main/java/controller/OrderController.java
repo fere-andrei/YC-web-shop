@@ -20,14 +20,16 @@ public class OrderController extends HttpServlet {
 
     public void init() {
         orderService = new OrderServiceImpl();
-    };
+    }
+
+    ;
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.sendRedirect("orderPage.jsp");
         try {
-            orderService.displayAllOrders(request,response);
+            orderService.displayAllOrders(request, response);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -37,15 +39,13 @@ public class OrderController extends HttpServlet {
             throws ServletException, IOException {
         String orderComponent = request.getParameter("orderComponent");
         try {
-            if("orderDetails".equalsIgnoreCase(orderComponent)){
-                orderService.displayOrdeDetails(request,response);
-            }else{
-            orderService.placeOrder(request,response);
+            if ("orderDetails".equalsIgnoreCase(orderComponent)) {
+                orderService.displayOrdeDetails(request, response);
+            } else {
+                orderService.placeOrder(request, response);
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 }

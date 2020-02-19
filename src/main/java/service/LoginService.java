@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public interface LoginService {
+
      void authenticate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
 
 }

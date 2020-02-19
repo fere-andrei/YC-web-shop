@@ -17,4 +17,5 @@ public interface ProductsDAO extends CommonDAO {
     ProductsEntity findProductByName(String productName);
 
     List<ProductsEntity> findAvailableProductsByCategory(String categoryType);
+
 }

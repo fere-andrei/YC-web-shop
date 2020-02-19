@@ -34,9 +34,8 @@ public class OrderServiceImpl implements OrderService {
         HttpSession session = request.getSession();
 
         UserDTO user = SessionUtil.getCurrentUserFromSession(session);
-        //UserDTO user = (UserDTO) session.getAttribute("currentUser");
         UserEntity userEntity = UserTransformer.convertToEntity(user);
-        Long orderNumber = orderDetailsDAO.lastOrderNumberFromUser(user.getId())+1;
+        Long orderNumber = orderDetailsDAO.lastOrderNumberFromUser(user.getId()) + 1;
         Double totalCost = (Double) session.getAttribute("totalCost");
 
         setOrderDetailsEntity(userEntity, orderNumber, totalCost);
@@ -51,31 +50,29 @@ public class OrderServiceImpl implements OrderService {
         }
         RequestDispatcher dispatcher = request.getRequestDispatcher("orderPage.jsp");
         dispatcher.forward(request, response);
-        SessionUtil.storeNumberOfItemsInCart(session,0L);
+        SessionUtil.storeNumberOfItemsInCart(session, 0L);
     }
 
     @Override
     public void displayAllOrders(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         UserDTO user = SessionUtil.getCurrentUserFromSession(session);
-        // UserDTO user = (UserDTO) session.getAttribute("currentUser");
         List<OrderEntity> orderList = orderDAO.findOrdersByUser(user.getId());
-        SessionUtil.storeOrders(session,orderList);
+        SessionUtil.storeOrders(session, orderList);
     }
 
     @Override
     public void displayOrdeDetails(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         UserDTO user = SessionUtil.getCurrentUserFromSession(session);
-       // UserDTO user = (UserDTO) session.getAttribute("currentUser");
-        Long orderNumber = Long.parseLong(request.getParameter("orderItems"));;
-        List<OrderDetailsEntity> orderDetailsList = orderDetailsDAO.findOrderDetailsByUserIdAndOrderNUmber(user.getId(),orderNumber);
-        SessionUtil.storeOrderDetailsList(session,orderDetailsList);
+        Long orderNumber = Long.parseLong(request.getParameter("orderItems"));
+        List<OrderDetailsEntity> orderDetailsList = orderDetailsDAO.findOrderDetailsByUserIdAndOrderNUmber(user.getId(), orderNumber);
+        SessionUtil.storeOrderDetailsList(session, orderDetailsList);
     }
 
     private void updateProductStock(MyCartEntity itemFromCart) {
         ProductsEntity productToUpdate = productsDAO.findProductByName(itemFromCart.getProductName());
-        productToUpdate.setStockNumber(productToUpdate.getStockNumber()-itemFromCart.getQuantity());
+        productToUpdate.setStockNumber(productToUpdate.getStockNumber() - itemFromCart.getQuantity());
         productsDAO.updateEntity(productToUpdate);
     }
 

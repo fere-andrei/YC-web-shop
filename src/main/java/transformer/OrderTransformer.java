@@ -5,8 +5,8 @@ import entity.OrderDetailsEntity;
 
 public class OrderTransformer {
 
-    public static OrderDetailsDTO convertToDto(OrderDetailsEntity orderDetailsEntity){
-        if(orderDetailsEntity ==null){
+    public static OrderDetailsDTO convertToDto(OrderDetailsEntity orderDetailsEntity) {
+        if (orderDetailsEntity == null) {
             return null;
         }
         OrderDetailsDTO orderDetailsDTO = new OrderDetailsDTO();
@@ -20,8 +20,8 @@ public class OrderTransformer {
         return orderDetailsDTO;
     }
 
-    public static OrderDetailsEntity convertToEntity(OrderDetailsDTO orderDetailsDTO){
-        if(orderDetailsDTO ==null){
+    public static OrderDetailsEntity convertToEntity(OrderDetailsDTO orderDetailsDTO) {
+        if (orderDetailsDTO == null) {
             return null;
         }
         OrderDetailsEntity orderDetailsEntity = new OrderDetailsEntity();

@@ -37,7 +37,6 @@ public class CartController extends HttpServlet {
         response.sendRedirect("cartPage.jsp");
         try {
             UserDTO user = SessionUtil.getCurrentUserFromSession(session);
-           // UserDTO user = (UserDTO) session.getAttribute("currentUser");
             cartService.displayCartAndTotalCost(session, user);
         } catch (Exception e) {
             e.printStackTrace();
