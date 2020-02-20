@@ -25,6 +25,9 @@ public class ProductsEntity {
     @Column(name = "price")
     private Double price;
 
+    @Column(name = "image_url")
+    private String imageUrl;
+
 
     public Long getId() {
         return id;
@@ -64,5 +67,13 @@ public class ProductsEntity {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

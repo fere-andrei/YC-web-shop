@@ -8,7 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "t_my_cart")
-public class MyCartEntity {
+public class MyCartEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -27,7 +27,7 @@
         <c:forEach items="${myCartItems}" var="cartItem">
             <tr class = "js-product-from-cart">
                 <td><c:out value="${cartItem.productName}" /></td>
-                <td class="js-price-of-item"><c:out value="${cartItem.price}" /></td>
+                <td><a class="js-price-of-item" id = "js-item-price" data-item-price="${cartItem.pricePerUnit}"><c:out value="${cartItem.price}" /></a></td>
                 <td><input class = "js-quantity-to-update" id = "js-quantity-from-cart" type = "number" name = "newQuantity" value="${cartItem.quantity}" min="0"></td>
                 <td>
                     <button type = "submit" class="js-update-cart-button" id="js-update-cart" name="itemId" value="${cartItem.id}">Update Cart</button>
@@ -37,7 +37,7 @@
 
     </table>
 </div>
-You have to pay : <b id = "js-total-cost">${totalCost}</b> $
+You have to pay : <li id = "js-total-cost">${totalCost}$</li>
 <br/>
 
 <c:if test = "${currentUser.fullName != 'guest'}">

@@ -22,34 +22,26 @@
 <br>
 <br>
 <div>
-    <%--<table border="2" cellpadding="5" align="center">
-        <tr>
-            <th>Product Name</th>
-            <th>Price$</th>
-            <th>Category</th>
-            <th>Stock</th>
-            <th>Number of units</th>
-            <th>Add to cart</th>
-        </tr>--%>
+
     <div class="grid-container">
-           <c:forEach items="${products}" var="item">
-              <div class="grid-item">
-                  <tr class = "js-product-details">
-                      <td><c:out value="${item.productName}" /></td>
-                        <br>
-                      <td><c:out value="${item.price}"/>$</td>
-                        <br>
-                      <td><c:out value="${item.category}" /></td>
-                        <br>
-                      <td><c:out value="${item.stockNumber}" /></td>
-                        <br>
-                      <td><input class = "js-quantity-class" id = "js-quantity-id" type = "number" name = "quantity" value="1" min="1" max="${item.stockNumber}"></td>
-                      <td>
-                           <button id="js-button-id" type="submit" name="productId" value = "${item.id}" class="js-add-to-cart-button">Add to cart</button>
-                      </td>
+        <c:forEach items="${products}" var="item">
+            <div class="grid-item">
+                <tr class="js-product-details">
+                    <td><img SRC= <c:out value="${item.imageUrl}"/> width="200" height="200"></td>
+                    <li>Name: <c:out value="${item.productName}"/></li>
+                    <li>Price: <c:out value="${item.price}"/>$</li>
+                    <li>Category: <c:out value="${item.category}"/></li>
+                    <li>Quantity: <c:out value="${item.stockNumber}"/></li>
+                    <td><input class="js-quantity-class" id="js-quantity-id" type="number" name="quantity" value="1"
+                               min="1" max="${item.stockNumber}"></td>
+                    <td>
+                        <button id="js-button-id" type="submit" name="productId" value="${item.id}"
+                                class="js-add-to-cart-button">Add to cart
+                        </button>
+                    </td>
                 </tr>
-              </div>
-           </c:forEach>
+            </div>
+        </c:forEach>
     </div>
     <%--</table>--%>
 </div>

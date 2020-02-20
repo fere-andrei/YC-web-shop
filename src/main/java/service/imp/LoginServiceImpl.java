@@ -39,15 +39,16 @@ public class LoginServiceImpl implements LoginService {
             SessionUtil.storeCurrentUser(session, userDTO);
             SessionUtil.storeNumberOfItemsInCart(session, numberOfItemsInCart);
             destPage = "userHomePage.jsp";
-            return new Pair<>(destPage,null);
+            return new Pair<>(destPage, null);
         } else {
             String message = "Invalid email/password";
-            return new Pair<>(destPage,message);
+            return new Pair<>(destPage, message);
             //request.setAttribute("message", message);
         }
 
     }
 
+    //TODO send just id
     private void mergeUserWithGuest(HttpSession session, UserDTO userDTO, UserEntity userEntity) {
         List<MyCartEntity> userItems = myCartDAO.findSpecificCartByUser(userDTO.getId());
         UserDTO guestUser = (UserDTO) session.getAttribute("currentUser");

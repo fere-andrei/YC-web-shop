@@ -14,6 +14,7 @@ public class ProductsTransformer {
         productDTO.setPrice(productsEntity.getPrice());
         productDTO.setProductName(productsEntity.getProductName());
         productDTO.setStockNumber(productsEntity.getStockNumber());
+        productDTO.setImageUrl(productsEntity.getImageUrl());
 
         return productDTO;
     }
@@ -28,6 +29,7 @@ public class ProductsTransformer {
         productEntity.setPrice(productsDto.getPrice());
         productEntity.setProductName(productsDto.getProductName());
         productEntity.setStockNumber(productsDto.getStockNumber());
+        productEntity.setImageUrl(productsDto.getImageUrl());
 
         return productEntity;
     }

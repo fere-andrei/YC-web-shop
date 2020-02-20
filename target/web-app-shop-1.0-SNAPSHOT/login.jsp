@@ -15,10 +15,13 @@
 <jsp:include page="_header.jsp"></jsp:include>
 <jsp:include page="_menu.jsp"></jsp:include>
 
+<br>
+<br>
 <div class="container col-md-8 col-md-offset-3" style="overflow: auto">
     <div class="card card-body">
         <h1>Login Form</h1>
         <form action="<%=request.getContextPath()%>/login" method="post" id="loginForm">
+            <a style="color: green">${succesMessage}</a>
             <%--@declare id="username"--%><%--@declare id="password"--%>
                 <div class="form-group">
                     <label for="username">User Name:</label> <input type="text"
@@ -35,6 +38,7 @@
             <br><br>
             <button type="submit" class="btn btn-primary">Login</button>
 
+                <a style="color: red">${errMsg}</a>
         </form>
     </div>
 </div>

@@ -71,4 +71,22 @@
         <url-pattern>/order</url-pattern>
     </servlet-mapping>
 
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>filters.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/login</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>RegisterFilter</filter-name>
+        <filter-class>filters.RegisterFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>RegisterFilter</filter-name>
+        <url-pattern>/register</url-pattern>
+    </filter-mapping>
+
 </web-app>
