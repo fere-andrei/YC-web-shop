@@ -1,15 +1,17 @@
 package service;
 
+import dto.OrderDTO;
+import dto.OrderDetailsDTO;
 import dto.UserDTO;
 
-import javax.servlet.http.HttpSession;
+import java.util.List;
 
 public interface OrderService {
 
     void placeOrder(UserDTO userDTO);
 
-    void displayAllOrders(HttpSession session);
+    List<OrderDTO> displayAllOrders(UserDTO userDTO);
 
-    void displayOrderDetails(HttpSession session, Long orderNumber);
+    List<OrderDetailsDTO> getOrderDetailsToDisplay(UserDTO userDTO, Long orderNumber);
 
 }

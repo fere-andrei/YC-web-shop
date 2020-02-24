@@ -1,5 +1,7 @@
 package controller;
 
+import dto.OrderDTO;
+import dto.OrderDetailsDTO;
 import dto.UserDTO;
 import service.OrderService;
 import service.imp.OrderServiceImpl;
@@ -11,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 public class OrderController extends HttpServlet {
     OrderService orderService;
@@ -27,8 +30,10 @@ public class OrderController extends HttpServlet {
         HttpSession session = request.getSession();
         response.sendRedirect("orderPage.jsp");
         SessionUtil.storeSelectedCategory(session, "Category");
+        UserDTO userDTO = (UserDTO) session.getAttribute("currentUser");
         try {
-            orderService.displayAllOrders(session);
+            List<OrderDTO> orderDTOList = orderService.displayAllOrders(userDTO);
+            SessionUtil.storeOrders(session, orderDTOList);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -42,7 +47,8 @@ public class OrderController extends HttpServlet {
         try {
             if ("orderDetails".equalsIgnoreCase(orderComponent)) {
                 Long orderNumber = Long.parseLong(request.getParameter("orderItems"));
-                orderService.displayOrderDetails(session, orderNumber);
+                List<OrderDetailsDTO> orderDetailsDTOList = orderService.getOrderDetailsToDisplay(userDTO, orderNumber);
+                SessionUtil.storeOrderDetailsList(session, orderDetailsDTOList);
             } else {
                 response.sendRedirect("productPage.jsp");
                 orderService.placeOrder(userDTO);

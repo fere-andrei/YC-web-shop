@@ -18,7 +18,6 @@ import transformer.OrderTransformer;
 import transformer.UserTransformer;
 import util.SessionUtil;
 
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -58,25 +57,23 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void displayAllOrders(HttpSession session) {
-        UserDTO user = SessionUtil.getCurrentUserFromSession(session);
-        List<OrderEntity> orderEntityList = orderDAO.findOrdersByUser(user.getId());
+    public List<OrderDTO> displayAllOrders(UserDTO userDTO) {
+        List<OrderEntity> orderEntityList = orderDAO.findOrdersByUser(userDTO.getId());
         List<OrderDTO> orderDTOList = new ArrayList<>();
         for (OrderEntity order : orderEntityList) {
             orderDTOList.add(OrderTransformer.convertToDto(order));
         }
-        SessionUtil.storeOrders(session, orderDTOList);
+        return  orderDTOList;
     }
 
     @Override
-    public void displayOrderDetails(HttpSession session, Long orderNumber) {
-        UserDTO user = SessionUtil.getCurrentUserFromSession(session);
-        List<OrderDetailsEntity> orderDetailsEntityList = orderDetailsDAO.findOrderDetailsByUserIdAndOrderNUmber(user.getId(), orderNumber);
+    public List<OrderDetailsDTO> getOrderDetailsToDisplay(UserDTO userDTO, Long orderNumber) {
+        List<OrderDetailsEntity> orderDetailsEntityList = orderDetailsDAO.findOrderDetailsByUserIdAndOrderNUmber(userDTO.getId(), orderNumber);
         List<OrderDetailsDTO> orderDetailsDTOList = new ArrayList<>();
         for (OrderDetailsEntity orderDetails : orderDetailsEntityList) {
             orderDetailsDTOList.add(OrderDetailsTransformer.convertToDto(orderDetails));
         }
-        SessionUtil.storeOrderDetailsList(session, orderDetailsDTOList);
+        return orderDetailsDTOList;
     }
 
     private void updateProductStock(MyCartEntity itemFromCart) {
