@@ -3,12 +3,14 @@ package controller;
 import dto.UserDTO;
 import service.RegisterService;
 import service.imp.RegisterServiceImpl;
+import util.SessionUtil;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class RegisterController extends HttpServlet {
@@ -40,6 +42,8 @@ public class RegisterController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        SessionUtil.storeSelectedCategory(session,"Category");
         response.sendRedirect("register.jsp");
     }
 

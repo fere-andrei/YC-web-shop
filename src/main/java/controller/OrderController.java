@@ -3,6 +3,7 @@ package controller;
 import service.OrderService;
 import service.imp.OrderServiceImpl;
 import sun.awt.geom.AreaOp;
+import util.SessionUtil;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -26,6 +27,7 @@ public class OrderController extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         response.sendRedirect("orderPage.jsp");
+        SessionUtil.storeSelectedCategory(session,"Category");
         try {
             orderService.displayAllOrders(session);
         } catch (Exception e) {

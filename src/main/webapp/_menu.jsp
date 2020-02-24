@@ -6,13 +6,14 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style type="text/css">
     @import "css/menu.css";
+    @import "css/background.css";
 </style>
 
 <div class="navbar-custom">
     <a href="${pageContext.request.contextPath}/home">Home</a>
     <a href="${pageContext.request.contextPath}/products">Product List</a>
     <div class="dropdown-custom">
-        <button href="products" class="dropbtn-custom">Category
+        <button class="dropbtn-custom">${categoryDisplay}
             <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content-custom">
@@ -24,7 +25,7 @@
         </div>
     </div>
     <c:if test = "${currentUser.fullName != 'guest'}">
-        <a href="order">Orders</a>
+        <a href="order">My Orders</a>
     </c:if>
 
 </div>

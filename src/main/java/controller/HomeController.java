@@ -3,6 +3,7 @@ package controller;
 import dto.UserDTO;
 import service.HomeService;
 import service.imp.HomeServiceImpl;
+import util.SessionUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -24,6 +25,7 @@ public class HomeController extends HttpServlet {
         try {
             HttpSession session = request.getSession();
             UserDTO user = (UserDTO) session.getAttribute("currentUser");
+            SessionUtil.storeSelectedCategory(session,"Category");
 
             if (user == null) {
                 homeService.loadUser(session);

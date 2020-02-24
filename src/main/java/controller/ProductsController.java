@@ -2,6 +2,7 @@ package controller;
 
 import service.ProductsService;
 import service.imp.ProductsServiceImpl;
+import util.SessionUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,6 +19,7 @@ public class ProductsController extends HttpServlet {
         HttpSession session = request.getSession();
         response.sendRedirect("productPage.jsp");
         try {
+            SessionUtil.storeSelectedCategory(session,"Category");
             productsService.displayProducts(session);
         } catch (Exception e) {
             e.printStackTrace();
@@ -30,7 +32,9 @@ public class ProductsController extends HttpServlet {
         try {
             String categoryType = request.getParameter("category");
             productsService.displayProductsByCategory(session, categoryType);
+            SessionUtil.storeSelectedCategory(session,categoryType);
             response.sendRedirect("productPage.jsp");
+
 
         } catch (Exception e) {
             e.printStackTrace();

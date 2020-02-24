@@ -2,6 +2,7 @@ package controller;
 import javafx.util.Pair;
 import service.LoginService;
 import service.imp.LoginServiceImpl;
+import util.SessionUtil;
 
 import java.io.IOException;
 
@@ -22,6 +23,8 @@ public class LoginController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        SessionUtil.storeSelectedCategory(session,"Category");
         response.sendRedirect("login.jsp");
     }
 

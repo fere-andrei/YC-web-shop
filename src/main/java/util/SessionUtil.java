@@ -39,6 +39,10 @@ public class SessionUtil {
         session.setAttribute("products", productDTOList);
     }
 
+    public static void storeSelectedCategory(HttpSession session,String category){
+        session.setAttribute("categoryDisplay",category);
+    }
+
     public static UserDTO getCurrentUserFromSession(HttpSession session) {
         UserDTO user = (UserDTO) session.getAttribute("currentUser");
         return user;

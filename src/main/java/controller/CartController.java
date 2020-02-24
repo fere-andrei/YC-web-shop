@@ -25,6 +25,7 @@ public class CartController extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         response.sendRedirect("cartPage.jsp");
+        SessionUtil.storeSelectedCategory(session,"Category");
         try {
             UserDTO user = SessionUtil.getCurrentUserFromSession(session);
             cartService.displayCartAndTotalCost(session,user.getId());

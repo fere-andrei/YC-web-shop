@@ -37,7 +37,7 @@
 
     </table>
 </div>
-You have to pay : <li id = "js-total-cost">${totalCost}$</li>
+You have to pay : <li id = "js-total-cost">${totalCost}</li>
 <br/>
 
 <c:if test = "${currentUser.fullName != 'guest'}">
