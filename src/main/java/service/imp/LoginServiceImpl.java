@@ -38,7 +38,7 @@ public class LoginServiceImpl implements LoginService {
             Long numberOfItemsInCart = myCartDAO.findNumberOfItems(userDTO.getId());
             SessionUtil.storeCurrentUser(session, userDTO);
             SessionUtil.storeNumberOfItemsInCart(session, numberOfItemsInCart);
-            destPage = "userHomePage.jsp";
+            destPage = "home";
             return new Pair<>(destPage, null);
         } else {
             String message = "Invalid email/password";

@@ -2,6 +2,7 @@ package controller;
 
 import service.OrderService;
 import service.imp.OrderServiceImpl;
+import sun.awt.geom.AreaOp;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -41,9 +42,8 @@ public class OrderController extends HttpServlet {
                 Long orderNumber = Long.parseLong(request.getParameter("orderItems"));
                 orderService.displayOrderDetails(session, orderNumber);
             } else {
+                response.sendRedirect("productPage.jsp");
                 orderService.placeOrder(session);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("orderPage.jsp");
-                dispatcher.forward(request, response);
             }
         } catch (Exception e) {
             e.printStackTrace();

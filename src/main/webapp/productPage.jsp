@@ -9,8 +9,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <style type="text/css">
     @import "css/displayProducts.css";
+    @import "css/paging.css";
 </style>
-<script src="js/allJavaScripts.js"></script>
+
 <html>
 <head>
     <title>Title</title>
@@ -18,12 +19,13 @@
 <body>
 <jsp:include page="_header.jsp"></jsp:include>
 <jsp:include page="_menu.jsp"></jsp:include>
+
+
 <caption><h2>List of products</h2></caption>
 <br>
 <br>
-<div>
-
-    <div class="grid-container">
+<div id = "div-container">
+    <div class="grid-container" id="div-pag">
         <c:forEach items="${products}" var="item">
             <div class="grid-item">
                 <tr class="js-product-details">
@@ -43,7 +45,15 @@
             </div>
         </c:forEach>
     </div>
-    <%--</table>--%>
+</div>
+
+<div>
+    <script>
+        $('#div-pag').easyPaginate({
+            paginateElement: 'div',
+            elementsPerPage: 3
+        });
+    </script>
 </div>
 <jsp:include page="_footer.jsp"></jsp:include>
 </body>
