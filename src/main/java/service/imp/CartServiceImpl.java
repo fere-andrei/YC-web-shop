@@ -4,15 +4,18 @@ import dao.MyCartDAO;
 import dao.ProductsDAO;
 import daoImpl.MyCartDAOImpl;
 import daoImpl.ProductsDAOImpl;
+import dto.MyCartDTO;
 import dto.UserDTO;
 import entity.MyCartEntity;
 import entity.ProductsEntity;
 import entity.UserEntity;
 import service.CartService;
+import transformer.MyCartTransformer;
 import transformer.UserTransformer;
 import util.SessionUtil;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CartServiceImpl implements CartService {
@@ -65,9 +68,13 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public void displayCartAndTotalCost(HttpSession session,Long userId) {
-        List<MyCartEntity> productsFromCart = myCartDAO.findSpecificCartByUser(userId);
+        List<MyCartEntity> productsFromCartEntity = myCartDAO.findSpecificCartByUser(userId);
+        List<MyCartDTO> productsFromCartDTO = new ArrayList<>();
+        for(MyCartEntity product : productsFromCartEntity){
+            productsFromCartDTO.add(MyCartTransformer.convertToDto(product));
+        }
         Double totalCost = myCartDAO.totalCostOfMyCart(userId);
-        SessionUtil.storeItemsFromCart(session, productsFromCart);
+        SessionUtil.storeItemsFromCart(session, productsFromCartDTO);
         SessionUtil.storeTotalCost(session, totalCost);
     }
 

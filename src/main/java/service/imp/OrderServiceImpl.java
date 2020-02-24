@@ -8,15 +8,22 @@ import daoImpl.MyCartDAOImpl;
 import daoImpl.OrderDAOImpl;
 import daoImpl.OrderDetailsDAOImpl;
 import daoImpl.ProductsDAOImpl;
+import dto.MyCartDTO;
+import dto.OrderDTO;
+import dto.OrderDetailsDTO;
 import dto.UserDTO;
 import entity.*;
 import service.OrderService;
+import transformer.MyCartTransformer;
+import transformer.OrderDetailsTransformer;
+import transformer.OrderTransformer;
 import transformer.UserTransformer;
 import util.SessionUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -29,45 +36,59 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void placeOrder(HttpSession session) throws ServletException, IOException {
 
-        UserDTO user = SessionUtil.getCurrentUserFromSession(session);
-        UserEntity userEntity = UserTransformer.convertToEntity(user);
-        Long orderNumber = orderDetailsDAO.lastOrderNumberFromUser(user.getId()) + 1;
+
         Double totalCost = (Double) session.getAttribute("totalCost");
+        if (totalCost != 0.0) {
 
-        setOrderDetailsEntity(userEntity, orderNumber, totalCost);
+            UserDTO user = SessionUtil.getCurrentUserFromSession(session);
+            UserEntity userEntity = UserTransformer.convertToEntity(user);
+            Long orderNumber = orderDetailsDAO.lastOrderNumberFromUser(user.getId()) + 1;
 
-        List<MyCartEntity> itemsFromCart = (List<MyCartEntity>) session.getAttribute("myCartItems");
-        for (MyCartEntity itemFromCart : itemsFromCart) {
-            OrderDetailsEntity orderDetails = setOrderDetailsEntity(userEntity, orderNumber, itemFromCart);
-            updateProductStock(itemFromCart);
 
-            orderDetailsDAO.saveEntity(orderDetails);
-            myCartDAO.deleteEntity(itemFromCart);
+            setOrderDetailsEntity(userEntity, orderNumber, totalCost);
+
+            List<MyCartDTO> itemsFromCart = (List<MyCartDTO>) session.getAttribute("myCartItems");
+            for (MyCartDTO itemFromCart : itemsFromCart) {
+                OrderDetailsEntity orderDetails = setOrderDetailsEntity(userEntity, orderNumber, itemFromCart);
+                updateProductStock(itemFromCart);
+
+                orderDetailsDAO.saveEntity(orderDetails);
+                MyCartEntity myCartEntity = MyCartTransformer.convertToEntity(itemFromCart);
+                myCartDAO.deleteEntity(myCartEntity);
+            }
+            SessionUtil.storeNumberOfItemsInCart(session, 0L);
         }
-        SessionUtil.storeNumberOfItemsInCart(session, 0L);
     }
 
     @Override
     public void displayAllOrders(HttpSession session) {
         UserDTO user = SessionUtil.getCurrentUserFromSession(session);
-        List<OrderEntity> orderList = orderDAO.findOrdersByUser(user.getId());
-        SessionUtil.storeOrders(session, orderList);
+        List<OrderEntity> orderEntityList = orderDAO.findOrdersByUser(user.getId());
+        List<OrderDTO> orderDTOList = new ArrayList<>();
+        for (OrderEntity order : orderEntityList) {
+            orderDTOList.add(OrderTransformer.convertToDto(order));
+        }
+        SessionUtil.storeOrders(session, orderDTOList);
     }
 
     @Override
     public void displayOrderDetails(HttpSession session, Long orderNumber) {
         UserDTO user = SessionUtil.getCurrentUserFromSession(session);
-        List<OrderDetailsEntity> orderDetailsList = orderDetailsDAO.findOrderDetailsByUserIdAndOrderNUmber(user.getId(), orderNumber);
-        SessionUtil.storeOrderDetailsList(session, orderDetailsList);
+        List<OrderDetailsEntity> orderDetailsEntityList = orderDetailsDAO.findOrderDetailsByUserIdAndOrderNUmber(user.getId(), orderNumber);
+        List<OrderDetailsDTO> orderDetailsDTOList = new ArrayList<>();
+        for (OrderDetailsEntity orderDetails : orderDetailsEntityList) {
+            orderDetailsDTOList.add(OrderDetailsTransformer.convertToDto(orderDetails));
+        }
+        SessionUtil.storeOrderDetailsList(session, orderDetailsDTOList);
     }
 
-    private void updateProductStock(MyCartEntity itemFromCart) {
+    private void updateProductStock(MyCartDTO itemFromCart) {
         ProductsEntity productToUpdate = productsDAO.findProductByName(itemFromCart.getProductName());
         productToUpdate.setStockNumber(productToUpdate.getStockNumber() - itemFromCart.getQuantity());
         productsDAO.updateEntity(productToUpdate);
     }
 
-    private OrderDetailsEntity setOrderDetailsEntity(UserEntity userEntity, Long orderNumber, MyCartEntity itemFromCart) {
+    private OrderDetailsEntity setOrderDetailsEntity(UserEntity userEntity, Long orderNumber, MyCartDTO itemFromCart) {
         OrderDetailsEntity order = new OrderDetailsEntity();
         order.setOrderNumber(orderNumber);
         order.setPrice(itemFromCart.getPrice());

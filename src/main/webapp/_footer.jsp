@@ -9,5 +9,5 @@
 <br>
 <br>
 <div class="footer">
-  <p>@Copyright Fere Andrei magazinul lui aici ! ;)</p>
+  <p>@Copyright Fere Andrei</p>
 </div>

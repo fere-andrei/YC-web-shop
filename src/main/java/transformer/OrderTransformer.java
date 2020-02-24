@@ -1,38 +1,40 @@
 package transformer;
 
+import dto.OrderDTO;
 import dto.OrderDetailsDTO;
 import entity.OrderDetailsEntity;
+import entity.OrderEntity;
 
 public class OrderTransformer {
 
-    public static OrderDetailsDTO convertToDto(OrderDetailsEntity orderDetailsEntity) {
-        if (orderDetailsEntity == null) {
+    public static OrderDTO convertToDto(OrderEntity orderEntity) {
+        if (orderEntity == null) {
             return null;
         }
-        OrderDetailsDTO orderDetailsDTO = new OrderDetailsDTO();
-        orderDetailsDTO.setId(orderDetailsEntity.getId());
-        orderDetailsDTO.setOrderNumber(orderDetailsEntity.getOrderNumber());
-        orderDetailsDTO.setPrice(orderDetailsEntity.getPrice());
-        orderDetailsDTO.setProductName(orderDetailsEntity.getProductName());
-        orderDetailsDTO.setQuantity(orderDetailsEntity.getQuantity());
-        orderDetailsDTO.setUser(orderDetailsEntity.getUser());
+        OrderDTO orderDTO = new OrderDTO();
+        orderDTO.setId(orderEntity.getId());
+        orderDTO.setOrderNumber(orderEntity.getOrderNumber());
+        orderDTO.setUser(orderEntity.getUser());
+        orderDTO.setAddress(orderEntity.getAddress());
+        orderDTO.setOrderDate(orderEntity.getOrderDate());
+        orderDTO.setTotalCost(orderEntity.getTotalCost());
 
-        return orderDetailsDTO;
+        return orderDTO;
     }
 
-    public static OrderDetailsEntity convertToEntity(OrderDetailsDTO orderDetailsDTO) {
-        if (orderDetailsDTO == null) {
+    public static OrderEntity convertToEntity(OrderDTO orderDTO) {
+        if (orderDTO == null) {
             return null;
         }
-        OrderDetailsEntity orderDetailsEntity = new OrderDetailsEntity();
-        orderDetailsEntity.setId(orderDetailsDTO.getId());
-        orderDetailsEntity.setOrderNumber(orderDetailsDTO.getOrderNumber());
-        orderDetailsEntity.setPrice(orderDetailsDTO.getPrice());
-        orderDetailsEntity.setProductName(orderDetailsDTO.getProductName());
-        orderDetailsEntity.setQuantity(orderDetailsDTO.getQuantity());
-        orderDetailsEntity.setUser(orderDetailsDTO.getUser());
+        OrderEntity orderEntity = new OrderEntity();
+        orderEntity.setId(orderDTO.getId());
+        orderEntity.setOrderNumber(orderDTO.getOrderNumber());
+        orderEntity.setUser(orderDTO.getUser());
+        orderEntity.setAddress(orderDTO.getAddress());
+        orderEntity.setOrderDate(orderDTO.getOrderDate());
+        orderEntity.setTotalCost(orderDTO.getTotalCost());
 
-        return orderDetailsEntity;
+        return orderEntity;
     }
 
 }

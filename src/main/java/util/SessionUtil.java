@@ -1,13 +1,6 @@
 package util;
 
-import dao.UserDAO;
-import daoImpl.UserDAOImpl;
-import dto.UserDTO;
-import entity.MyCartEntity;
-import entity.OrderDetailsEntity;
-import entity.OrderEntity;
-import entity.UserEntity;
-import transformer.UserTransformer;
+import dto.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -26,20 +19,24 @@ public class SessionUtil {
         session.setAttribute("totalCost", totalCost);
     }
 
-    public static void storeItemsFromCart(HttpSession session, List<MyCartEntity> myCartEntityList) {
-        session.setAttribute("myCartItems", myCartEntityList);
+    public static void storeItemsFromCart(HttpSession session, List<MyCartDTO> myCartDTOList) {
+        session.setAttribute("myCartItems", myCartDTOList);
     }
 
-    public static void storeOrders(HttpSession session, List<OrderEntity> orderEntities) {
-        session.setAttribute("orderItems", orderEntities);
+    public static void storeOrders(HttpSession session, List<OrderDTO> orderDTOList) {
+        session.setAttribute("orderItems", orderDTOList);
     }
 
-    public static void storeOrderDetailsList(HttpSession session, List<OrderDetailsEntity> orderDetailsList) {
-        session.setAttribute("orderDetailsList", orderDetailsList);
+    public static void storeOrderDetailsList(HttpSession session, List<OrderDetailsDTO> orderDetailsDTOList) {
+        session.setAttribute("orderDetailsList", orderDetailsDTOList);
     }
 
     public static void storeCategoryList(HttpSession session, List<String> categoryList) {
         session.setAttribute("categoryList", categoryList);
+    }
+
+    public static void storeProductsList(HttpSession session, List<ProductDTO> productDTOList){
+        session.setAttribute("products", productDTOList);
     }
 
     public static UserDTO getCurrentUserFromSession(HttpSession session) {

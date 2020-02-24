@@ -114,14 +114,19 @@ var MyCartComponent = (function () {
                 },
                 url: "order",
                 success: function () {
-                    $(document).ready(function () {
-                        document.write("Your order is COMPLETED, Thank you for using this shop!");
-                        window.setTimeout(function () {
-                            window.location.href = "home"
-                        }, 5000);
+                    if ($(Config.TOTAL_COST).text() === "0.0") {
+                        alert("Pleas add products in cart");
 
-                    });
+                    } else {
 
+                        $(document).ready(function () {
+                            document.write("Your order is COMPLETED, Thank you for using this shop!");
+                            window.setTimeout(function () {
+                                window.location.href = "home"
+                            }, 3000);
+
+                        });
+                    }
                 },
                 error: function () {
                     alert("FAIL");
