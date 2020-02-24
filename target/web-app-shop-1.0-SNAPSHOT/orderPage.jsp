@@ -43,7 +43,6 @@
         </table>
     </div>
 
-    <div id="showMe" style="display:none">In curaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaas de procesare</div>
 
 
     <jsp:include page="_footer.jsp"></jsp:include>

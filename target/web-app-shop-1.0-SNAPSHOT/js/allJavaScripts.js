@@ -14,7 +14,7 @@ var MyCartComponent = (function () {
         PRICE_OF_ITEM: ".js-price-of-item",
         QUANTITY_TO_UPDATE: ".js-quantity-to-update",
         TABLE_CLASS_TO_UPDATE: ".js-product-from-cart",
-        TOTAL_COST:"#js-total-cost",
+        TOTAL_COST: "#js-total-cost",
 
         //place order
         PLACE_ORDER: "#js-place-order",
@@ -39,10 +39,9 @@ var MyCartComponent = (function () {
     }
 
     var addToCart = function () {
-        $(Config.ADD_TO_CART_BUTTON).click(function (event) {
-            var productId = $(event.target).val();
-            //var quantity = $(Config.NO_OF_ITEMES).val();
 
+        $(document).on("click", Config.ADD_TO_CART_BUTTON, function (event) {
+            var productId = $(event.target).val();
             var quantity = $(event.target).closest(".grid-item").find(".js-quantity-class").val();
             $.ajax({
                 type: "POST",
@@ -115,8 +114,20 @@ var MyCartComponent = (function () {
                 },
                 url: "order",
                 success: function () {
-                    $('#showMe').delay(5000).show(0);
+                    if ($(Config.TOTAL_COST).text() === "0.0") {
+                        alert("Pleas add products in cart");
 
+                    } else {
+
+                        $(document).ready(function () {
+                            document.getElementById("hidden-message").style.left = "50%";
+                            document.getElementById("hidden-message").style.visibility = "visible";
+                            window.setTimeout(function () {
+                                window.location.href = "home"
+                            }, 3000);
+
+                        });
+                    }
                 },
                 error: function () {
                     alert("FAIL");
@@ -161,7 +172,6 @@ var MyCartComponent = (function () {
                 },
                 url: "products",
                 success: function () {
-                    /*window.location.reload();*/
                     window.location.href = "productPage.jsp"
                 },
                 error: function () {
@@ -174,9 +184,9 @@ var MyCartComponent = (function () {
 
 
     function updateTotalCost(allPrices) {
-        let totalCost=0;
+        let totalCost = 0;
         for (let i = 0; i < allPrices.size(); i++) {
-            totalCost+= parseFloat(allPrices[i].text);
+            totalCost += parseFloat(allPrices[i].text);
         }
         $(Config.TOTAL_COST).text(totalCost);
     }

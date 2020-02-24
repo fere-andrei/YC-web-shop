@@ -7,6 +7,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<style type="text/css">
+    @import "css/loading.css";
+</style>
 <html>
 <head>
     <title>My Cart</title>
@@ -37,12 +40,16 @@
 
     </table>
 </div>
-You have to pay : <li id = "js-total-cost">${totalCost}$</li>
+You have to pay : <li id = "js-total-cost">${totalCost}</li>
 <br/>
 
 <c:if test = "${currentUser.fullName != 'guest'}">
     <button type = "submit" id="js-place-order" name="orderButton" value="${myCartItems}">Place Order</button>
 </c:if>
+
+<div id = "hidden-message" style="visibility: hidden">Your order is COMPLETED, Thank you for using this shop!
+    <div class="loader"></div>
+</div>
 
 <c:if test = "${currentUser.fullName == 'guest'}">
     Please <a href="login">Login</a> to buy!

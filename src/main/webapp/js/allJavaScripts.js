@@ -120,7 +120,8 @@ var MyCartComponent = (function () {
                     } else {
 
                         $(document).ready(function () {
-                            document.write("Your order is COMPLETED, Thank you for using this shop!");
+                            document.getElementById("hidden-message").style.left = "50%";
+                            document.getElementById("hidden-message").style.visibility = "visible";
                             window.setTimeout(function () {
                                 window.location.href = "home"
                             }, 3000);
