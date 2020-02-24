@@ -1,11 +1,10 @@
 package controller;
 
+import dto.UserDTO;
 import service.OrderService;
 import service.imp.OrderServiceImpl;
-import sun.awt.geom.AreaOp;
 import util.SessionUtil;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +26,7 @@ public class OrderController extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         response.sendRedirect("orderPage.jsp");
-        SessionUtil.storeSelectedCategory(session,"Category");
+        SessionUtil.storeSelectedCategory(session, "Category");
         try {
             orderService.displayAllOrders(session);
         } catch (Exception e) {
@@ -39,13 +38,15 @@ public class OrderController extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         String orderComponent = request.getParameter("orderComponent");
+        UserDTO userDTO = (UserDTO) session.getAttribute("currentUser");
         try {
             if ("orderDetails".equalsIgnoreCase(orderComponent)) {
                 Long orderNumber = Long.parseLong(request.getParameter("orderItems"));
                 orderService.displayOrderDetails(session, orderNumber);
             } else {
                 response.sendRedirect("productPage.jsp");
-                orderService.placeOrder(session);
+                orderService.placeOrder(userDTO);
+                SessionUtil.storeNumberOfItemsInCart(session, 0L);
             }
         } catch (Exception e) {
             e.printStackTrace();

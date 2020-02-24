@@ -1,12 +1,12 @@
 package service;
 
-import javax.servlet.ServletException;
+import dto.UserDTO;
+
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 
 public interface OrderService {
 
-    void placeOrder(HttpSession session) throws ServletException, IOException;
+    void placeOrder(UserDTO userDTO);
 
     void displayAllOrders(HttpSession session);
 

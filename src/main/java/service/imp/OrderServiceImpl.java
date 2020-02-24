@@ -8,21 +8,17 @@ import daoImpl.MyCartDAOImpl;
 import daoImpl.OrderDAOImpl;
 import daoImpl.OrderDetailsDAOImpl;
 import daoImpl.ProductsDAOImpl;
-import dto.MyCartDTO;
 import dto.OrderDTO;
 import dto.OrderDetailsDTO;
 import dto.UserDTO;
 import entity.*;
 import service.OrderService;
-import transformer.MyCartTransformer;
 import transformer.OrderDetailsTransformer;
 import transformer.OrderTransformer;
 import transformer.UserTransformer;
 import util.SessionUtil;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -34,29 +30,30 @@ public class OrderServiceImpl implements OrderService {
     OrderDAO orderDAO = new OrderDAOImpl();
 
     @Override
-    public void placeOrder(HttpSession session) throws ServletException, IOException {
+    public void placeOrder(UserDTO userDTO) {
 
+        List<MyCartEntity> cartEntityList = myCartDAO.findSpecificCartByUser(userDTO.getId());
+        if (cartEntityList != null) {
 
-        Double totalCost = (Double) session.getAttribute("totalCost");
-        if (totalCost != 0.0) {
-
-            UserDTO user = SessionUtil.getCurrentUserFromSession(session);
-            UserEntity userEntity = UserTransformer.convertToEntity(user);
-            Long orderNumber = orderDetailsDAO.lastOrderNumberFromUser(user.getId()) + 1;
-
-
-            setOrderDetailsEntity(userEntity, orderNumber, totalCost);
-
-            List<MyCartDTO> itemsFromCart = (List<MyCartDTO>) session.getAttribute("myCartItems");
-            for (MyCartDTO itemFromCart : itemsFromCart) {
-                OrderDetailsEntity orderDetails = setOrderDetailsEntity(userEntity, orderNumber, itemFromCart);
-                updateProductStock(itemFromCart);
-
-                orderDetailsDAO.saveEntity(orderDetails);
-                MyCartEntity myCartEntity = MyCartTransformer.convertToEntity(itemFromCart);
-                myCartDAO.deleteEntity(myCartEntity);
+            Double totalCostFromCart= 0D;
+            for (MyCartEntity cartEntity : cartEntityList){
+                totalCostFromCart+=cartEntity.getPrice();
             }
-            SessionUtil.storeNumberOfItemsInCart(session, 0L);
+
+            UserEntity userEntity = UserTransformer.convertToEntity(userDTO);
+            Long orderNumber = orderDetailsDAO.lastOrderNumberFromUser(userDTO.getId()) + 1;
+            setOrderEntity(userEntity, orderNumber, totalCostFromCart);
+            createOrderDetails(cartEntityList, userEntity, orderNumber);
+
+        }
+    }
+
+    private void createOrderDetails(List<MyCartEntity> cartEntityList, UserEntity userEntity, Long orderNumber) {
+        for (MyCartEntity itemFromCart : cartEntityList) {
+            OrderDetailsEntity orderDetails = setOrderDetailsEntity(userEntity, orderNumber, itemFromCart);
+            updateProductStock(itemFromCart);
+            orderDetailsDAO.saveEntity(orderDetails);
+            myCartDAO.deleteEntity(itemFromCart);
         }
     }
 
@@ -82,13 +79,13 @@ public class OrderServiceImpl implements OrderService {
         SessionUtil.storeOrderDetailsList(session, orderDetailsDTOList);
     }
 
-    private void updateProductStock(MyCartDTO itemFromCart) {
+    private void updateProductStock(MyCartEntity itemFromCart) {
         ProductsEntity productToUpdate = productsDAO.findProductByName(itemFromCart.getProductName());
         productToUpdate.setStockNumber(productToUpdate.getStockNumber() - itemFromCart.getQuantity());
         productsDAO.updateEntity(productToUpdate);
     }
 
-    private OrderDetailsEntity setOrderDetailsEntity(UserEntity userEntity, Long orderNumber, MyCartDTO itemFromCart) {
+    private OrderDetailsEntity setOrderDetailsEntity(UserEntity userEntity, Long orderNumber, MyCartEntity itemFromCart) {
         OrderDetailsEntity order = new OrderDetailsEntity();
         order.setOrderNumber(orderNumber);
         order.setPrice(itemFromCart.getPrice());
@@ -99,7 +96,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
 
-    private void setOrderDetailsEntity(UserEntity userEntity, Long orderNumber, Double totalCost) {
+    private void setOrderEntity(UserEntity userEntity, Long orderNumber, Double totalCost) {
         OrderEntity order = new OrderEntity();
         order.setUser(userEntity);
         order.setOrderNumber(orderNumber);
