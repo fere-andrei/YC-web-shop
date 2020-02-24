@@ -1,6 +1,6 @@
 package dto;
 
-public class ProductDTO {
+public class ProductsDTO {
 
     private Long id;
 

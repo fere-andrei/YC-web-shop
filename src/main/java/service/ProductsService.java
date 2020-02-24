@@ -1,11 +1,14 @@
 package service;
 
+import dto.ProductsDTO;
+
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 public interface ProductsService {
 
-    void displayProducts(HttpSession session);
+    List<ProductsDTO> displayProducts();
 
-    void displayProductsByCategory(HttpSession session, String categoryType);
+    List<ProductsDTO> displayProductsByCategory(String categoryType);
 
 }

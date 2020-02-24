@@ -1,5 +1,6 @@
 package controller;
 
+import dto.ProductsDTO;
 import service.ProductsService;
 import service.imp.ProductsServiceImpl;
 import util.SessionUtil;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProductsController extends HttpServlet {
     ProductsService productsService = new ProductsServiceImpl();
@@ -20,18 +23,19 @@ public class ProductsController extends HttpServlet {
         response.sendRedirect("productPage.jsp");
         try {
             SessionUtil.storeSelectedCategory(session,"Category");
-            productsService.displayProducts(session);
+            List<ProductsDTO> productsDTOList = productsService.displayProducts();
+            session.setAttribute("products", productsDTOList);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         try {
             String categoryType = request.getParameter("category");
-            productsService.displayProductsByCategory(session, categoryType);
+            List<ProductsDTO> productsDTOList = productsService.displayProductsByCategory(categoryType);
+            SessionUtil.storeProductsList(session,productsDTOList);
             SessionUtil.storeSelectedCategory(session,categoryType);
             response.sendRedirect("productPage.jsp");
 

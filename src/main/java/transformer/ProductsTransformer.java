@@ -1,25 +1,25 @@
 package transformer;
 
-import dto.ProductDTO;
+import dto.ProductsDTO;
 import entity.ProductsEntity;
 
 public class ProductsTransformer {
-    public static ProductDTO convertToDto(ProductsEntity productsEntity) {
+    public static ProductsDTO convertToDto(ProductsEntity productsEntity) {
         if (productsEntity == null) {
             return null;
         }
-        ProductDTO productDTO = new ProductDTO();
-        productDTO.setCategory(productsEntity.getCategory());
-        productDTO.setId(productsEntity.getId());
-        productDTO.setPrice(productsEntity.getPrice());
-        productDTO.setProductName(productsEntity.getProductName());
-        productDTO.setStockNumber(productsEntity.getStockNumber());
-        productDTO.setImageUrl(productsEntity.getImageUrl());
+        ProductsDTO productsDTO = new ProductsDTO();
+        productsDTO.setCategory(productsEntity.getCategory());
+        productsDTO.setId(productsEntity.getId());
+        productsDTO.setPrice(productsEntity.getPrice());
+        productsDTO.setProductName(productsEntity.getProductName());
+        productsDTO.setStockNumber(productsEntity.getStockNumber());
+        productsDTO.setImageUrl(productsEntity.getImageUrl());
 
-        return productDTO;
+        return productsDTO;
     }
 
-    public static ProductsEntity convertToEntity(ProductDTO productsDto) {
+    public static ProductsEntity convertToEntity(ProductsDTO productsDto) {
         if (productsDto == null) {
             return null;
         }

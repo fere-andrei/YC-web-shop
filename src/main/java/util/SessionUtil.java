@@ -35,8 +35,8 @@ public class SessionUtil {
         session.setAttribute("categoryList", categoryList);
     }
 
-    public static void storeProductsList(HttpSession session, List<ProductDTO> productDTOList){
-        session.setAttribute("products", productDTOList);
+    public static void storeProductsList(HttpSession session, List<ProductsDTO> productsDTOList){
+        session.setAttribute("products", productsDTOList);
     }
 
     public static void storeSelectedCategory(HttpSession session,String category){

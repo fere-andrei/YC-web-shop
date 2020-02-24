@@ -2,7 +2,7 @@ package service.imp;
 
 import dao.ProductsDAO;
 import daoImpl.ProductsDAOImpl;
-import dto.ProductDTO;
+import dto.ProductsDTO;
 import entity.ProductsEntity;
 import service.ProductsService;
 import transformer.ProductsTransformer;
@@ -15,24 +15,23 @@ import java.util.List;
 public class ProductsServiceImpl implements ProductsService {
     ProductsDAO productsDao = new ProductsDAOImpl();
 
-    //TODO AICI DTO
     @Override
-    public void displayProducts(HttpSession session) {
-        List<ProductsEntity> products = productsDao.findAvailableProducts();
-        session.setAttribute("products", products);
+    public List<ProductsDTO> displayProducts() {
+        List<ProductsEntity> productsEntityList = productsDao.findAvailableProducts();
+        List<ProductsDTO> productsDTOList = new ArrayList<>();
+        for(ProductsEntity productsEntity : productsEntityList){
+            productsDTOList.add(ProductsTransformer.convertToDto(productsEntity));
+        }
+        return productsDTOList;
     }
     //TODO AICI DTO
     @Override
-    public void displayProductsByCategory(HttpSession session, String categoryType) {
-        List<String> allCategory = (List<String>) session.getAttribute("categoryList");
-        if (allCategory.contains(categoryType)) {
-            List<ProductsEntity> products = productsDao.findAvailableProductsByCategory(categoryType);
-            List<ProductDTO> productDTOList = new ArrayList<>();
-            for(ProductsEntity product : products){
-               productDTOList.add(ProductsTransformer.convertToDto(product));
-            }
-            SessionUtil.storeProductsList(session,productDTOList);
-
+    public List<ProductsDTO> displayProductsByCategory(String categoryType) {
+        List<ProductsEntity> products = productsDao.findAvailableProductsByCategory(categoryType);
+        List<ProductsDTO> productsDTOList = new ArrayList<>();
+        for (ProductsEntity product : products) {
+            productsDTOList.add(ProductsTransformer.convertToDto(product));
         }
+        return productsDTOList;
     }
 }
