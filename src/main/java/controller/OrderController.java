@@ -3,8 +3,10 @@ package controller;
 import dto.OrderDTO;
 import dto.OrderDetailsDTO;
 import dto.UserDTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import service.OrderService;
-import service.imp.OrderServiceImpl;
+import service.impl.OrderServiceImpl;
 import util.SessionUtil;
 
 import javax.servlet.ServletException;
@@ -15,15 +17,9 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
+@Controller
 public class OrderController extends HttpServlet {
     OrderService orderService;
-
-    public void init() {
-        orderService = new OrderServiceImpl();
-    }
-
-    ;
-
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -57,5 +53,13 @@ public class OrderController extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public OrderService getOrderService() {
+        return orderService;
+    }
+
+    public void setOrderService(OrderService orderService) {
+        this.orderService = orderService;
     }
 }

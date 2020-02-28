@@ -1,14 +1,17 @@
 package service;
 
-import javax.servlet.http.HttpSession;
+import dto.UserDTO;
+
+import java.util.List;
+
 
 public interface HomeService {
 
-    void loadCategoryList(HttpSession session);
+    List<String> loadCategoryList();
 
-    void loadCartItemsCounter(HttpSession session);
+    Long loadCartItemsCounter(Long userId);
 
-    void loadUser(HttpSession session);
+    UserDTO loadUser();
 
     void clearGuestUsers();
 }

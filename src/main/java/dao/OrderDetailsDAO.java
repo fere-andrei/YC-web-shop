@@ -1,12 +1,15 @@
 package dao;
 
 import entity.OrderDetailsEntity;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public interface OrderDetailsDAO extends CommonDAO{
 
-    Long lastOrderNumberFromUser(Long userId);
+    //TODO change find
+    Long findLastOrderNumberFromUser(Long userId);
 
     List<OrderDetailsEntity> findOrderByUserId(Long userId);
 

@@ -1,49 +1,47 @@
 package controller;
 
 import dto.ProductsDTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import service.ProductsService;
-import service.imp.ProductsServiceImpl;
-import util.SessionUtil;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
-public class ProductsController extends HttpServlet {
-    ProductsService productsService = new ProductsServiceImpl();
+@Controller
+public class ProductsController {
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        response.sendRedirect("productPage.jsp");
-        try {
-            SessionUtil.storeSelectedCategory(session,"Category");
-            List<ProductsDTO> productsDTOList = productsService.displayProducts();
-            session.setAttribute("products", productsDTOList);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    @Autowired
+    ProductsService productsService;
+
+    @RequestMapping(method = RequestMethod.GET, value = "/products")
+    protected String displayAllProducts(HttpSession session, Model model) {
+        model.addAttribute("categoryDisplay", "Category");
+        List<ProductsDTO> productsDTOList = productsService.displayProducts();
+        model.addAttribute("products", productsDTOList);
+
+        return "productPage";
     }
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        try {
-            String categoryType = request.getParameter("category");
-            List<ProductsDTO> productsDTOList = productsService.displayProductsByCategory(categoryType);
-            SessionUtil.storeProductsList(session,productsDTOList);
-            SessionUtil.storeSelectedCategory(session,categoryType);
-            response.sendRedirect("productPage.jsp");
 
+    @RequestMapping(method = RequestMethod.POST, value = "/products")
+    protected String doPost(@ModelAttribute("category") String categoryType, Model model) {
+        List<ProductsDTO> productsDTOList = productsService.displayProductsByCategory(categoryType);
+        model.addAttribute("products", productsDTOList);
+        model.addAttribute("categoryDisplay", "Category");
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        return "productPage";
+    }
+
+    public ProductsService getProductsService() {
+        return productsService;
     }
 
 
+    public void setProductsService(ProductsService productsService) {
+        this.productsService = productsService;
+    }
 }

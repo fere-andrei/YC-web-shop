@@ -2,7 +2,7 @@ package filters;
 
 import com.google.common.hash.Hashing;
 import dao.UserDAO;
-import daoImpl.UserDAOImpl;
+import dao.daoImpl.UserDAOImpl;
 import dto.UserDTO;
 
 import javax.servlet.*;

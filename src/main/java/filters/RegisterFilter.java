@@ -1,7 +1,7 @@
 package filters;
 
 import dao.UserDAO;
-import daoImpl.UserDAOImpl;
+import dao.daoImpl.UserDAOImpl;
 import entity.UserEntity;
 
 import javax.servlet.*;

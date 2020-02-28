@@ -1,8 +1,10 @@
 package controller;
 
 import dto.UserDTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import service.RegisterService;
-import service.imp.RegisterServiceImpl;
+import service.impl.RegisterServiceImpl;
 import util.SessionUtil;
 
 import javax.servlet.RequestDispatcher;
@@ -13,12 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+@Controller
 public class RegisterController extends HttpServlet {
     private RegisterService registerService;
-
-    public void init() {
-        registerService = new RegisterServiceImpl();
-    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -43,9 +42,15 @@ public class RegisterController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        SessionUtil.storeSelectedCategory(session,"Category");
+        SessionUtil.storeSelectedCategory(session, "Category");
         response.sendRedirect("register.jsp");
     }
 
+    public RegisterService getRegisterService() {
+        return registerService;
+    }
 
+    public void setRegisterService(RegisterService registerService) {
+        this.registerService = registerService;
+    }
 }
