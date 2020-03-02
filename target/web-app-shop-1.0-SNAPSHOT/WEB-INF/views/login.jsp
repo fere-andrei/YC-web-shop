@@ -47,30 +47,5 @@
 
 </body>
 
-<script type="text/javascript">
-
-    $(document).ready(function() {
-        $("#loginForm").validate({
-            rules: {
-                username: {
-                    required: true,
-                    username: true
-                },
-
-                password: "required",
-            },
-
-            messages: {
-                username: {
-                    required: "Please enter username",
-                    username: "Please enter a valid username "
-                },
-
-                password: "Please enter password"
-            }
-        });
-
-    });
-</script>
 
 </html>

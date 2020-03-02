@@ -34,7 +34,6 @@ var MyCartComponent = (function () {
         addToCart();
         updateCart();
         placeOrder();
-        showOrderDetails();
         selectCategory();
     }
 
@@ -47,10 +46,9 @@ var MyCartComponent = (function () {
                 type: "POST",
                 data: {
                     quantity: quantity,
-                    productId: productId,
-                    cartComponent: "addProduct"
+                    productId: productId
                 },
-                url: "cart",
+                url: "cartCounter",
                 success: function (rest) {
                     var inputStock = parseInt($(Config.MY_CART_VIEW).text());
                     var totalItems = inputStock + parseInt(quantity);
@@ -68,35 +66,35 @@ var MyCartComponent = (function () {
         $(Config.UPDATE_CLASS_ITEMS).click(function (event) {
             var event = $(event.target);
             var productIdFromCart = event.val();
-            var oldQuantity = event.closest(".js-product-from-cart").find(".js-quantity-to-update")[0].defaultValue;
             var newQuantity = event.closest(".js-product-from-cart").find(".js-quantity-to-update").val();
-
-
             var pricePerUnit = event.closest(".js-product-from-cart").find(".js-price-of-item").data("item-price");
 
             $.ajax({
                 type: "POST",
                 data: {
                     newQuantity: newQuantity,
-                    productIdFromCart: productIdFromCart,
-                    cartComponent: "updateProduct"
+                    productIdFromCart: productIdFromCart
                 },
-                url: "cart",
+                url: "cartView",
                 success: function () {
                     if (parseInt(newQuantity) === 0) {
                         event.closest(".js-product-from-cart").remove()
                     } else {
                         //update price item
-                        var finalPriceOfItem = parseFloat(pricePerUnit) * parseInt(newQuantity);
+                        const finalPriceOfItem = parseFloat(pricePerUnit) * parseInt(newQuantity);
                         event.closest(".js-product-from-cart").find(".js-price-of-item").text(finalPriceOfItem);
 
                     }
-                    updateTotalCost($(Config.PRICE_OF_ITEM));
                     updateItemCount($(Config.QUANTITY_TO_UPDATE));
+                    updateTotalCost($(Config.PRICE_OF_ITEM));
 
                 },
-                error: function () {
-                    alert("FAIL");
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(xhr);
+                    console.log(ajaxOptions);
+                    console.log(thrownError);
+
+                    alert(xhr.status);
                 }
             });
         });
@@ -112,7 +110,7 @@ var MyCartComponent = (function () {
                     orderNumber: orderNumber,
                     cartComponent: "orderDetails"
                 },
-                url: "order",
+                url: "placeOrder",
                 success: function () {
                     if ($(Config.TOTAL_COST).text() === "0.0") {
                         alert("Pleas add products in cart");
@@ -136,34 +134,7 @@ var MyCartComponent = (function () {
         });
 
     }
-
-
-   /* var showOrderDetails = function () {
-        $(Config.DETAILS_BUTTON).click(function (event) {
-            var orderItems = $(event.target).val();
-
-            $.ajax({
-                type: "POST",
-                data: {
-                    orderItems: orderItems,
-                    orderComponent: "orderDetails"
-                },
-                url: "displayOrderDetails",
-                success: function () {
-                    //window.open("orderDetails", "_blank", "scrollbars=1,resizable=1,height=300,width=950");
-
-                },
-                error: function (request, status, error) {
-                    console.log(request);
-                    console.log(status);
-                    console.log(error);
-                    alert("FAIL");
-                }
-            });
-        });
-
-    }*/
-
+/*
     var selectCategory = function () {
         $(Config.DROPDOWN_CATEGORY).click(function (event) {
             var category = $(event.target).text();
@@ -173,9 +144,9 @@ var MyCartComponent = (function () {
                 data: {
                     category: category
                 },
-                url: "products",
+                url: "product",
                 success: function () {
-                    window.location.href = "productPage.jsp"
+
                 },
                 error: function () {
                     alert("FAIL");
@@ -183,12 +154,12 @@ var MyCartComponent = (function () {
             });
         });
 
-    }
+    }*/
 
 
     function updateTotalCost(allPrices) {
         let totalCost = 0;
-        for (let i = 0; i < allPrices.size(); i++) {
+        for (let i = 0; i < allPrices.length; i++) {
             totalCost += parseFloat(allPrices[i].text);
         }
         $(Config.TOTAL_COST).text(totalCost);
@@ -196,7 +167,7 @@ var MyCartComponent = (function () {
 
     function updateItemCount(allQuantity) {
         let totalItems = 0;
-        for (let i = 0; i < allQuantity.size(); i++) {
+        for (let i = 0; i < allQuantity.length; i++) {
             totalItems += parseInt(allQuantity[i].value);
         }
         $(Config.MY_CART_VIEW).text(totalItems);

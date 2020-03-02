@@ -6,16 +6,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import service.LogoutService;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpSession;
 
 @Controller
-public class LogoutController{
+public class LogoutController {
     @Autowired
     LogoutService logoutService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/logout")
-    protected String logout(HttpSession session){
+    protected String logout(HttpSession session) {
         session.setAttribute("category", "Category");
         logoutService.logoutUser(session);
         return "redirect:/home";

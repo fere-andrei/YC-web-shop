@@ -3,63 +3,54 @@ package controller;
 import dto.UserDTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import service.CartService;
 import util.SessionUtil;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 
-
-public class CartController extends HttpServlet {
+@Controller
+public class CartController {
 
     @Autowired
     CartService cartService;
 
-    public CartController() {
-        super();
-    }
+    @RequestMapping(method = RequestMethod.GET, value = "/cart")
+    protected String displayCartPage(HttpSession session, Model model) {
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        response.sendRedirect("cartPage.jsp");
-        SessionUtil.storeSelectedCategory(session, "Category");
-        try {
-            UserDTO user = SessionUtil.getCurrentUserFromSession(session);
-            cartService.displayCartAndTotalCost(session, user.getId());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String cartComponent = request.getParameter("cartComponent");
-        HttpSession session = request.getSession();
-
+        model.addAttribute("categoryDisplay", "Category");
         UserDTO user = SessionUtil.getCurrentUserFromSession(session);
+        cartService.displayCartAndTotalCost(session, user.getId());
 
-        if ("updateProduct".equalsIgnoreCase(cartComponent)) {
-            Long itemToBeUpdated = Long.parseLong(request.getParameter("productIdFromCart"));
-            Long newQuantity = Long.parseLong(request.getParameter("newQuantity"));
-
-            cartService.updateItemInCart(session, newQuantity, itemToBeUpdated);
-        } else if (cartComponent != null) {
-            Long productId = Long.parseLong(request.getParameter("productId"));
-            Long quantity = Long.parseLong(request.getParameter("quantity"));
-            cartService.addItemInCart(user, productId, quantity, session);
-        } else {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("productPage.jsp");
-            dispatcher.forward(request, response);
-        }
+        return "cartPage";
     }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/cartView")
+    @ResponseStatus(value = HttpStatus.OK)
+    protected void updateItemsFromCart(
+            @ModelAttribute("productIdFromCart") Long itemToBeUpdated,
+            @ModelAttribute("newQuantity") Long newQuantity,
+            HttpSession session) {
+        UserDTO user = SessionUtil.getCurrentUserFromSession(session);
+        Long numberOfItemsInCart = cartService.updateItemInCart(user, newQuantity, itemToBeUpdated);
+        session.setAttribute("numberOfItems", numberOfItemsInCart);
+    }
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/cartCounter")
+    @ResponseStatus(value = HttpStatus.OK)
+    protected void updateCartCounter(@ModelAttribute("quantity") Long quantity, @ModelAttribute("productId") Long productId, HttpSession session) {
+        UserDTO user = SessionUtil.getCurrentUserFromSession(session);
+        Long numberOfItemsInCart = cartService.addItemInCart(user, productId, quantity);
+        session.setAttribute("numberOfItems", numberOfItemsInCart);
+    }
+
 
     public CartService getCartService() {
         return cartService;

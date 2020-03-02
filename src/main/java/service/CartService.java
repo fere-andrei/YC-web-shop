@@ -1,8 +1,6 @@
 package service;
 
 import dto.UserDTO;
-import entity.MyCartEntity;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
@@ -10,10 +8,10 @@ import javax.servlet.http.HttpSession;
 @Service
 public interface CartService {
 
-    void addItemInCart(UserDTO user, Long productId, Long quantity, HttpSession session);
+    Long addItemInCart(UserDTO user, Long productId, Long quantity);
 
     void displayCartAndTotalCost(HttpSession session,Long userId);
 
-    void updateItemInCart(HttpSession session, Long newQuantity, Long itemToBeUpdated);
+    Long updateItemInCart(UserDTO userDTO, Long newQuantity, Long itemToBeUpdated);
 
 }

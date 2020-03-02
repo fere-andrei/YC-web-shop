@@ -49,7 +49,8 @@ You have to pay : <li id = "js-total-cost">${totalCost}</li>
     <button type = "submit" id="js-place-order" name="orderButton" value="${myCartItems}">Place Order</button>
 </c:if>
 
-<div id = "hidden-message" style="visibility: hidden">Your order is COMPLETED, Thank you for using this shop!
+<div id = "hidden-message" style="visibility: hidden">
+    Your order is COMPLETED, Thank you for using this shop!
     <div class="loader"></div>
 </div>
 

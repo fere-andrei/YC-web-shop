@@ -32,35 +32,8 @@ public class OrderController {
         return "orderPage";
     }
 
-
-    //TODO TWO METHODS ONE FOR DETAILS ONE FOR PLACE ORDER
-/*    @RequestMapping(method = RequestMethod.POST, value = "/order")
-    protected void doPost(HttpSession session, Model model){
-        String orderComponent = request.getParameter("orderComponent");
-        UserDTO userDTO = (UserDTO) session.getAttribute("currentUser");
-
-            if ("orderDetails".equalsIgnoreCase(orderComponent)) {
-                Long orderNumber = Long.parseLong(request.getParameter("orderItems"));
-                List<OrderDetailsDTO> orderDetailsDTOList = orderService.getOrderDetailsToDisplay(userDTO, orderNumber);
-                SessionUtil.storeOrderDetailsList(session, orderDetailsDTOList);
-
-                //PLACE ORDER LOGIC ->
-            } else {
-                response.sendRedirect("productPage.jsp");
-                orderService.placeOrder(userDTO);
-                SessionUtil.storeNumberOfItemsInCart(session, 0L);
-            }
-    }*/
-
-
-/*    @RequestMapping(method = RequestMethod.GET, value = "/orderDetails")
-    protected String displayOrderDetails(@RequestParam("orderItems") Long orderNumber, HttpSession session, Model model) {
-
-        return "orderDetails";
-    }*/
-
     @RequestMapping(method = RequestMethod.POST, value = "/displayOrderDetails")
-    protected String redirectToPopUpOrders( @RequestParam String orderNumber, HttpSession session, Model model) {
+    protected String redirectToPopUpOrders(@RequestParam String orderNumber, HttpSession session, Model model) {
         UserDTO userDTO = (UserDTO) session.getAttribute("currentUser");
 
         List<OrderDetailsDTO> orderDetailsDTOList = orderService.getOrderDetailsToDisplay(userDTO, Long.parseLong(orderNumber));
@@ -69,6 +42,16 @@ public class OrderController {
         return "orderDetails";
     }
 
+    @RequestMapping(method = RequestMethod.POST, value = "/placeOrder")
+    protected String placeOrder(@RequestParam String orderNumber, HttpSession session, Model model) {
+        UserDTO userDTO = (UserDTO) session.getAttribute("currentUser");
+        orderService.placeOrder(userDTO);
+        session.setAttribute("numberOfItems", 0L);
+
+        return "productPage";
+    }
+
+
     public OrderService getOrderService() {
         return orderService;
     }
@@ -76,4 +59,5 @@ public class OrderController {
     public void setOrderService(OrderService orderService) {
         this.orderService = orderService;
     }
+
 }

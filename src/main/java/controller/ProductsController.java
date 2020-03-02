@@ -27,9 +27,9 @@ public class ProductsController {
         return "productPage";
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/products")
-    protected String displayProductsByCategory(@ModelAttribute("category") String categoryType, Model model) {
-        List<ProductsDTO> productsDTOList = productsService.displayProductsByCategory(categoryType);
+    @RequestMapping(method = RequestMethod.GET, value = "/productCategory")
+    protected String displayProductsByCategory(@ModelAttribute("categoryItems") String selectedCategory, Model model) {
+        List<ProductsDTO> productsDTOList = productsService.displayProductsByCategory(selectedCategory);
         model.addAttribute("products", productsDTOList);
         model.addAttribute("categoryDisplay", "Category");
 
@@ -39,7 +39,6 @@ public class ProductsController {
     public ProductsService getProductsService() {
         return productsService;
     }
-
 
     public void setProductsService(ProductsService productsService) {
         this.productsService = productsService;
