@@ -138,7 +138,7 @@ var MyCartComponent = (function () {
     }
 
 
-    var showOrderDetails = function () {
+   /* var showOrderDetails = function () {
         $(Config.DETAILS_BUTTON).click(function (event) {
             var orderItems = $(event.target).val();
 
@@ -148,18 +148,21 @@ var MyCartComponent = (function () {
                     orderItems: orderItems,
                     orderComponent: "orderDetails"
                 },
-                url: "order",
+                url: "displayOrderDetails",
                 success: function () {
-                    window.open("orderDetails.jsp", "_blank", "scrollbars=1,resizable=1,height=300,width=950");
+                    //window.open("orderDetails", "_blank", "scrollbars=1,resizable=1,height=300,width=950");
 
                 },
-                error: function () {
+                error: function (request, status, error) {
+                    console.log(request);
+                    console.log(status);
+                    console.log(error);
                     alert("FAIL");
                 }
             });
         });
 
-    }
+    }*/
 
     var selectCategory = function () {
         $(Config.DROPDOWN_CATEGORY).click(function (event) {

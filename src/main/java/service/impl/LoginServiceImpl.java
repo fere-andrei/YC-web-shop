@@ -31,18 +31,17 @@ public class LoginServiceImpl implements LoginService {
         UserDTO userDTO = userDAO.checkLogin(username, encryptedPassword);
         UserEntity userEntity = UserTransformer.convertToEntity(userDTO);
 
-        String destPage = "login.jsp";
+        String destPage = "login";
         if (null != userDTO) {
             mergeUserWithGuest(session, userDTO, userEntity);
             Long numberOfItemsInCart = myCartDAO.findNumberOfItems(userDTO.getId());
             SessionUtil.storeCurrentUser(session, userDTO);
             SessionUtil.storeNumberOfItemsInCart(session, numberOfItemsInCart);
-            destPage = "home";
+            destPage = "homeView";
             return new Pair<>(destPage, null);
         } else {
             String message = "Invalid email/password";
             return new Pair<>(destPage, message);
-            //request.setAttribute("message", message);
         }
 
     }

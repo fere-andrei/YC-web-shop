@@ -28,7 +28,7 @@ public class ProductsController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/products")
-    protected String doPost(@ModelAttribute("category") String categoryType, Model model) {
+    protected String displayProductsByCategory(@ModelAttribute("category") String categoryType, Model model) {
         List<ProductsDTO> productsDTOList = productsService.displayProductsByCategory(categoryType);
         model.addAttribute("products", productsDTOList);
         model.addAttribute("categoryDisplay", "Category");

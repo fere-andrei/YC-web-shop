@@ -9,14 +9,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 
-<div style="background: #E0E0E0; height: 65px; padding: 5px; ">
-    <div style="float: left; " >
-        <h1>YC Shop</h1>
-    </div>
-
-    <img src="${pageContext.request.contextPath}/resources/img/app-icon.png" style="width: 55px; height: 55px; padding-bottom: inherit">
-</div>
-
+<jsp:include page="_header.jsp"></jsp:include>
+<jsp:include page="_menu.jsp"></jsp:include>
 <head>
     <title>Order Details</title>
 

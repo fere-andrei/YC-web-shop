@@ -38,7 +38,9 @@
                     <td><c:out value="${item.orderDate}" /></td>
                     <td><c:out value="${item.totalCost}"/>$</td>
                     <td>
-                        <button type = "submit" class="js-show-order-details" id="js-show-details" name="orderNUmber" value="${item.orderNumber}">Show details</button>
+                        <form action="${pageContext.request.contextPath}/displayOrderDetails" method="post">
+                        <button type = "submit" class="js-show-order-details" id="js-show-details" name="orderNumber" value="${item.orderNumber}">Show details</button>
+                        </form>
                     </td>
                 </tr>
             </c:forEach>
