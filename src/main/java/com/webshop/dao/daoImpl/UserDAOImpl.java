@@ -4,11 +4,7 @@ package com.webshop.dao.daoImpl;
 import com.webshop.dao.UserDAO;
 import com.webshop.dto.UserDTO;
 import com.webshop.entity.UserEntity;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.type.TimestampType;
 import com.webshop.transformer.UserTransformer;
-import com.webshop.util.HibernateUtil;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

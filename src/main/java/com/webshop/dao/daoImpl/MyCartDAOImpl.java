@@ -3,12 +3,9 @@ package com.webshop.dao.daoImpl;
 
 import com.webshop.dao.MyCartDAO;
 import com.webshop.entity.MyCartEntity;
-import org.hibernate.Session;
-import com.webshop.util.HibernateUtil;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MyCartDAOImpl extends CommonDAOImpl implements MyCartDAO {

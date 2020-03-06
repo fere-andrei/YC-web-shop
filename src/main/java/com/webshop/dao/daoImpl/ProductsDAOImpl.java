@@ -2,8 +2,6 @@ package com.webshop.dao.daoImpl;
 
 import com.webshop.dao.ProductsDAO;
 import com.webshop.entity.ProductsEntity;
-import org.hibernate.Session;
-import com.webshop.util.HibernateUtil;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
