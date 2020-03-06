@@ -1,4 +1,4 @@
-<%--@elvariable id="" type="entity.UserDTO"--%>
+<%--@elvariable id="" type="com.webshop.entity.UserDTO"--%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" session="true" %>
 

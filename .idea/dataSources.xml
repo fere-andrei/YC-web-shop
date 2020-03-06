@@ -7,7 +7,7 @@
       <imported>true</imported>
       <remarks>Hibernate
 
-D:/workspace-webShop/web-app-shop/src/main/resources/META-INF/hibernate.cfg.xml</remarks>
+D:/workspace-webShop/web-app-shop/src/main/resources/META-INF/persistence.xml</remarks>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://localhost:3306</jdbc-url>
     </data-source>

@@ -21,7 +21,7 @@
     <div class="card card-body">
         <h1>Login Form</h1>
         <form action="<%=request.getContextPath()%>/login" method="post" id="loginForm">
-            <a style="color: green">${succesMessage}</a>
+            <a style="color: green">${successMessage}</a>
             <%--@declare id="username"--%><%--@declare id="password"--%>
                 <div class="form-group">
                     <label for="username">User Name:</label> <input type="text"

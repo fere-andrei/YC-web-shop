@@ -9,67 +9,67 @@
 
 
     <!-- Service -->
-    <bean id="cartService" class="service.impl.CartServiceImpl">
+    <bean id="cartService" class="com.webshop.service.impl.CartServiceImpl">
         <property name="productsDao" ref="productsDAO"/>
-        <property name="myCartDAO" ref="myCartDAO"/>
+        <property name="myCartDao" ref="myCartDAO"/>
     </bean>
 
-    <bean id="registerService" class="service.impl.RegisterServiceImpl">
+    <bean id="registerService" class="com.webshop.service.impl.RegisterServiceImpl">
         <property name="userDao" ref="userDAO"/>
     </bean>
 
-    <bean id="loginService" class="service.impl.LoginServiceImpl">
+    <bean id="loginService" class="com.webshop.service.impl.LoginServiceImpl">
         <property name="myCartDAO" ref="myCartDAO"/>
         <property name="userDAO" ref="userDAO"/>
     </bean>
 
-    <bean id="orderService" class="service.impl.OrderServiceImpl">
+    <bean id="orderService" class="com.webshop.service.impl.OrderServiceImpl">
         <property name="myCartDAO" ref="myCartDAO"/>
         <property name="orderDAO" ref="orderDAO"/>
         <property name="orderDetailsDAO" ref="orderDetailsDAO"/>
         <property name="productsDAO" ref="productsDAO"/>
     </bean>
 
-    <bean id="productsService" class="service.impl.ProductsServiceImpl" lazy-init="false">
+    <bean id="productsService" class="com.webshop.service.impl.ProductsServiceImpl" lazy-init="false">
         <property name="productsDao" ref="productsDAO"/>
     </bean>
 
-    <bean id="homeService" class="service.impl.HomeServiceImpl">
+    <bean id="homeService" class="com.webshop.service.impl.HomeServiceImpl">
         <property name="productsDAO" ref="productsDAO"/>
         <property name="myCartDAO" ref="myCartDAO"/>
         <property name="userDAO" ref="userDAO"/>
     </bean>
 
-    <bean id="logoutService" class="service.impl.LogoutServiceImpl">
+    <bean id="logoutService" class="com.webshop.service.impl.LogoutServiceImpl">
     </bean>
 
-    <!-- dao beans -->
-    <bean id="productsDAO" class="dao.daoImpl.ProductsDAOImpl" lazy-init="false"/>
-    <bean id="myCartDAO" class="dao.daoImpl.MyCartDAOImpl"/>
-    <bean id="userDAO" class="dao.daoImpl.UserDAOImpl"/>
-    <bean id="orderDAO" class="dao.daoImpl.OrderDAOImpl"/>
-    <bean id="orderDetailsDAO" class="dao.daoImpl.OrderDetailsDAOImpl"/>
+    <!-- com.webshop.dao beans -->
+    <bean id="productsDAO" class="com.webshop.dao.daoImpl.ProductsDAOImpl" lazy-init="false"/>
+    <bean id="myCartDAO" class="com.webshop.dao.daoImpl.MyCartDAOImpl"/>
+    <bean id="userDAO" class="com.webshop.dao.daoImpl.UserDAOImpl"/>
+    <bean id="orderDAO" class="com.webshop.dao.daoImpl.OrderDAOImpl"/>
+    <bean id="orderDetailsDAO" class="com.webshop.dao.daoImpl.OrderDetailsDAOImpl"/>
 
 <!--    &lt;!&ndash;    Controller's    &ndash;&gt;
-    <bean id="cartController" class="controller.CartController">
+    <bean id="cartController" class="com.webshop.controller.CartController">
         <property name="cartService" ref="cartService"/>
     </bean>
-    <bean id="homeController" class="controller.HomeController">
+    <bean id="homeController" class="com.webshop.controller.HomeController">
         <property name="homeService" ref="homeService"/>
     </bean>
-    <bean id="loginController" class="controller.LoginController">
+    <bean id="loginController" class="com.webshop.controller.LoginController">
         <property name="loginService" ref="loginService"/>
     </bean>
-    <bean id="logoutController" class="controller.LogoutController">
+    <bean id="logoutController" class="com.webshop.controller.LogoutController">
         <property name="logoutService" ref="logoutService"/>
     </bean>
-    <bean id="registerController" class="controller.RegisterController">
+    <bean id="registerController" class="com.webshop.controller.RegisterController">
         <property name="registerService" ref="registerService"/>
     </bean>
-    <bean id="orderController" class="controller.OrderController">
+    <bean id="orderController" class="com.webshop.controller.OrderController">
         <property name="orderService" ref="orderService"/>
     </bean>
-    <bean id="productsController" class="controller.ProductsController">
+    <bean id="productsController" class="com.webshop.controller.ProductsController">
         <property name="productsService" ref="productsService"/>
     </bean>-->
 

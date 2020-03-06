@@ -4,17 +4,20 @@
     <facet type="jpa" name="JPA">
       <configuration>
         <setting name="validation-enabled" value="true" />
+        <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
-          <factory-entry name="Entities" />
-          <factory-entry name="web-app-shop" value="7979c7cc-d975-4b4b-b65b-732f5c5d08b7" />
+          <factory-entry name="Entities" value="7979c7cc-d975-4b4b-b65b-732f5c5d08b7" />
+          <factory-entry name="entityManagerFactoryBean" />
+          <factory-entry name="web-app-shop" />
         </datasource-mapping>
         <naming-strategy-map />
-        <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/resources/hibernate.cfg.xml" />
       </configuration>
     </facet>
     <facet type="hibernate" name="Hibernate">
       <configuration>
-        <datasource-map />
+        <datasource-map>
+          <unit-entry name="sessionFactory" />
+        </datasource-map>
         <naming-strategy-map />
       </configuration>
     </facet>
