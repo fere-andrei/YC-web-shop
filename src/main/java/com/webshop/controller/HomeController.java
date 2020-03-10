@@ -35,12 +35,4 @@ public class HomeController {
         return "homeView";
     }
 
-    public HomeService getHomeService() {
-        return homeService;
-    }
-
-    public void setHomeService(HomeService homeService) {
-        this.homeService = homeService;
-    }
-
 }

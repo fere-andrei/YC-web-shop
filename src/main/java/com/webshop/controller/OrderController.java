@@ -24,23 +24,29 @@ public class OrderController {
     @RequestMapping(method = RequestMethod.GET, value = "/order")
     protected String displayOrders(HttpSession session, Model model) {
 
-        model.addAttribute("category", "Category");
+
         UserDTO userDTO = (UserDTO) session.getAttribute("currentUser");
-
-
-        List<OrderDTO> orderDTOList = orderService.displayAllOrders(userDTO);
-        model.addAttribute("orderItems", orderDTOList);
-        return "orderPage";
+        if (userDTO.getUserStatus() == 2) {
+            return "redirect:/home";
+        } else {
+            model.addAttribute("category", "Category");
+            List<OrderDTO> orderDTOList = orderService.displayAllOrders(userDTO);
+            model.addAttribute("orderItems", orderDTOList);
+            return "orderPage";
+        }
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/displayOrderDetails")
     protected String redirectToPopUpOrders(@RequestParam String orderNumber, HttpSession session, Model model) {
         UserDTO userDTO = (UserDTO) session.getAttribute("currentUser");
+        if (userDTO.getUserStatus()!=2) {
+            model.addAttribute("categoryDisplay", "Category");
 
-        List<OrderDetailsDTO> orderDetailsDTOList = orderService.getOrderDetailsToDisplay(userDTO, Long.parseLong(orderNumber));
-        model.addAttribute("orderDetailsList", orderDetailsDTOList);
+            List<OrderDetailsDTO> orderDetailsDTOList = orderService.getOrderDetailsToDisplay(userDTO, Long.parseLong(orderNumber));
+            model.addAttribute("orderDetailsList", orderDetailsDTOList);
 
-        return "orderDetails";
+            return "orderDetails";
+        } else return "redirect:/home";
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/placeOrder")
@@ -48,17 +54,9 @@ public class OrderController {
         UserDTO userDTO = (UserDTO) session.getAttribute("currentUser");
         orderService.placeOrder(userDTO);
         session.setAttribute("numberOfItems", 0L);
+        model.addAttribute("categoryDisplay", "Category");
 
         return "productPage";
-    }
-
-
-    public OrderService getOrderService() {
-        return orderService;
-    }
-
-    public void setOrderService(OrderService orderService) {
-        this.orderService = orderService;
     }
 
 }

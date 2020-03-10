@@ -36,11 +36,4 @@ public class ProductsController {
         return "productPage";
     }
 
-    public ProductsService getProductsService() {
-        return productsService;
-    }
-
-    public void setProductsService(ProductsService productsService) {
-        this.productsService = productsService;
-    }
 }

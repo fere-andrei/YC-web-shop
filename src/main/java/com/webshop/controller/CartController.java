@@ -56,12 +56,4 @@ public class CartController {
         session.setAttribute("numberOfItems", numberOfItemsInCart);
     }
 
-
-    public CartService getCartService() {
-        return cartService;
-    }
-
-    public void setCartService(CartService cartService) {
-        this.cartService = cartService;
-    }
 }

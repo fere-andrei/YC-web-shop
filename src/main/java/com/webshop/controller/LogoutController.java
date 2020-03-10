@@ -20,11 +20,4 @@ public class LogoutController {
         return "redirect:/home";
     }
 
-    public LogoutService getLogoutService() {
-        return logoutService;
-    }
-
-    public void setLogoutService(LogoutService logoutService) {
-        this.logoutService = logoutService;
-    }
 }

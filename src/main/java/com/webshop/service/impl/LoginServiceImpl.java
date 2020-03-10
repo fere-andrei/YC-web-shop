@@ -28,10 +28,7 @@ public class LoginServiceImpl implements LoginService {
     @Transactional
     public Pair<String, String> authenticate(HttpSession session, String username, String password) {
 
-        final String encryptedPassword = Hashing.sha256()
-                .hashString(password, StandardCharsets.UTF_8)
-                .toString();
-        UserDTO userDTO = userDAO.checkLogin(username, encryptedPassword);
+        UserDTO userDTO = userDAO.checkLogin(username, password);
         UserEntity userEntity = UserTransformer.convertToEntity(userDTO);
 
         String destPage = "login";

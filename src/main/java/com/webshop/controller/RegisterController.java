@@ -2,6 +2,7 @@ package com.webshop.controller;
 
 import com.webshop.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,6 +14,9 @@ import com.webshop.service.RegisterService;
 public class RegisterController {
     @Autowired
     private RegisterService registerService;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     //TODO MAKE DTO TO MAP THE NEW USER
     @RequestMapping(method = RequestMethod.POST, value = "/register")
@@ -26,6 +30,7 @@ public class RegisterController {
         userDTO.setPassword(password);
         userDTO.setFullName(fullname);
         userDTO.setAddress(address);
+        userDTO.setPassword(bCryptPasswordEncoder.encode(userDTO.getPassword()));
 
         //TODO where send the message,redirect to login with message as param to be displayed after registration
         if (errMsg.isEmpty()) {
@@ -42,11 +47,4 @@ public class RegisterController {
         return "register";
     }
 
-    public RegisterService getRegisterService() {
-        return registerService;
-    }
-
-    public void setRegisterService(RegisterService registerService) {
-        this.registerService = registerService;
-    }
 }

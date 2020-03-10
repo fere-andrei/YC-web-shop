@@ -10,7 +10,7 @@ public class UserTransformer {
         }
         UserDTO userDTO = new UserDTO();
         userDTO.setAddress(userEntity.getAddress());
-        userDTO.setAdminStatus(userEntity.getUserStatus());
+        userDTO.setUserStatus(userEntity.getUserStatus());
         userDTO.setFullName(userEntity.getFullName());
         userDTO.setId(userEntity.getId());
         userDTO.setPassword(userEntity.getPassword());
@@ -26,7 +26,7 @@ public class UserTransformer {
         }
         UserEntity userEntity = new UserEntity();
         userEntity.setAddress(userDTO.getAddress());
-        userEntity.setUserStatus(userDTO.getAdminStatus());
+        userEntity.setUserStatus(userDTO.getUserStatus());
         userEntity.setFullName(userDTO.getFullName());
         userEntity.setId(userDTO.getId());
         userEntity.setPassword(userDTO.getPassword());

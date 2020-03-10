@@ -16,6 +16,8 @@
 
     <bean id="registerService" class="com.webshop.service.impl.RegisterServiceImpl">
         <property name="userDao" ref="userDAO"/>
+        <!--<property name="bCryptPasswordEncoder" ref="passwordEncoder"/>-->
+        <property name="roleDAO" ref="roleDAO"/>
     </bean>
 
     <bean id="loginService" class="com.webshop.service.impl.LoginServiceImpl">
@@ -49,28 +51,7 @@
     <bean id="userDAO" class="com.webshop.dao.daoImpl.UserDAOImpl"/>
     <bean id="orderDAO" class="com.webshop.dao.daoImpl.OrderDAOImpl"/>
     <bean id="orderDetailsDAO" class="com.webshop.dao.daoImpl.OrderDetailsDAOImpl"/>
+    <bean id="roleDAO" class="com.webshop.dao.daoImpl.RoleDAOImpl"/>
 
-<!--    &lt;!&ndash;    Controller's    &ndash;&gt;
-    <bean id="cartController" class="com.webshop.controller.CartController">
-        <property name="cartService" ref="cartService"/>
-    </bean>
-    <bean id="homeController" class="com.webshop.controller.HomeController">
-        <property name="homeService" ref="homeService"/>
-    </bean>
-    <bean id="loginController" class="com.webshop.controller.LoginController">
-        <property name="loginService" ref="loginService"/>
-    </bean>
-    <bean id="logoutController" class="com.webshop.controller.LogoutController">
-        <property name="logoutService" ref="logoutService"/>
-    </bean>
-    <bean id="registerController" class="com.webshop.controller.RegisterController">
-        <property name="registerService" ref="registerService"/>
-    </bean>
-    <bean id="orderController" class="com.webshop.controller.OrderController">
-        <property name="orderService" ref="orderService"/>
-    </bean>
-    <bean id="productsController" class="com.webshop.controller.ProductsController">
-        <property name="productsService" ref="productsService"/>
-    </bean>-->
 
 </beans>

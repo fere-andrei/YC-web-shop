@@ -2,6 +2,7 @@ package com.webshop.controller;
 
 import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,6 +17,9 @@ public class LoginController {
     @Autowired
     LoginService loginService;
 
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @RequestMapping(method = RequestMethod.GET, value = "/login")
     protected String doGet(HttpSession session, Model model) {
         model.addAttribute("category", "Category");
@@ -27,7 +31,9 @@ public class LoginController {
     protected String doPost(@ModelAttribute("username") String username, @ModelAttribute("password") String password, HttpSession session, Model model) {
 
         //TODO USE AUTHENTICATE WITHOUT SESSION
+        password = bCryptPasswordEncoder.encode(password);
         Pair<String, String> messageAndUrlPage = loginService.authenticate(session, username, password);
+        model.addAttribute("categoryDisplay", "Category");
         model.addAttribute("message", messageAndUrlPage.getValue());
         return messageAndUrlPage.getKey();
     }
@@ -36,7 +42,4 @@ public class LoginController {
         return loginService;
     }
 
-    public void setLoginService(LoginService loginService) {
-        this.loginService = loginService;
-    }
 }

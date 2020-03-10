@@ -73,7 +73,7 @@ public class HomeServiceImpl implements HomeService {
                 .hashString("guestPassword", StandardCharsets.UTF_8)
                 .toString();
         userDTO.setPassword(encryptedPassword);
-        userDTO.setAdminStatus(2);
+        userDTO.setUserStatus(2);
         userDTO.setAddress("");
         userDTO.setRegisterDate(new Date());
         return UserTransformer.convertToEntity(userDTO);
