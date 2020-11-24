@@ -1,0 +1,9 @@
+diff a/web-app-shop.iml b/web-app-shop.iml	(rejected hunks)
+@@ -8,6 +8,7 @@
+         <datasource-mapping>
+           <factory-entry name="Entities" value="7979c7cc-d975-4b4b-b65b-732f5c5d08b7" />
+           <factory-entry name="entityManagerFactoryBean" />
++          <factory-entry name="myJpaPersistenceUnit" value="853dd01d-b5c6-49b2-b219-83b8f04dc942" />
+           <factory-entry name="web-app-shop" />
+         </datasource-mapping>
+         <naming-strategy-map />

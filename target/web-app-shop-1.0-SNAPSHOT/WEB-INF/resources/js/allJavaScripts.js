@@ -134,27 +134,7 @@ var MyCartComponent = (function () {
         });
 
     }
-/*
-    var selectCategory = function () {
-        $(Config.DROPDOWN_CATEGORY).click(function (event) {
-            var category = $(event.target).text();
 
-            $.ajax({
-                type: "POST",
-                data: {
-                    category: category
-                },
-                url: "product",
-                success: function () {
-
-                },
-                error: function () {
-                    alert("FAIL");
-                }
-            });
-        });
-
-    }*/
 
 
     function updateTotalCost(allPrices) {

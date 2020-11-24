@@ -71,15 +71,6 @@
         </dependency>
 
 
-        <!-- MySQL JDBC driver -->
-        <!-- http://mvnrepository.com/artifact/mysql/mysql-connector-java -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.18</version>
-        </dependency>
-
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -149,7 +140,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.14</version>
+            <version>8.0.20</version>
             <scope>runtime</scope>
         </dependency>
 

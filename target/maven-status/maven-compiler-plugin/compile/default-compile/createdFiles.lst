@@ -41,7 +41,6 @@ com\webshop\service\impl\CartServiceImpl.class
 com\webshop\dao\MyCartDAO.class
 com\webshop\controller\CartController.class
 com\webshop\dto\ProductsDTO.class
-com\webshop\util\HibernateUtil.class
 com\webshop\controller\LoginController.class
 com\webshop\dao\daoImpl\OrderDAOImpl.class
 com\webshop\transformer\ProductsTransformer.class
