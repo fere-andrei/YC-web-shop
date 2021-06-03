@@ -1,0 +1,664 @@
+Index: pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd\">\r\n\r\n    <modelVersion>4.0.0</modelVersion>\r\n    <packaging>war</packaging>\r\n\r\n    <name>web-app-shop</name>\r\n    <groupId>org.example</groupId>\r\n    <artifactId>web-app-shop</artifactId>\r\n    <version>1.0-SNAPSHOT</version>\r\n\r\n    <build>\r\n        <plugins>\r\n            <plugin>\r\n                <groupId>org.apache.tomcat.maven</groupId>\r\n                <artifactId>tomcat6-maven-plugin</artifactId>\r\n                <version>2.2</version>\r\n            </plugin>\r\n            <plugin>\r\n                <groupId>org.apache.tomcat.maven</groupId>\r\n                <artifactId>tomcat7-maven-plugin</artifactId>\r\n                <version>2.2</version>\r\n                <configuration>\r\n                    <port>8080</port>\r\n                </configuration>\r\n            </plugin>\r\n            <plugin>\r\n                <groupId>org.apache.maven.plugins</groupId>\r\n                <artifactId>maven-compiler-plugin</artifactId>\r\n                <configuration>\r\n                    <source>8</source>\r\n                    <target>8</target>\r\n                </configuration>\r\n            </plugin>\r\n        </plugins>\r\n    </build>\r\n\r\n    <properties>\r\n        <spring.version>5.1.5.RELEASE</spring.version>\r\n        <hibernate.version>5.4.1.Final</hibernate.version>\r\n    </properties>\r\n\r\n    <dependencies>\r\n        <dependency>\r\n            <groupId>javax.servlet</groupId>\r\n            <artifactId>javax.servlet-api</artifactId>\r\n            <version>4.0.1</version>\r\n            <scope>provided</scope>\r\n        </dependency>\r\n\r\n        <dependency>\r\n            <groupId>jstl</groupId>\r\n            <artifactId>jstl</artifactId>\r\n            <version>1.2</version>\r\n        </dependency>\r\n\r\n        <dependency>\r\n            <groupId>org.json</groupId>\r\n            <artifactId>json</artifactId>\r\n            <version>20190722</version>\r\n        </dependency>\r\n\r\n        <dependency>\r\n            <groupId>javax</groupId>\r\n            <artifactId>javaee-api</artifactId>\r\n            <version>6.0</version>\r\n            <scope>provided</scope>\r\n        </dependency>\r\n\r\n\r\n        <!-- MySQL JDBC driver -->\r\n        <!-- http://mvnrepository.com/artifact/mysql/mysql-connector-java -->\r\n        <dependency>\r\n            <groupId>mysql</groupId>\r\n            <artifactId>mysql-connector-java</artifactId>\r\n            <version>8.0.18</version>\r\n        </dependency>\r\n\r\n\r\n        <dependency>\r\n            <groupId>org.projectlombok</groupId>\r\n            <artifactId>lombok</artifactId>\r\n            <version>1.16.8</version>\r\n            <scope>provided</scope>\r\n        </dependency>\r\n\r\n        <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->\r\n        <dependency>\r\n            <groupId>com.google.guava</groupId>\r\n            <artifactId>guava</artifactId>\r\n            <version>19.0</version>\r\n        </dependency>\r\n\r\n        <dependency>\r\n            <groupId>org.springframework</groupId>\r\n            <artifactId>spring-context</artifactId>\r\n            <version>${spring.version}</version>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.springframework</groupId>\r\n            <artifactId>spring-webmvc</artifactId>\r\n            <version>${spring.version}</version>\r\n        </dependency>\r\n\r\n        <dependency>\r\n            <groupId>org.springframework</groupId>\r\n            <artifactId>spring-orm</artifactId>\r\n            <version>${spring.version}</version>\r\n        </dependency>\r\n        <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->\r\n        <dependency>\r\n            <groupId>org.springframework.data</groupId>\r\n            <artifactId>spring-data-jpa</artifactId>\r\n            <version>2.1.8.RELEASE</version>\r\n        </dependency>\r\n\r\n\r\n        <dependency>\r\n            <groupId>org.hibernate</groupId>\r\n            <artifactId>hibernate-core</artifactId>\r\n            <version>${hibernate.version}</version>\r\n        </dependency>\r\n\r\n        <dependency>\r\n            <groupId>mysql</groupId>\r\n            <artifactId>mysql-connector-java</artifactId>\r\n            <version>8.0.14</version>\r\n            <scope>runtime</scope>\r\n        </dependency>\r\n\r\n\r\n\r\n        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2 -->\r\n        <dependency>\r\n            <groupId>org.apache.commons</groupId>\r\n            <artifactId>commons-dbcp2</artifactId>\r\n            <version>2.0</version>\r\n        </dependency>\r\n\r\n\r\n    </dependencies>\r\n</project>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- pom.xml	(revision 79f63da74f82a68853c353cc2257d5790944a8d3)
++++ pom.xml	(date 1622746368734)
+@@ -49,6 +49,7 @@
+             <scope>provided</scope>
+         </dependency>
+ 
++        
+         <dependency>
+             <groupId>jstl</groupId>
+             <artifactId>jstl</artifactId>
+Index: src/main/java/com/webshop/service/impl/ProductsServiceImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.webshop.service.impl;\r\n\r\nimport com.webshop.dao.ProductsDAO;\r\nimport com.webshop.dto.ProductsDTO;\r\nimport com.webshop.entity.ProductsEntity;\r\nimport com.webshop.service.ProductsService;\r\nimport com.webshop.transformer.ProductsTransformer;\r\nimport org.springframework.transaction.annotation.Transactional;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class ProductsServiceImpl implements ProductsService {\r\n    ProductsDAO productsDao;\r\n\r\n    @Override\r\n    @Transactional\r\n    public List<ProductsDTO> displayProducts() {\r\n        List<ProductsEntity> productsEntityList = productsDao.findAvailableProducts();\r\n        List<ProductsDTO> productsDTOList = new ArrayList<>();\r\n        for(ProductsEntity productsEntity : productsEntityList){\r\n            productsDTOList.add(ProductsTransformer.convertToDto(productsEntity));\r\n        }\r\n        return productsDTOList;\r\n    }\r\n    //TODO AICI DTO\r\n    @Override\r\n    @Transactional\r\n    public List<ProductsDTO> displayProductsByCategory(String categoryType) {\r\n        List<ProductsEntity> products = productsDao.findAvailableProductsByCategory(categoryType);\r\n        List<ProductsDTO> productsDTOList = new ArrayList<>();\r\n        for (ProductsEntity product : products) {\r\n            productsDTOList.add(ProductsTransformer.convertToDto(product));\r\n        }\r\n        return productsDTOList;\r\n    }\r\n\r\n    public ProductsDAO getProductsDao() {\r\n        return productsDao;\r\n    }\r\n\r\n    public void setProductsDao(ProductsDAO productsDao) {\r\n        this.productsDao = productsDao;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/com/webshop/service/impl/ProductsServiceImpl.java	(revision 79f63da74f82a68853c353cc2257d5790944a8d3)
++++ src/main/java/com/webshop/service/impl/ProductsServiceImpl.java	(date 1606340568226)
+@@ -18,11 +18,12 @@
+     public List<ProductsDTO> displayProducts() {
+         List<ProductsEntity> productsEntityList = productsDao.findAvailableProducts();
+         List<ProductsDTO> productsDTOList = new ArrayList<>();
+-        for(ProductsEntity productsEntity : productsEntityList){
++        for (ProductsEntity productsEntity : productsEntityList) {
+             productsDTOList.add(ProductsTransformer.convertToDto(productsEntity));
+         }
+         return productsDTOList;
+     }
++
+     //TODO AICI DTO
+     @Override
+     @Transactional
+@@ -35,6 +36,18 @@
+         return productsDTOList;
+     }
+ 
++    @Override
++    public List<ProductsDTO> firstProductsCarousel() {
++        List<ProductsDTO> firstCarousel = displayProducts();
++        return firstCarousel.subList(0,3);
++    }
++
++    @Override
++    public List<ProductsDTO> secondProductsCarousel() {
++        List<ProductsDTO> firstCarousel = displayProducts();
++        return firstCarousel.subList(3,6);
++    }
++
+     public ProductsDAO getProductsDao() {
+         return productsDao;
+     }
+Index: src/main/java/com/webshop/service/ProductsService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.webshop.service;\r\n\r\nimport com.webshop.dto.ProductsDTO;\r\nimport org.springframework.stereotype.Service;\r\n\r\nimport java.util.List;\r\n\r\n\r\npublic interface ProductsService {\r\n\r\n    List<ProductsDTO> displayProducts();\r\n\r\n    List<ProductsDTO> displayProductsByCategory(String categoryType);\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/com/webshop/service/ProductsService.java	(revision 79f63da74f82a68853c353cc2257d5790944a8d3)
++++ src/main/java/com/webshop/service/ProductsService.java	(date 1606340363420)
+@@ -12,4 +12,9 @@
+ 
+     List<ProductsDTO> displayProductsByCategory(String categoryType);
+ 
++    List<ProductsDTO> firstProductsCarousel();
++
++    List<ProductsDTO> secondProductsCarousel();
++
++
+ }
+Index: src/main/java/com/webshop/controller/HomeController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.webshop.controller;\r\n\r\nimport com.webshop.dto.UserDTO;\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\n\r\nimport org.springframework.stereotype.Controller;\r\nimport org.springframework.ui.Model;\r\nimport org.springframework.web.bind.annotation.RequestMapping;\r\nimport org.springframework.web.bind.annotation.RequestMethod;\r\nimport com.webshop.service.HomeService;\r\n\r\nimport javax.servlet.http.HttpSession;\r\nimport java.util.List;\r\n\r\n@Controller\r\npublic class HomeController {\r\n\r\n    @Autowired\r\n    private HomeService homeService;\r\n\r\n    @RequestMapping(method = RequestMethod.GET, value = \"/home\")\r\n    protected String initHomePage(HttpSession session, Model model) {\r\n        UserDTO userDTO = (UserDTO) session.getAttribute(\"currentUser\");\r\n        model.addAttribute(\"categoryDisplay\", \"Category\");\r\n        if (userDTO == null) {\r\n            userDTO = homeService.loadUser();\r\n            homeService.clearGuestUsers();\r\n        }\r\n        List<String> categoryList = homeService.loadCategoryList();\r\n        Long noOfItems = homeService.loadCartItemsCounter(userDTO.getId());\r\n        session.setAttribute(\"categoryList\", categoryList);\r\n        session.setAttribute(\"numberOfItems\", noOfItems);\r\n        session.setAttribute(\"currentUser\", userDTO);\r\n\r\n        return \"homeView\";\r\n    }\r\n\r\n    public HomeService getHomeService() {\r\n        return homeService;\r\n    }\r\n\r\n    public void setHomeService(HomeService homeService) {\r\n        this.homeService = homeService;\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/com/webshop/controller/HomeController.java	(revision 79f63da74f82a68853c353cc2257d5790944a8d3)
++++ src/main/java/com/webshop/controller/HomeController.java	(date 1606340363430)
+@@ -1,6 +1,8 @@
+ package com.webshop.controller;
+ 
++import com.webshop.dto.ProductsDTO;
+ import com.webshop.dto.UserDTO;
++import com.webshop.service.ProductsService;
+ import org.springframework.beans.factory.annotation.Autowired;
+ 
+ import org.springframework.stereotype.Controller;
+@@ -18,6 +20,9 @@
+     @Autowired
+     private HomeService homeService;
+ 
++    @Autowired
++    private ProductsService productsService;
++
+     @RequestMapping(method = RequestMethod.GET, value = "/home")
+     protected String initHomePage(HttpSession session, Model model) {
+         UserDTO userDTO = (UserDTO) session.getAttribute("currentUser");
+@@ -26,8 +31,15 @@
+             userDTO = homeService.loadUser();
+             homeService.clearGuestUsers();
+         }
++        //home stuff
+         List<String> categoryList = homeService.loadCategoryList();
+         Long noOfItems = homeService.loadCartItemsCounter(userDTO.getId());
++        //products stuff
++        List<ProductsDTO> firstPageCarousel = productsService.firstProductsCarousel();
++        List<ProductsDTO> secondPageCarousel = productsService.secondProductsCarousel();
++
++        session.setAttribute("firstPageCarousel", firstPageCarousel);
++        session.setAttribute("secondPageCarousel", secondPageCarousel);
+         session.setAttribute("categoryList", categoryList);
+         session.setAttribute("numberOfItems", noOfItems);
+         session.setAttribute("currentUser", userDTO);
+@@ -43,4 +55,11 @@
+         this.homeService = homeService;
+     }
+ 
++    public ProductsService getProductsService() {
++        return productsService;
++    }
++
++    public void setProductsService(ProductsService productsService) {
++        this.productsService = productsService;
++    }
+ }
+Index: src/main/webapp/WEB-INF/views/homeView.jsp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><%@ taglib prefix=\"c\" uri=\"http://java.sun.com/jsp/jstl/core\" %>\r\n<!DOCTYPE html>\r\n<html>\r\n\r\n<jsp:include page=\"_header.jsp\"></jsp:include>\r\n<head>\r\n    <title>EStore</title>\r\n</head>\r\n\r\n<div class=\"container-fluid\">\r\n    <div class=\"row flex-xl-nowrap\">\r\n            <div class=\"bg-light border-right\" id=\"sidebar-wrapper\">\r\n                <div class=\"sidebar-heading\">Category</div>\r\n                <div class=\"list-group list-group-flush\">\r\n                    <c:forEach items=\"${categoryList}\" var=\"category\">\r\n                            <a class=\"list-group-item list-group-item-action bg-light\" href=\"${pageContext.request.contextPath}/productCategory?categoryItems=${category}\"><c:out value=\"${category}\"/></a>\r\n                    </c:forEach>\r\n                </div>\r\n            </div>\r\n\r\n            <div id=\"page-content-wrapper\">\r\n\r\n                <section class=\"pt-5 pb-5\">\r\n                    <div class=\"container\">\r\n                        <div class=\"row\">\r\n                            <div class=\"col-6\">\r\n                                <h3 class=\"mb-3\">Carousel cards title </h3>\r\n                            </div>\r\n                            <div class=\"col-6 text-right\">\r\n                                <a class=\"btn btn-primary mb-3 mr-1\" href=\"#carouselExampleIndicators2\" role=\"button\" data-slide=\"prev\">\r\n                                    <i class=\"fa fa-arrow-left\"></i>\r\n                                </a>\r\n                                <a class=\"btn btn-primary mb-3 \" href=\"#carouselExampleIndicators2\" role=\"button\" data-slide=\"next\">\r\n                                    <i class=\"fa fa-arrow-right\"></i>\r\n                                </a>\r\n                            </div>\r\n                            <div class=\"col-12\">\r\n                                <div id=\"carouselExampleIndicators2\" class=\"carousel slide\" data-ride=\"carousel\">\r\n\r\n                                    <div class=\"carousel-inner\">\r\n                                        <div class=\"carousel-item active\">\r\n                                            <div class=\"row\">\r\n\r\n                                                <div class=\"col-md-4 mb-3\">\r\n                                                    <div class=\"card\">\r\n                                                        <img class=\"img-fluid\" alt=\"100%x280\" src=\"https://images.unsplash.com/photo-1532781914607-2031eca2f00d?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=7c625ea379640da3ef2e24f20df7ce8d\">\r\n                                                        <div class=\"card-body\">\r\n                                                            <h4 class=\"card-title\">Special title treatment</h4>\r\n                                                            <p class=\"card-text\">With supporting text below as a natural lead-in to additional content.</p>\r\n\r\n                                                        </div>\r\n\r\n                                                    </div>\r\n                                                </div>\r\n\r\n                                            </div>\r\n                                        </div>\r\n                                        <div class=\"carousel-item\">\r\n                                            <div class=\"row\">\r\n\r\n                                                <div class=\"col-md-4 mb-3\">\r\n                                                    <div class=\"card\">\r\n                                                        <img class=\"img-fluid\" alt=\"100%x280\" src=\"https://images.unsplash.com/photo-1532771098148-525cefe10c23?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=3f317c1f7a16116dec454fbc267dd8e4\">\r\n                                                        <div class=\"card-body\">\r\n                                                            <h4 class=\"card-title\">Special title treatment</h4>\r\n                                                            <p class=\"card-text\">With supporting text below as a natural lead-in to additional content.</p>\r\n\r\n                                                        </div>\r\n\r\n                                                    </div>\r\n                                                </div>\r\n                                                <div class=\"col-md-4 mb-3\">\r\n                                                    <div class=\"card\">\r\n                                                        <img class=\"img-fluid\" alt=\"100%x280\" src=\"https://images.unsplash.com/photo-1532715088550-62f09305f765?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=ebadb044b374504ef8e81bdec4d0e840\">\r\n                                                        <div class=\"card-body\">\r\n                                                            <h4 class=\"card-title\">Special title treatment</h4>\r\n                                                            <p class=\"card-text\">With supporting text below as a natural lead-in to additional content.</p>\r\n\r\n                                                        </div>\r\n                                                    </div>\r\n                                                </div>\r\n                                                <div class=\"col-md-4 mb-3\">\r\n                                                    <div class=\"card\">\r\n                                                        <img class=\"img-fluid\" alt=\"100%x280\" src=\"https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=0754ab085804ae8a3b562548e6b4aa2e\">\r\n                                                        <div class=\"card-body\">\r\n                                                            <h4 class=\"card-title\">Special title treatment</h4>\r\n                                                            <p class=\"card-text\">With supporting text below as a natural lead-in to additional content.</p>\r\n\r\n                                                        </div>\r\n                                                    </div>\r\n                                                </div>\r\n\r\n                                            </div>\r\n                                        </div>\r\n                                        <div class=\"carousel-item\">\r\n                                            <div class=\"row\">\r\n\r\n                                                <div class=\"col-md-4 mb-3\">\r\n                                                    <div class=\"card\">\r\n                                                        <img class=\"img-fluid\" alt=\"100%x280\" src=\"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=ee8417f0ea2a50d53a12665820b54e23\">\r\n                                                        <div class=\"card-body\">\r\n                                                            <h4 class=\"card-title\">Special title treatment</h4>\r\n                                                            <p class=\"card-text\">With supporting text below as a natural lead-in to additional content.</p>\r\n\r\n                                                        </div>\r\n\r\n                                                    </div>\r\n                                                </div>\r\n                                                <div class=\"col-md-4 mb-3\">\r\n                                                    <div class=\"card\">\r\n                                                        <img class=\"img-fluid\" alt=\"100%x280\" src=\"https://images.unsplash.com/photo-1532777946373-b6783242f211?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=8ac55cf3a68785643998730839663129\">\r\n                                                        <div class=\"card-body\">\r\n                                                            <h4 class=\"card-title\">Special title treatment</h4>\r\n                                                            <p class=\"card-text\">With supporting text below as a natural lead-in to additional content.</p>\r\n\r\n                                                        </div>\r\n                                                    </div>\r\n                                                </div>\r\n                                                <div class=\"col-md-4 mb-3\">\r\n                                                    <div class=\"card\">\r\n                                                        <img class=\"img-fluid\" alt=\"100%x280\" src=\"https://images.unsplash.com/photo-1532763303805-529d595877c5?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=5ee4fd5d19b40f93eadb21871757eda6\">\r\n                                                        <div class=\"card-body\">\r\n                                                            <h4 class=\"card-title\">Special title treatment</h4>\r\n                                                            <p class=\"card-text\">With supporting text below as a natural lead-in to additional content.</p>\r\n                                                        </div>\r\n                                                    </div>\r\n                                                </div>\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </section>\r\n\r\n            </div>\r\n\r\n    </div>\r\n</div>\r\n\r\n\r\n\r\n\r\n<jsp:include page=\"_footer.jsp\"></jsp:include>\r\n\r\n</body>\r\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/webapp/WEB-INF/views/homeView.jsp	(revision 79f63da74f82a68853c353cc2257d5790944a8d3)
++++ src/main/webapp/WEB-INF/views/homeView.jsp	(date 1606341653825)
+@@ -9,132 +9,75 @@
+ 
+ <div class="container-fluid">
+     <div class="row flex-xl-nowrap">
+-            <div class="bg-light border-right" id="sidebar-wrapper">
+-                <div class="sidebar-heading">Category</div>
+-                <div class="list-group list-group-flush">
+-                    <c:forEach items="${categoryList}" var="category">
+-                            <a class="list-group-item list-group-item-action bg-light" href="${pageContext.request.contextPath}/productCategory?categoryItems=${category}"><c:out value="${category}"/></a>
+-                    </c:forEach>
+-                </div>
+-            </div>
++        <div class="bg-light border-right" id="sidebar-wrapper">
++            <div class="sidebar-heading">Category</div>
++            <div class="list-group list-group-flush">
++                <c:forEach items="${categoryList}" var="category">
++                    <a class="list-group-item list-group-item-action bg-light" href="${pageContext.request.contextPath}/productCategory?categoryItems=${category}"><c:out value="${category}"/></a>
++                </c:forEach>
++            </div>
++        </div>
+ 
+-            <div id="page-content-wrapper">
++        <div id="page-content-wrapper">
+ 
+-                <section class="pt-5 pb-5">
+-                    <div class="container">
+-                        <div class="row">
+-                            <div class="col-6">
+-                                <h3 class="mb-3">Carousel cards title </h3>
+-                            </div>
+-                            <div class="col-6 text-right">
+-                                <a class="btn btn-primary mb-3 mr-1" href="#carouselExampleIndicators2" role="button" data-slide="prev">
+-                                    <i class="fa fa-arrow-left"></i>
+-                                </a>
+-                                <a class="btn btn-primary mb-3 " href="#carouselExampleIndicators2" role="button" data-slide="next">
+-                                    <i class="fa fa-arrow-right"></i>
+-                                </a>
+-                            </div>
+-                            <div class="col-12">
+-                                <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
+-
+-                                    <div class="carousel-inner">
+-                                        <div class="carousel-item active">
+-                                            <div class="row">
+-
+-                                                <div class="col-md-4 mb-3">
+-                                                    <div class="card">
+-                                                        <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532781914607-2031eca2f00d?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=7c625ea379640da3ef2e24f20df7ce8d">
+-                                                        <div class="card-body">
+-                                                            <h4 class="card-title">Special title treatment</h4>
+-                                                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+-
+-                                                        </div>
+-
+-                                                    </div>
+-                                                </div>
+-
+-                                            </div>
+-                                        </div>
+-                                        <div class="carousel-item">
+-                                            <div class="row">
+-
+-                                                <div class="col-md-4 mb-3">
+-                                                    <div class="card">
+-                                                        <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532771098148-525cefe10c23?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=3f317c1f7a16116dec454fbc267dd8e4">
+-                                                        <div class="card-body">
+-                                                            <h4 class="card-title">Special title treatment</h4>
+-                                                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+-
+-                                                        </div>
+-
+-                                                    </div>
+-                                                </div>
+-                                                <div class="col-md-4 mb-3">
+-                                                    <div class="card">
+-                                                        <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532715088550-62f09305f765?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=ebadb044b374504ef8e81bdec4d0e840">
+-                                                        <div class="card-body">
+-                                                            <h4 class="card-title">Special title treatment</h4>
+-                                                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+-
+-                                                        </div>
+-                                                    </div>
+-                                                </div>
+-                                                <div class="col-md-4 mb-3">
+-                                                    <div class="card">
+-                                                        <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=0754ab085804ae8a3b562548e6b4aa2e">
+-                                                        <div class="card-body">
+-                                                            <h4 class="card-title">Special title treatment</h4>
+-                                                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+-
+-                                                        </div>
+-                                                    </div>
+-                                                </div>
+-
+-                                            </div>
+-                                        </div>
+-                                        <div class="carousel-item">
+-                                            <div class="row">
+-
+-                                                <div class="col-md-4 mb-3">
+-                                                    <div class="card">
+-                                                        <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=ee8417f0ea2a50d53a12665820b54e23">
+-                                                        <div class="card-body">
+-                                                            <h4 class="card-title">Special title treatment</h4>
+-                                                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+-
+-                                                        </div>
+-
+-                                                    </div>
+-                                                </div>
+-                                                <div class="col-md-4 mb-3">
+-                                                    <div class="card">
+-                                                        <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532777946373-b6783242f211?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=8ac55cf3a68785643998730839663129">
+-                                                        <div class="card-body">
+-                                                            <h4 class="card-title">Special title treatment</h4>
+-                                                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+-
+-                                                        </div>
+-                                                    </div>
+-                                                </div>
+-                                                <div class="col-md-4 mb-3">
+-                                                    <div class="card">
+-                                                        <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532763303805-529d595877c5?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=5ee4fd5d19b40f93eadb21871757eda6">
+-                                                        <div class="card-body">
+-                                                            <h4 class="card-title">Special title treatment</h4>
+-                                                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+-                                                        </div>
+-                                                    </div>
+-                                                </div>
+-                                            </div>
+-                                        </div>
+-                                    </div>
+-                                </div>
+-                            </div>
+-                        </div>
+-                    </div>
+-                </section>
++          <%--  ###############################Carousel########################################--%>
++
++            <section class="pt-5 pb-5">
++                <div class="container">
++                    <div class="row">
++                        <div class="col-6">
++                            <h3 class="mb-3">Carousel cards title </h3>
++                        </div>
++                        <div class="col-6 text-right">
++                            <a class="btn btn-primary mb-3 mr-1" href="#carouselExampleIndicators2" role="button" data-slide="prev">
++                                <i class="fa fa-arrow-left"></i>
++                            </a>
++                            <a class="btn btn-primary mb-3 " href="#carouselExampleIndicators2" role="button" data-slide="next">
++                                <i class="fa fa-arrow-right"></i>
++                            </a>
++                        </div>
++                        <div class="col-12">
++                            <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
++                                <div class="carousel-inner">
++                                    <div class="carousel-item active">
++                                        <div class="row">
++                                            <c:forEach items="${firstPageCarousel}" var="item">
++                                            <div class="col-md-4 mb-3">
++                                                <div class="card">
++                                                    <img class="img-fluid"  src="https://i.imgur.com/Us0evpC.png&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=3f317c1f7a16116dec454fbc267dd8e4/>">
++                                                    <div class="card-body">
++                                                        <h4 class="card-title"><c:out value="${item.productName}"/></h4>
++                                                        <p class="card-text"><c:out value="${item.price}"/>$</p>
++                                                    </div>
++                                                </div>
++                                            </div>
++                                            </c:forEach>
++                                        </div>
++                                    </div>
++                                    <div class="carousel-item">
++                                        <div class="row">
++                                            <c:forEach items="${products}" var="item">
++                                            <div class="col-md-4 mb-3">
++                                                <div class="card">
++                                                    <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532771098148-525cefe10c23?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=3f317c1f7a16116dec454fbc267dd8e4">
++                                                    <div class="card-body">
++                                                        <h4 class="card-title">Special title treatment</h4>
++                                                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
++                                                    </div>
++                                                </div>
++                                            </div>
++                                            </c:forEach>
++                                        </div>
++                                    </div>
++                                </div>
++                            </div>
++                        </div>
++                    </div>
++                </div>
++            </section>
+ 
+-            </div>
++              <%--  ###############################Carousel########################################--%>
++        </div>
+ 
+     </div>
+ </div>
+Index: target/maven-archiver/pom.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#Generated by Maven\r\n#Tue Nov 24 12:58:48 EET 2020\r\nversion=1.0-SNAPSHOT\r\ngroupId=org.example\r\nartifactId=web-app-shop\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>windows-1252
+===================================================================
+--- target/maven-archiver/pom.properties	(revision 79f63da74f82a68853c353cc2257d5790944a8d3)
++++ target/maven-archiver/pom.properties	(date 1622746332374)
+@@ -1,5 +1,5 @@
+ #Generated by Maven
+-#Tue Nov 24 12:58:48 EET 2020
++#Thu Jun 03 21:52:12 EEST 2021
+ version=1.0-SNAPSHOT
+ groupId=org.example
+ artifactId=web-app-shop
+Index: .idea/libraries/Maven__org_thymeleaf_thymeleaf_Release.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><component name=\"libraryTable\">\r\n  <library name=\"Maven: org.thymeleaf:thymeleaf:Release\" type=\"repository\">\r\n    <properties maven-id=\"org.thymeleaf:thymeleaf:RELEASE\" />\r\n    <CLASSES>\r\n      <root url=\"jar://$MAVEN_REPOSITORY$/org/thymeleaf/thymeleaf/3.0.11.RELEASE/thymeleaf-3.0.11.RELEASE.jar!/\" />\r\n      <root url=\"jar://$MAVEN_REPOSITORY$/ognl/ognl/3.1.12/ognl-3.1.12.jar!/\" />\r\n      <root url=\"jar://$MAVEN_REPOSITORY$/org/javassist/javassist/3.20.0-GA/javassist-3.20.0-GA.jar!/\" />\r\n      <root url=\"jar://$MAVEN_REPOSITORY$/org/attoparser/attoparser/2.0.5.RELEASE/attoparser-2.0.5.RELEASE.jar!/\" />\r\n      <root url=\"jar://$MAVEN_REPOSITORY$/org/unbescape/unbescape/1.1.6.RELEASE/unbescape-1.1.6.RELEASE.jar!/\" />\r\n      <root url=\"jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar!/\" />\r\n    </CLASSES>\r\n    <JAVADOC />\r\n    <SOURCES />\r\n  </library>\r\n</component>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/libraries/Maven__org_thymeleaf_thymeleaf_Release.xml	(revision 79f63da74f82a68853c353cc2257d5790944a8d3)
++++ .idea/libraries/Maven__org_thymeleaf_thymeleaf_Release.xml	(date 1612648867323)
+@@ -2,8 +2,8 @@
+   <library name="Maven: org.thymeleaf:thymeleaf:Release" type="repository">
+     <properties maven-id="org.thymeleaf:thymeleaf:RELEASE" />
+     <CLASSES>
+-      <root url="jar://$MAVEN_REPOSITORY$/org/thymeleaf/thymeleaf/3.0.11.RELEASE/thymeleaf-3.0.11.RELEASE.jar!/" />
+-      <root url="jar://$MAVEN_REPOSITORY$/ognl/ognl/3.1.12/ognl-3.1.12.jar!/" />
++      <root url="jar://$MAVEN_REPOSITORY$/org/thymeleaf/thymeleaf/3.0.12.RELEASE/thymeleaf-3.0.12.RELEASE.jar!/" />
++      <root url="jar://$MAVEN_REPOSITORY$/ognl/ognl/3.1.26/ognl-3.1.26.jar!/" />
+       <root url="jar://$MAVEN_REPOSITORY$/org/javassist/javassist/3.20.0-GA/javassist-3.20.0-GA.jar!/" />
+       <root url="jar://$MAVEN_REPOSITORY$/org/attoparser/attoparser/2.0.5.RELEASE/attoparser-2.0.5.RELEASE.jar!/" />
+       <root url="jar://$MAVEN_REPOSITORY$/org/unbescape/unbescape/1.1.6.RELEASE/unbescape-1.1.6.RELEASE.jar!/" />
+Index: src/main/webapp/WEB-INF/resources/js/allJavaScripts.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>$(document).ready(function () {\r\n    MyCartComponent.bindAll();\r\n});\r\n\r\nvar MyCartComponent = (function () {\r\n    var Config = {\r\n        //add to cart\r\n        ADD_TO_CART_BUTTON: \".js-add-to-cart-button\",\r\n        NO_OF_ITEMES: \".js-quantity-class\",\r\n\r\n        //update\r\n        TOTAL_COST: \"#js-place-order\",\r\n        UPDATE_CLASS_ITEMS: \".js-update-cart-button\",\r\n        PRICE_OF_ITEM: \".js-price-of-item\",\r\n        QUANTITY_TO_UPDATE: \".js-quantity-to-update\",\r\n        TABLE_CLASS_TO_UPDATE: \".js-product-from-cart\",\r\n        TOTAL_COST: \"#js-total-cost\",\r\n\r\n        //place order\r\n        PLACE_ORDER: \"#js-place-order\",\r\n\r\n        //order details\r\n        DETAILS_BUTTON: \".js-show-order-details\",\r\n\r\n        //common\r\n        MY_CART_VIEW: \"#JS-cart-item-count\",\r\n\r\n        //dropdown category\r\n        DROPDOWN_CATEGORY: \".dropbtn-custom\"\r\n\r\n    };\r\n\r\n    var bindAllComponents = function () {\r\n        addToCart();\r\n        updateCart();\r\n        placeOrder();\r\n        //selectCategory();\r\n    }\r\n\r\n    var addToCart = function () {\r\n\r\n        $(document).on(\"click\", Config.ADD_TO_CART_BUTTON, function (event) {\r\n            var productId = $(event.target).val();\r\n            var quantity = $(event.target).closest(\".grid-item\").find(\".js-quantity-class\").val();\r\n            $.ajax({\r\n                type: \"POST\",\r\n                data: {\r\n                    quantity: quantity,\r\n                    productId: productId\r\n                },\r\n                url: \"cartCounter\",\r\n                success: function (rest) {\r\n                    var inputStock = parseInt($(Config.MY_CART_VIEW).text());\r\n                    var totalItems = inputStock + parseInt(quantity);\r\n                    $(Config.MY_CART_VIEW).text(totalItems);\r\n                },\r\n                error: function (resp) {\r\n                    alert(\"FAIL\");\r\n                }\r\n            });\r\n        });\r\n    }\r\n\r\n\r\n    var updateCart = function () {\r\n        $(Config.UPDATE_CLASS_ITEMS).click(function (event) {\r\n            var event = $(event.target);\r\n            var productIdFromCart = event.val();\r\n            var newQuantity = event.closest(\".js-product-from-cart\").find(\".js-quantity-to-update\").val();\r\n            var pricePerUnit = event.closest(\".js-product-from-cart\").find(\".js-price-of-item\").data(\"item-price\");\r\n\r\n            $.ajax({\r\n                type: \"POST\",\r\n                data: {\r\n                    newQuantity: newQuantity,\r\n                    productIdFromCart: productIdFromCart\r\n                },\r\n                url: \"cartView\",\r\n                success: function () {\r\n                    if (parseInt(newQuantity) === 0) {\r\n                        event.closest(\".js-product-from-cart\").remove()\r\n                    } else {\r\n                        //update price item\r\n                        const finalPriceOfItem = parseFloat(pricePerUnit) * parseInt(newQuantity);\r\n                        event.closest(\".js-product-from-cart\").find(\".js-price-of-item\").text(finalPriceOfItem);\r\n\r\n                    }\r\n                    updateItemCount($(Config.QUANTITY_TO_UPDATE));\r\n                    updateTotalCost($(Config.PRICE_OF_ITEM));\r\n\r\n                },\r\n                error: function (xhr, ajaxOptions, thrownError) {\r\n                    console.log(xhr);\r\n                    console.log(ajaxOptions);\r\n                    console.log(thrownError);\r\n\r\n                    alert(xhr.status);\r\n                }\r\n            });\r\n        });\r\n    }\r\n\r\n    var placeOrder = function () {\r\n        $(Config.PLACE_ORDER).click(function (event) {\r\n            var orderNumber = $(event.target).val();\r\n\r\n            $.ajax({\r\n                type: \"POST\",\r\n                data: {\r\n                    orderNumber: orderNumber,\r\n                    cartComponent: \"orderDetails\"\r\n                },\r\n                url: \"placeOrder\",\r\n                success: function () {\r\n                    if ($(Config.TOTAL_COST).text() === \"0.0\") {\r\n                        alert(\"Pleas add products in cart\");\r\n\r\n                    } else {\r\n\r\n                        $(document).ready(function () {\r\n                            document.getElementById(\"hidden-message\").style.left = \"50%\";\r\n                            document.getElementById(\"hidden-message\").style.visibility = \"visible\";\r\n                            window.setTimeout(function () {\r\n                                window.location.href = \"home\"\r\n                            }, 3000);\r\n\r\n                        });\r\n                    }\r\n                },\r\n                error: function () {\r\n                    alert(\"FAIL\");\r\n                }\r\n            });\r\n        });\r\n\r\n    }\r\n/*\r\n    var selectCategory = function () {\r\n        $(Config.DROPDOWN_CATEGORY).click(function (event) {\r\n            var category = $(event.target).text();\r\n\r\n            $.ajax({\r\n                type: \"POST\",\r\n                data: {\r\n                    category: category\r\n                },\r\n                url: \"product\",\r\n                success: function () {\r\n\r\n                },\r\n                error: function () {\r\n                    alert(\"FAIL\");\r\n                }\r\n            });\r\n        });\r\n\r\n    }*/\r\n\r\n\r\n    function updateTotalCost(allPrices) {\r\n        let totalCost = 0;\r\n        for (let i = 0; i < allPrices.length; i++) {\r\n            totalCost += parseFloat(allPrices[i].text);\r\n        }\r\n        $(Config.TOTAL_COST).text(totalCost);\r\n    }\r\n\r\n    function updateItemCount(allQuantity) {\r\n        let totalItems = 0;\r\n        for (let i = 0; i < allQuantity.length; i++) {\r\n            totalItems += parseInt(allQuantity[i].value);\r\n        }\r\n        $(Config.MY_CART_VIEW).text(totalItems);\r\n    }\r\n\r\n\r\n    return {\r\n        bindAll: bindAllComponents\r\n    }\r\n})();
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/webapp/WEB-INF/resources/js/allJavaScripts.js	(revision 79f63da74f82a68853c353cc2257d5790944a8d3)
++++ src/main/webapp/WEB-INF/resources/js/allJavaScripts.js	(date 1618691027331)
+@@ -172,7 +172,18 @@
+         }
+         $(Config.MY_CART_VIEW).text(totalItems);
+     }
+-
++    function fizzBuzz(n) {
++        // Write your code here
++        for(var i=1;i<=n;i++)
++        {
++            if(i/3==0 && i/5==0){
++                console.log("FizzBuzz");
++            }else if(i/3==0 && i/5!==0){
++                console.log("Fizz");
++            }else if(i/3!==0 && i/5==0){
++                console.log("Buzz");}
++         else {console.log(i);}
++    }
+ 
+     return {
+         bindAll: bindAllComponents
+Index: .idea/libraries/Maven__org_thymeleaf_thymeleaf_spring4_Release.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><component name=\"libraryTable\">\r\n  <library name=\"Maven: org.thymeleaf:thymeleaf-spring4:Release\" type=\"repository\">\r\n    <properties maven-id=\"org.thymeleaf:thymeleaf-spring4:RELEASE\" />\r\n    <CLASSES>\r\n      <root url=\"jar://$MAVEN_REPOSITORY$/org/thymeleaf/thymeleaf-spring4/3.0.11.RELEASE/thymeleaf-spring4-3.0.11.RELEASE.jar!/\" />\r\n      <root url=\"jar://$MAVEN_REPOSITORY$/org/thymeleaf/thymeleaf/3.0.11.RELEASE/thymeleaf-3.0.11.RELEASE.jar!/\" />\r\n      <root url=\"jar://$MAVEN_REPOSITORY$/org/attoparser/attoparser/2.0.5.RELEASE/attoparser-2.0.5.RELEASE.jar!/\" />\r\n      <root url=\"jar://$MAVEN_REPOSITORY$/org/unbescape/unbescape/1.1.6.RELEASE/unbescape-1.1.6.RELEASE.jar!/\" />\r\n      <root url=\"jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar!/\" />\r\n    </CLASSES>\r\n    <JAVADOC />\r\n    <SOURCES />\r\n  </library>\r\n</component>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/libraries/Maven__org_thymeleaf_thymeleaf_spring4_Release.xml	(revision 79f63da74f82a68853c353cc2257d5790944a8d3)
++++ .idea/libraries/Maven__org_thymeleaf_thymeleaf_spring4_Release.xml	(date 1612648867328)
+@@ -2,8 +2,8 @@
+   <library name="Maven: org.thymeleaf:thymeleaf-spring4:Release" type="repository">
+     <properties maven-id="org.thymeleaf:thymeleaf-spring4:RELEASE" />
+     <CLASSES>
+-      <root url="jar://$MAVEN_REPOSITORY$/org/thymeleaf/thymeleaf-spring4/3.0.11.RELEASE/thymeleaf-spring4-3.0.11.RELEASE.jar!/" />
+-      <root url="jar://$MAVEN_REPOSITORY$/org/thymeleaf/thymeleaf/3.0.11.RELEASE/thymeleaf-3.0.11.RELEASE.jar!/" />
++      <root url="jar://$MAVEN_REPOSITORY$/org/thymeleaf/thymeleaf-spring4/3.0.12.RELEASE/thymeleaf-spring4-3.0.12.RELEASE.jar!/" />
++      <root url="jar://$MAVEN_REPOSITORY$/org/thymeleaf/thymeleaf/3.0.12.RELEASE/thymeleaf-3.0.12.RELEASE.jar!/" />
+       <root url="jar://$MAVEN_REPOSITORY$/org/attoparser/attoparser/2.0.5.RELEASE/attoparser-2.0.5.RELEASE.jar!/" />
+       <root url="jar://$MAVEN_REPOSITORY$/org/unbescape/unbescape/1.1.6.RELEASE/unbescape-1.1.6.RELEASE.jar!/" />
+       <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar!/" />
+Index: target/web-app-shop-1.0-SNAPSHOT/WEB-INF/views/homeView.jsp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><%@ taglib prefix=\"c\" uri=\"http://java.sun.com/jsp/jstl/core\" %>\r\n<!DOCTYPE html>\r\n<html>\r\n\r\n<jsp:include page=\"_header.jsp\"></jsp:include>\r\n<head>\r\n    <title>EStore</title>\r\n</head>\r\n\r\n<div class=\"container-fluid\">\r\n    <div class=\"row flex-xl-nowrap\">\r\n            <div class=\"bg-light border-right\" id=\"sidebar-wrapper\">\r\n                <div class=\"sidebar-heading\">Category</div>\r\n                <div class=\"list-group list-group-flush\">\r\n                    <c:forEach items=\"${categoryList}\" var=\"category\">\r\n                            <a class=\"list-group-item list-group-item-action bg-light\" href=\"${pageContext.request.contextPath}/productCategory?categoryItems=${category}\"><c:out value=\"${category}\"/></a>\r\n                    </c:forEach>\r\n                </div>\r\n            </div>\r\n\r\n            <div id=\"page-content-wrapper\">\r\n\r\n                <section class=\"pt-5 pb-5\">\r\n                    <div class=\"container\">\r\n                        <div class=\"row\">\r\n                            <div class=\"col-6\">\r\n                                <h3 class=\"mb-3\">Carousel cards title </h3>\r\n                            </div>\r\n                            <div class=\"col-6 text-right\">\r\n                                <a class=\"btn btn-primary mb-3 mr-1\" href=\"#carouselExampleIndicators2\" role=\"button\" data-slide=\"prev\">\r\n                                    <i class=\"fa fa-arrow-left\"></i>\r\n                                </a>\r\n                                <a class=\"btn btn-primary mb-3 \" href=\"#carouselExampleIndicators2\" role=\"button\" data-slide=\"next\">\r\n                                    <i class=\"fa fa-arrow-right\"></i>\r\n                                </a>\r\n                            </div>\r\n                            <div class=\"col-12\">\r\n                                <div id=\"carouselExampleIndicators2\" class=\"carousel slide\" data-ride=\"carousel\">\r\n\r\n                                    <div class=\"carousel-inner\">\r\n                                        <div class=\"carousel-item active\">\r\n                                            <div class=\"row\">\r\n\r\n                                                <div class=\"col-md-4 mb-3\">\r\n                                                    <div class=\"card\">\r\n                                                        <img class=\"img-fluid\" alt=\"100%x280\" src=\"https://images.unsplash.com/photo-1532781914607-2031eca2f00d?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=7c625ea379640da3ef2e24f20df7ce8d\">\r\n                                                        <div class=\"card-body\">\r\n                                                            <h4 class=\"card-title\">Special title treatment</h4>\r\n                                                            <p class=\"card-text\">With supporting text below as a natural lead-in to additional content.</p>\r\n\r\n                                                        </div>\r\n\r\n                                                    </div>\r\n                                                </div>\r\n\r\n                                            </div>\r\n                                        </div>\r\n                                        <div class=\"carousel-item\">\r\n                                            <div class=\"row\">\r\n\r\n                                                <div class=\"col-md-4 mb-3\">\r\n                                                    <div class=\"card\">\r\n                                                        <img class=\"img-fluid\" alt=\"100%x280\" src=\"https://images.unsplash.com/photo-1532771098148-525cefe10c23?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=3f317c1f7a16116dec454fbc267dd8e4\">\r\n                                                        <div class=\"card-body\">\r\n                                                            <h4 class=\"card-title\">Special title treatment</h4>\r\n                                                            <p class=\"card-text\">With supporting text below as a natural lead-in to additional content.</p>\r\n\r\n                                                        </div>\r\n\r\n                                                    </div>\r\n                                                </div>\r\n                                                <div class=\"col-md-4 mb-3\">\r\n                                                    <div class=\"card\">\r\n                                                        <img class=\"img-fluid\" alt=\"100%x280\" src=\"https://images.unsplash.com/photo-1532715088550-62f09305f765?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=ebadb044b374504ef8e81bdec4d0e840\">\r\n                                                        <div class=\"card-body\">\r\n                                                            <h4 class=\"card-title\">Special title treatment</h4>\r\n                                                            <p class=\"card-text\">With supporting text below as a natural lead-in to additional content.</p>\r\n\r\n                                                        </div>\r\n                                                    </div>\r\n                                                </div>\r\n                                                <div class=\"col-md-4 mb-3\">\r\n                                                    <div class=\"card\">\r\n                                                        <img class=\"img-fluid\" alt=\"100%x280\" src=\"https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=0754ab085804ae8a3b562548e6b4aa2e\">\r\n                                                        <div class=\"card-body\">\r\n                                                            <h4 class=\"card-title\">Special title treatment</h4>\r\n                                                            <p class=\"card-text\">With supporting text below as a natural lead-in to additional content.</p>\r\n\r\n                                                        </div>\r\n                                                    </div>\r\n                                                </div>\r\n\r\n                                            </div>\r\n                                        </div>\r\n                                        <div class=\"carousel-item\">\r\n                                            <div class=\"row\">\r\n\r\n                                                <div class=\"col-md-4 mb-3\">\r\n                                                    <div class=\"card\">\r\n                                                        <img class=\"img-fluid\" alt=\"100%x280\" src=\"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=ee8417f0ea2a50d53a12665820b54e23\">\r\n                                                        <div class=\"card-body\">\r\n                                                            <h4 class=\"card-title\">Special title treatment</h4>\r\n                                                            <p class=\"card-text\">With supporting text below as a natural lead-in to additional content.</p>\r\n\r\n                                                        </div>\r\n\r\n                                                    </div>\r\n                                                </div>\r\n                                                <div class=\"col-md-4 mb-3\">\r\n                                                    <div class=\"card\">\r\n                                                        <img class=\"img-fluid\" alt=\"100%x280\" src=\"https://images.unsplash.com/photo-1532777946373-b6783242f211?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=8ac55cf3a68785643998730839663129\">\r\n                                                        <div class=\"card-body\">\r\n                                                            <h4 class=\"card-title\">Special title treatment</h4>\r\n                                                            <p class=\"card-text\">With supporting text below as a natural lead-in to additional content.</p>\r\n\r\n                                                        </div>\r\n                                                    </div>\r\n                                                </div>\r\n                                                <div class=\"col-md-4 mb-3\">\r\n                                                    <div class=\"card\">\r\n                                                        <img class=\"img-fluid\" alt=\"100%x280\" src=\"https://images.unsplash.com/photo-1532763303805-529d595877c5?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=5ee4fd5d19b40f93eadb21871757eda6\">\r\n                                                        <div class=\"card-body\">\r\n                                                            <h4 class=\"card-title\">Special title treatment</h4>\r\n                                                            <p class=\"card-text\">With supporting text below as a natural lead-in to additional content.</p>\r\n                                                        </div>\r\n                                                    </div>\r\n                                                </div>\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </section>\r\n\r\n            </div>\r\n\r\n    </div>\r\n</div>\r\n\r\n\r\n\r\n\r\n<jsp:include page=\"_footer.jsp\"></jsp:include>\r\n\r\n</body>\r\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- target/web-app-shop-1.0-SNAPSHOT/WEB-INF/views/homeView.jsp	(revision 79f63da74f82a68853c353cc2257d5790944a8d3)
++++ target/web-app-shop-1.0-SNAPSHOT/WEB-INF/views/homeView.jsp	(date 1606341653825)
+@@ -9,132 +9,75 @@
+ 
+ <div class="container-fluid">
+     <div class="row flex-xl-nowrap">
+-            <div class="bg-light border-right" id="sidebar-wrapper">
+-                <div class="sidebar-heading">Category</div>
+-                <div class="list-group list-group-flush">
+-                    <c:forEach items="${categoryList}" var="category">
+-                            <a class="list-group-item list-group-item-action bg-light" href="${pageContext.request.contextPath}/productCategory?categoryItems=${category}"><c:out value="${category}"/></a>
+-                    </c:forEach>
+-                </div>
+-            </div>
++        <div class="bg-light border-right" id="sidebar-wrapper">
++            <div class="sidebar-heading">Category</div>
++            <div class="list-group list-group-flush">
++                <c:forEach items="${categoryList}" var="category">
++                    <a class="list-group-item list-group-item-action bg-light" href="${pageContext.request.contextPath}/productCategory?categoryItems=${category}"><c:out value="${category}"/></a>
++                </c:forEach>
++            </div>
++        </div>
+ 
+-            <div id="page-content-wrapper">
++        <div id="page-content-wrapper">
+ 
+-                <section class="pt-5 pb-5">
+-                    <div class="container">
+-                        <div class="row">
+-                            <div class="col-6">
+-                                <h3 class="mb-3">Carousel cards title </h3>
+-                            </div>
+-                            <div class="col-6 text-right">
+-                                <a class="btn btn-primary mb-3 mr-1" href="#carouselExampleIndicators2" role="button" data-slide="prev">
+-                                    <i class="fa fa-arrow-left"></i>
+-                                </a>
+-                                <a class="btn btn-primary mb-3 " href="#carouselExampleIndicators2" role="button" data-slide="next">
+-                                    <i class="fa fa-arrow-right"></i>
+-                                </a>
+-                            </div>
+-                            <div class="col-12">
+-                                <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
+-
+-                                    <div class="carousel-inner">
+-                                        <div class="carousel-item active">
+-                                            <div class="row">
+-
+-                                                <div class="col-md-4 mb-3">
+-                                                    <div class="card">
+-                                                        <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532781914607-2031eca2f00d?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=7c625ea379640da3ef2e24f20df7ce8d">
+-                                                        <div class="card-body">
+-                                                            <h4 class="card-title">Special title treatment</h4>
+-                                                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+-
+-                                                        </div>
+-
+-                                                    </div>
+-                                                </div>
+-
+-                                            </div>
+-                                        </div>
+-                                        <div class="carousel-item">
+-                                            <div class="row">
+-
+-                                                <div class="col-md-4 mb-3">
+-                                                    <div class="card">
+-                                                        <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532771098148-525cefe10c23?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=3f317c1f7a16116dec454fbc267dd8e4">
+-                                                        <div class="card-body">
+-                                                            <h4 class="card-title">Special title treatment</h4>
+-                                                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+-
+-                                                        </div>
+-
+-                                                    </div>
+-                                                </div>
+-                                                <div class="col-md-4 mb-3">
+-                                                    <div class="card">
+-                                                        <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532715088550-62f09305f765?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=ebadb044b374504ef8e81bdec4d0e840">
+-                                                        <div class="card-body">
+-                                                            <h4 class="card-title">Special title treatment</h4>
+-                                                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+-
+-                                                        </div>
+-                                                    </div>
+-                                                </div>
+-                                                <div class="col-md-4 mb-3">
+-                                                    <div class="card">
+-                                                        <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=0754ab085804ae8a3b562548e6b4aa2e">
+-                                                        <div class="card-body">
+-                                                            <h4 class="card-title">Special title treatment</h4>
+-                                                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+-
+-                                                        </div>
+-                                                    </div>
+-                                                </div>
+-
+-                                            </div>
+-                                        </div>
+-                                        <div class="carousel-item">
+-                                            <div class="row">
+-
+-                                                <div class="col-md-4 mb-3">
+-                                                    <div class="card">
+-                                                        <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=ee8417f0ea2a50d53a12665820b54e23">
+-                                                        <div class="card-body">
+-                                                            <h4 class="card-title">Special title treatment</h4>
+-                                                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+-
+-                                                        </div>
+-
+-                                                    </div>
+-                                                </div>
+-                                                <div class="col-md-4 mb-3">
+-                                                    <div class="card">
+-                                                        <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532777946373-b6783242f211?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=8ac55cf3a68785643998730839663129">
+-                                                        <div class="card-body">
+-                                                            <h4 class="card-title">Special title treatment</h4>
+-                                                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+-
+-                                                        </div>
+-                                                    </div>
+-                                                </div>
+-                                                <div class="col-md-4 mb-3">
+-                                                    <div class="card">
+-                                                        <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532763303805-529d595877c5?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=5ee4fd5d19b40f93eadb21871757eda6">
+-                                                        <div class="card-body">
+-                                                            <h4 class="card-title">Special title treatment</h4>
+-                                                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+-                                                        </div>
+-                                                    </div>
+-                                                </div>
+-                                            </div>
+-                                        </div>
+-                                    </div>
+-                                </div>
+-                            </div>
+-                        </div>
+-                    </div>
+-                </section>
++          <%--  ###############################Carousel########################################--%>
++
++            <section class="pt-5 pb-5">
++                <div class="container">
++                    <div class="row">
++                        <div class="col-6">
++                            <h3 class="mb-3">Carousel cards title </h3>
++                        </div>
++                        <div class="col-6 text-right">
++                            <a class="btn btn-primary mb-3 mr-1" href="#carouselExampleIndicators2" role="button" data-slide="prev">
++                                <i class="fa fa-arrow-left"></i>
++                            </a>
++                            <a class="btn btn-primary mb-3 " href="#carouselExampleIndicators2" role="button" data-slide="next">
++                                <i class="fa fa-arrow-right"></i>
++                            </a>
++                        </div>
++                        <div class="col-12">
++                            <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
++                                <div class="carousel-inner">
++                                    <div class="carousel-item active">
++                                        <div class="row">
++                                            <c:forEach items="${firstPageCarousel}" var="item">
++                                            <div class="col-md-4 mb-3">
++                                                <div class="card">
++                                                    <img class="img-fluid"  src="https://i.imgur.com/Us0evpC.png&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=3f317c1f7a16116dec454fbc267dd8e4/>">
++                                                    <div class="card-body">
++                                                        <h4 class="card-title"><c:out value="${item.productName}"/></h4>
++                                                        <p class="card-text"><c:out value="${item.price}"/>$</p>
++                                                    </div>
++                                                </div>
++                                            </div>
++                                            </c:forEach>
++                                        </div>
++                                    </div>
++                                    <div class="carousel-item">
++                                        <div class="row">
++                                            <c:forEach items="${products}" var="item">
++                                            <div class="col-md-4 mb-3">
++                                                <div class="card">
++                                                    <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532771098148-525cefe10c23?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=3f317c1f7a16116dec454fbc267dd8e4">
++                                                    <div class="card-body">
++                                                        <h4 class="card-title">Special title treatment</h4>
++                                                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
++                                                    </div>
++                                                </div>
++                                            </div>
++                                            </c:forEach>
++                                        </div>
++                                    </div>
++                                </div>
++                            </div>
++                        </div>
++                    </div>
++                </div>
++            </section>
+ 
+-            </div>
++              <%--  ###############################Carousel########################################--%>
++        </div>
+ 
+     </div>
+ </div>
+Index: target/web-app-shop-1.0-SNAPSHOT/WEB-INF/resources/js/allJavaScripts.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>$(document).ready(function () {\r\n    MyCartComponent.bindAll();\r\n});\r\n\r\nvar MyCartComponent = (function () {\r\n    var Config = {\r\n        //add to cart\r\n        ADD_TO_CART_BUTTON: \".js-add-to-cart-button\",\r\n        NO_OF_ITEMES: \".js-quantity-class\",\r\n\r\n        //update\r\n        TOTAL_COST: \"#js-place-order\",\r\n        UPDATE_CLASS_ITEMS: \".js-update-cart-button\",\r\n        PRICE_OF_ITEM: \".js-price-of-item\",\r\n        QUANTITY_TO_UPDATE: \".js-quantity-to-update\",\r\n        TABLE_CLASS_TO_UPDATE: \".js-product-from-cart\",\r\n        TOTAL_COST: \"#js-total-cost\",\r\n\r\n        //place order\r\n        PLACE_ORDER: \"#js-place-order\",\r\n\r\n        //order details\r\n        DETAILS_BUTTON: \".js-show-order-details\",\r\n\r\n        //common\r\n        MY_CART_VIEW: \"#JS-cart-item-count\",\r\n\r\n        //dropdown category\r\n        DROPDOWN_CATEGORY: \".dropbtn-custom\"\r\n\r\n    };\r\n\r\n    var bindAllComponents = function () {\r\n        addToCart();\r\n        updateCart();\r\n        placeOrder();\r\n        //selectCategory();\r\n    }\r\n\r\n    var addToCart = function () {\r\n\r\n        $(document).on(\"click\", Config.ADD_TO_CART_BUTTON, function (event) {\r\n            var productId = $(event.target).val();\r\n            var quantity = $(event.target).closest(\".grid-item\").find(\".js-quantity-class\").val();\r\n            $.ajax({\r\n                type: \"POST\",\r\n                data: {\r\n                    quantity: quantity,\r\n                    productId: productId\r\n                },\r\n                url: \"cartCounter\",\r\n                success: function (rest) {\r\n                    var inputStock = parseInt($(Config.MY_CART_VIEW).text());\r\n                    var totalItems = inputStock + parseInt(quantity);\r\n                    $(Config.MY_CART_VIEW).text(totalItems);\r\n                },\r\n                error: function (resp) {\r\n                    alert(\"FAIL\");\r\n                }\r\n            });\r\n        });\r\n    }\r\n\r\n\r\n    var updateCart = function () {\r\n        $(Config.UPDATE_CLASS_ITEMS).click(function (event) {\r\n            var event = $(event.target);\r\n            var productIdFromCart = event.val();\r\n            var newQuantity = event.closest(\".js-product-from-cart\").find(\".js-quantity-to-update\").val();\r\n            var pricePerUnit = event.closest(\".js-product-from-cart\").find(\".js-price-of-item\").data(\"item-price\");\r\n\r\n            $.ajax({\r\n                type: \"POST\",\r\n                data: {\r\n                    newQuantity: newQuantity,\r\n                    productIdFromCart: productIdFromCart\r\n                },\r\n                url: \"cartView\",\r\n                success: function () {\r\n                    if (parseInt(newQuantity) === 0) {\r\n                        event.closest(\".js-product-from-cart\").remove()\r\n                    } else {\r\n                        //update price item\r\n                        const finalPriceOfItem = parseFloat(pricePerUnit) * parseInt(newQuantity);\r\n                        event.closest(\".js-product-from-cart\").find(\".js-price-of-item\").text(finalPriceOfItem);\r\n\r\n                    }\r\n                    updateItemCount($(Config.QUANTITY_TO_UPDATE));\r\n                    updateTotalCost($(Config.PRICE_OF_ITEM));\r\n\r\n                },\r\n                error: function (xhr, ajaxOptions, thrownError) {\r\n                    console.log(xhr);\r\n                    console.log(ajaxOptions);\r\n                    console.log(thrownError);\r\n\r\n                    alert(xhr.status);\r\n                }\r\n            });\r\n        });\r\n    }\r\n\r\n    var placeOrder = function () {\r\n        $(Config.PLACE_ORDER).click(function (event) {\r\n            var orderNumber = $(event.target).val();\r\n\r\n            $.ajax({\r\n                type: \"POST\",\r\n                data: {\r\n                    orderNumber: orderNumber,\r\n                    cartComponent: \"orderDetails\"\r\n                },\r\n                url: \"placeOrder\",\r\n                success: function () {\r\n                    if ($(Config.TOTAL_COST).text() === \"0.0\") {\r\n                        alert(\"Pleas add products in cart\");\r\n\r\n                    } else {\r\n\r\n                        $(document).ready(function () {\r\n                            document.getElementById(\"hidden-message\").style.left = \"50%\";\r\n                            document.getElementById(\"hidden-message\").style.visibility = \"visible\";\r\n                            window.setTimeout(function () {\r\n                                window.location.href = \"home\"\r\n                            }, 3000);\r\n\r\n                        });\r\n                    }\r\n                },\r\n                error: function () {\r\n                    alert(\"FAIL\");\r\n                }\r\n            });\r\n        });\r\n\r\n    }\r\n/*\r\n    var selectCategory = function () {\r\n        $(Config.DROPDOWN_CATEGORY).click(function (event) {\r\n            var category = $(event.target).text();\r\n\r\n            $.ajax({\r\n                type: \"POST\",\r\n                data: {\r\n                    category: category\r\n                },\r\n                url: \"product\",\r\n                success: function () {\r\n\r\n                },\r\n                error: function () {\r\n                    alert(\"FAIL\");\r\n                }\r\n            });\r\n        });\r\n\r\n    }*/\r\n\r\n\r\n    function updateTotalCost(allPrices) {\r\n        let totalCost = 0;\r\n        for (let i = 0; i < allPrices.length; i++) {\r\n            totalCost += parseFloat(allPrices[i].text);\r\n        }\r\n        $(Config.TOTAL_COST).text(totalCost);\r\n    }\r\n\r\n    function updateItemCount(allQuantity) {\r\n        let totalItems = 0;\r\n        for (let i = 0; i < allQuantity.length; i++) {\r\n            totalItems += parseInt(allQuantity[i].value);\r\n        }\r\n        $(Config.MY_CART_VIEW).text(totalItems);\r\n    }\r\n\r\n\r\n    return {\r\n        bindAll: bindAllComponents\r\n    }\r\n})();
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- target/web-app-shop-1.0-SNAPSHOT/WEB-INF/resources/js/allJavaScripts.js	(revision 79f63da74f82a68853c353cc2257d5790944a8d3)
++++ target/web-app-shop-1.0-SNAPSHOT/WEB-INF/resources/js/allJavaScripts.js	(date 1618691027331)
+@@ -172,7 +172,18 @@
+         }
+         $(Config.MY_CART_VIEW).text(totalItems);
+     }
+-
++    function fizzBuzz(n) {
++        // Write your code here
++        for(var i=1;i<=n;i++)
++        {
++            if(i/3==0 && i/5==0){
++                console.log("FizzBuzz");
++            }else if(i/3==0 && i/5!==0){
++                console.log("Fizz");
++            }else if(i/3!==0 && i/5==0){
++                console.log("Buzz");}
++         else {console.log(i);}
++    }
+ 
+     return {
+         bindAll: bindAllComponents
